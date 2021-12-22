@@ -13,6 +13,7 @@ function NavBar() {
       <AppBar position="static" style = {NavBarBackground}>
         <Toolbar>
           <IconButton
+            href = "/"
             size="large"
             edge="start"
             color="inherit"
@@ -24,8 +25,8 @@ function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}} style = {{color:'#000000'}}>
             {"Too Hungry \n To Think"}
           </Typography>
-          <Button style = {loginRegisterButton}>Register</Button>
-          <Button style = {loginRegisterButton}>Login</Button>
+          <Button style = {loginRegisterButton} href = "/Register">Register</Button>
+          <Button style = {loginRegisterButton} href = "/Login">Login</Button>
         </Toolbar>
       </AppBar>
 

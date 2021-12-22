@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import Button from '@mui/material/Button';
 
 import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", color: "white"};
 const NavBarBackground = {background: 'linear-gradient(90deg, white, #FAAC8A 100%)'}
@@ -20,6 +22,8 @@ function App() {
         <NavBar />
         <Switch>
           <Route path = "/" exact component={Home}/>
+          <Route path = "/Login" component = {Login}/>
+          <Route path = "/Register" component = {Register}/>
         </Switch>
       </Box>
     </Router>
