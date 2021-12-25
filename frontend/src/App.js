@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import * as React from 'react';
-import NavBar from './components/NavBar';
+import NavBar from './blocks/NavBar';
 import { Box } from '@mui/material';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 

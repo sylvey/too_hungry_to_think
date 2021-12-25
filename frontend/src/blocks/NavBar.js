@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 
 
 const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", color: "white"};
-const NavBarBackground = {background: 'linear-gradient(90deg, white, #FAAC8A 100%)'};
+const NavBarBackground = {background: '#FAAC8A'};
 function NavBar() {
   return (
       <AppBar position="static" style = {NavBarBackground}>
