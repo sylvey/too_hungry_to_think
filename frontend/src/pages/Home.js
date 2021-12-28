@@ -1,11 +1,22 @@
 import React from "react";
-import RightFrame from "../blocks/RightFrame";
-import { Background } from "../blocks/BackGround";
+import RightFrame from "../Containers/RightFrame";
+import { Background, CenterDiv, MainDiv, RightDiv } from "../Containers/BackGround";
+
 function Home(){
     return(
         <Background>
-            <RightFrame></RightFrame>
-            <RightFrame></RightFrame>
+            <CenterDiv>
+                <MainDiv>
+                    
+                </MainDiv>
+                <RightDiv>
+                    <RightFrame></RightFrame>
+                </RightDiv>
+               
+            </CenterDiv>
+           
+            {/* <RightFrame></RightFrame> */}
+            {/* <RightFrame></RightFrame> */}
         </Background>
     )
 }
