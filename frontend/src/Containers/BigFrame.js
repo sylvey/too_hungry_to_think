@@ -78,18 +78,26 @@ const Tag = styled.div`
     
 `
 
-const More = styled.div`
+const StarAndBomb = styled.div`
     display:flex;
-    flex-direction: row;
-    align-self: end;
+    flex: 8; 
     //background-color: red;
     align-items: center;
-    //justify-content: center;
-    margin-right: 10px;
+`
+
+const More = styled.div`
+    display:flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+     margin-right: 10px;
 `
 const Row = styled.div`
     display: flex;
     flex-direction: row;
+    align-content: center;
+    //justify-content: center;
+    // background-color: red;
 `
 
 
@@ -120,10 +128,17 @@ const BigFrame = ({name, image, star, tags})=>{
                 }
                 </Row>
                 
-                <More>
-                    <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
-                    <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
-                </More>
+                <Row>
+                    <StarAndBomb>
+                        <img width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
+                        <img width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
+                    </StarAndBomb>
+                    <More>
+                        <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
+                        <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
+                    </More>
+                </Row>
+                
 
             </Lower>
         </Block>
