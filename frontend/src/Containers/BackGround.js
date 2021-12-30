@@ -25,6 +25,7 @@ export const MainDiv = styled.div`
     min-width: 312.5px;
     //height: 100px;
     //background: yellow;
+    align-items: center;
     justify-content: center;
 `
 
