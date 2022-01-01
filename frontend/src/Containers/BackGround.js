@@ -30,11 +30,9 @@ export const MainDiv = styled.div`
 `
 
 export const RightDiv = styled.div`
-    display: flex;
     flex: 2;
+    //display: flex;
+    //background-color: red;
     max-width: 200px;
     min-width: 187.5px;
-    //height: 100px;
-    //background: green;
-    justify-content: center;
 `

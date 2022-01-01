@@ -32,9 +32,6 @@ function Home(){
                 </RightDiv>
                
             </CenterDiv>
-           
-            {/* <RightFrame></RightFrame> */}
-            {/* <RightFrame></RightFrame> */}
         </Background>
     )
 }

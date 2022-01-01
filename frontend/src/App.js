@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Personal from './pages/Personal';
 
 const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", color: "white"};
 const NavBarBackground = {background: 'linear-gradient(90deg, white, #FAAC8A 100%)'}
@@ -24,6 +25,7 @@ function App() {
           <Route path = "/" exact component={Home}/>
           <Route path = "/Login" component = {Login}/>
           <Route path = "/Register" component = {Register}/>
+          <Route path = "/Personal" component = {Personal}/>
         </Switch>
       </Box>
     </Router>

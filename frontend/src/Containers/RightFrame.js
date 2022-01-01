@@ -4,12 +4,15 @@ import styled from "styled-components";
 const Block = styled.div`
     display: flex;
     flex-direction: column;
-    width: 190px;
-    background-color: #FFEAA1;
+    width: 100%;
+    background-color: #FFFFE9;
     //height: 200px;
-    margin: 20px;
+    margin-top: 20px;
     border-radius: 20px;
-   // align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #BA905F;
+    // align-items: center;
     //justify-content: center;
 `
 const Button = styled.div`
@@ -20,7 +23,6 @@ const Button = styled.div`
     border-radius: 20px;
     align-self: center;
     justify-content: center;
-    align-content: center;
     font-size: 20px;
     color: white;
     margin-bottom: 8px;
@@ -35,7 +37,7 @@ function RightFrame({restaurants}){
     return(
         <Block>
             <Title>RAMDOM</Title>
-            <Button>GO</Button>
+            <Button>GO</Button> 
         </Block>
     )
 }
