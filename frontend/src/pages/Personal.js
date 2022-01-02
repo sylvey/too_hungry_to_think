@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import RightFrame from "../Containers/RightFrame";
-import {BackgroundPersonal, CenterDiv, MainDiv, RightDiv } from "../Containers/BackGroundPersonal";
+import { Background, CenterDiv, MainDiv, RightDiv } from "../Containers/BackGround";
 //import restaurants from "../hardData/restaurants";
 import boomb from "../hardData/boomb";
 //import BigFrame from "../Containers/BigFrame";
@@ -83,7 +83,7 @@ function Personal(){
     }
 
     return(
-        <BackgroundPersonal>
+        <Background>
             <CenterDiv>
                 <MainDiv style={{ flexDirection:'column'}}>
                     <Title>Favorites</Title>
@@ -126,7 +126,7 @@ function Personal(){
                     <RightFrame></RightFrame>
                 </RightDiv>
             </CenterDiv>
-        </BackgroundPersonal>
+        </Background>
     )
 }
 
