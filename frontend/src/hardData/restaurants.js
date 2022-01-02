@@ -64,9 +64,9 @@ export default[
     },
     {
         id: 4,
-        name: "某某餐廳",
+        name: "餐廳",
         image: require("../hardData/res 1.png"),
-        star: 4,
+        star: 2,
         tags: [
             {
                 type: "food",

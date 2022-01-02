@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import food from '../img/food.GIF'
+import foodPersonal from '../img/food-2.GIF'
 
-export const Background = styled.div`
+export const BackgroundPersonal = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: center;
-
-    background-image:url(${food});
-    background-size: cover;
+    
+    background-image:url(${foodPersonal});
+    // background-size: cover;
     background-position: center;
 `
 export const CenterDiv = styled.div`
