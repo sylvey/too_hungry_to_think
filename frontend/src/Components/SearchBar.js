@@ -10,6 +10,8 @@ const Container = styled.div`
     margin-top: 20px;
     align-items: center;
     padding-left: 20px;
+    border: 1px solid #BA905F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
 
 const Input = styled.input`
