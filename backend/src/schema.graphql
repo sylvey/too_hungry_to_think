@@ -1,0 +1,43 @@
+# Date type. See resolvers/Date.js
+# scalar Date
+
+# Status of a task. See resolvers/Status.js.
+# enum Status {
+#   TODO
+#   INPROGRESS
+#   DONE
+# }
+
+# A task will have an id, title, content, dueDate and status
+# type Task {
+#   id: ID!
+#   title: String!
+#   content: String!
+#   dueDate: Date! # use scalar Date above
+#   status: Status! # use enum Status above
+# }
+
+# See resolvers/Query.js
+# type Query {
+#   restaurantsRandom
+# }
+
+# See resolvers/Mutation.js
+type Mutation {
+  createRestaurant(title: String!, tags: [Tag], link: String ): Restaurant
+  createTag(type: String!, name: String!): Tag
+}
+
+type Restaurant{
+  id: ID!
+  title: String!
+  stars: Float!
+  link: String
+  tags: [Tag]
+}
+
+type Tag{
+  id: ID!
+  type: String!
+  name: String!
+}
