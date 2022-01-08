@@ -1,11 +1,11 @@
 # Date type. See resolvers/Date.js
 # scalar Date
 
-# Status of a task. See resolvers/Status.js.
+# Status of a restaurant. See resolvers/Status.js.
 # enum Status {
-#   TODO
-#   INPROGRESS
-#   DONE
+#   PICKED
+#   LIKE
+#   BOMB
 # }
 
 # A task will have an id, title, content, dueDate and status
@@ -13,7 +13,6 @@
 #   id: ID!
 #   title: String!
 #   content: String!
-#   dueDate: Date! # use scalar Date above
 #   status: Status! # use enum Status above
 # }
 

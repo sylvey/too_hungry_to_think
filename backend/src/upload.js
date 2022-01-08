@@ -1,4 +1,4 @@
-// import taskModel from "./models/task.js";
+// import restaurantModel from "./models/restaurantModel";
 
 // const example = [
 //   {

@@ -10,7 +10,7 @@ const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", c
 const NavBarBackground = {background: '#FAAC8A'};
 function NavBar() {
   return (
-      <AppBar position="static" style = {NavBarBackground}>
+      <AppBar position="fixed" style = {NavBarBackground}>
         <Toolbar>
           <IconButton
             href = "/"
@@ -23,7 +23,7 @@ function NavBar() {
             <img src = "logo192.png" width="50px" height="50px"></img>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}} style = {{color:'#000000'}}>
-            {"Too Hungry \n To Think"}
+            {"HTTP \n Help Them To Pick"}
           </Typography>
           <Button style = {loginRegisterButton} href = "/Register">Register</Button>
           <Button style = {loginRegisterButton} href = "/Login">Login</Button>
