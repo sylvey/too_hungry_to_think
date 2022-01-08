@@ -1,3 +1,5 @@
+// for schemas
+
 import mongoose from "mongoose";
 
 /**
@@ -8,6 +10,7 @@ const restaurantSchema = new mongoose.Schema(
     id: { type: String, unique: true },
     title: String,
     stars: Number,
+    // photo:??
     link: String,
     tags: [{type: mongoose.Types.ObjectId, ref: "Tag"}],
   },
