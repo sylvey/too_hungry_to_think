@@ -18,14 +18,15 @@
 # }
 
 # See resolvers/Query.js
-# type Query {
-#   restaurantsRandom
-# }
+type Query {
+  restaurant: String!
+}
+
 
 # See resolvers/Mutation.js
 type Mutation {
-  createRestaurant(title: String!, tags: [Tag], link: String ): Restaurant
-  createTag(type: String!, name: String!): Tag
+  createRestaurant(input: createRestaurantInput): Restaurant
+  createTag(input: createTagInput): Tag
 }
 
 type Restaurant{
@@ -41,3 +42,18 @@ type Tag{
   type: String!
   name: String!
 }
+
+input createRestaurantInput {
+    id: ID!
+    title: String!
+    link: String!
+    tags: [String!]
+}
+
+input createTagInput{
+  id: ID!
+  type: String!
+  name: String!
+}
+
+
