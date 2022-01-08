@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  cursor: pointer;
+  display: flex;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: #BA905F;
+  border-width: 1px;
+  border-radius: 8px;
+  background-color: #FFFFE9;
+  color: #BA905F;
+  font-size: 16px;
+}

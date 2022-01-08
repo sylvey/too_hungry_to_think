@@ -5,6 +5,7 @@ import restaurants from "../hardData/restaurants";
 import BigFrame from "../Containers/BigFrame";
 import SearchBar from "../Components/SearchBar";
 import styled from "styled-components";
+import AddRestaurants from "../Modal/AddRestaurants";
 
 const Wrap = styled.div`
     display: flex;
@@ -12,13 +13,30 @@ const Wrap = styled.div`
     flex-wrap: wrap;
     justify-content: center;
 `
+const Row = styled.div`
+    display: flex;
+    width: 100%;
+    //justify-content: center;
+    align-items: center;
+    flex-direction: row;
+`
 
 function Home(){
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     return(
         <Background>
             <CenterDiv>
                 <MainDiv style={{ flexDirection:'column'}}>
-                    <SearchBar></SearchBar>
+                    <Row>
+                        <SearchBar></SearchBar> 
+                        <img src={require("../hardData/add.png")} 
+                                width={"30px"} height={"30px"} 
+                                style={{marginTop: "20px", marginLeft: "5px"}}
+                                onClick={handleOpen}></img>
+                    </Row>
+                    
                     <Wrap>
                     {
                         restaurants.map((item)=>(
@@ -32,6 +50,7 @@ function Home(){
                 </RightDiv>
                
             </CenterDiv>
+            <AddRestaurants open = {open} handleClose={handleClose}></AddRestaurants>
         </Background>
     )
 }
