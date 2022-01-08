@@ -1,29 +1,21 @@
 # Date type. See resolvers/Date.js
 # scalar Date
 
-# Status of a restaurant. See resolvers/Status.js.
-# enum Status {
-#   PICKED
-#   LIKE
-#   BOMB
-# }
-
-# A task will have an id, title, content, dueDate and status
-# type Task {
-#   id: ID!
-#   title: String!
-#   content: String!
-#   status: Status! # use enum Status above
-# }
-
 # See resolvers/Query.js
 # type Query {
 #   restaurantsRandom
 # }
 
+
+# Status of a restaurant. See resolvers/Status.js.
+ enum Status {
+   PICKED
+   LIKE
+   BOMB
+ }
 # See resolvers/Mutation.js
 type Mutation {
-  createRestaurant(title: String!, tags: [Tag], link: String ): Restaurant
+  createRestaurant(title: String!, tags: [Tag], link: String, photo: ?? ): Restaurant
   createTag(type: String!, name: String!): Tag
 }
 
@@ -31,6 +23,7 @@ type Restaurant{
   id: ID!
   title: String!
   stars: Float!
+  photo: ?? 
   link: String
   tags: [Tag]
 }
@@ -39,4 +32,10 @@ type Tag{
   id: ID!
   type: String!
   name: String!
+}
+
+# See resolvers/Subscription.js
+type Subscription {
+  # Notify a restaurant created
+  restaurantCreated: Restaurant!
 }
