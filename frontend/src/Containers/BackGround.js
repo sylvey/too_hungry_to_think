@@ -5,18 +5,30 @@ import food from '../hardData/food.png'
 export const Background = styled.div`
     display: flex;
     flex-direction: row;
-    width: 100%;
-    justify-content: center;
-    background-color: white;
-    background-image:url(${food});
+    // width: 100%;
+    height: 57em;
+
     background-size: cover;
-    background-position: center;
+    background-position: fixed;
+
+    justify-content: center;
+    // background-color: white;
+    background-image:url(${food});
+    // background-size: cover;
+    @media(max-width:1500px){ 
+
+        height: auto;
+        background-position: center;
+        background-position-y: 0;
+        background-attachment: fixed;
+   }
+    
 `
 export const CenterDiv = styled.div`
     display: flex;
     flex-direction: row;
     width: 80%;
-    max-width: 800px;
+    max-width: 1200px;
     min-width: 500px;
     //height: 800px;
     //background: red;
@@ -26,18 +38,19 @@ export const CenterDiv = styled.div`
 export const MainDiv = styled.div`
     display: flex;
     flex: 7;
-    max-width: 600px;
+    max-width: 900px;
     min-width: 312.5px;
     //height: 100px;
     //background: yellow;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
+    margin-top: 170px;
 `
 
 export const RightDiv = styled.div`
-    flex: 2;
+    flex: 3;
     //display: flex;
     //background-color: red;
-    max-width: 200px;
+    max-width: 500px;
     min-width: 187.5px;
 `

@@ -138,12 +138,54 @@ const BigFrame = ({name, image, star, tags})=>{
                         <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
                     </More>
                 </Row>
-                
+            </Lower>
+        </Block>
+    )
+}
 
+const BigFrame4Right = ({name, image, star, tags})=>{
+    console.log(name);
+    return(
+        <Block>
+            <Upper>
+                <UpperLeft>
+                    <Img src = {image}></Img>
+                </UpperLeft>
+                <UpperRight>
+                    {/* <div style={{height:"20px"}}></div> */}
+                    {AddButton}
+                    <Title>{name}</Title>
+                    <Stars num={star} style= {{ width: "50px",height: "10px"}}></Stars>
+                </UpperRight>
+                
+            </Upper>
+            <Lower>
+                <Row>
+                {
+                    tags.map((item)=>(
+                        <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
+                            {item.name}
+                        </Tag>
+                    ))
+                }
+                </Row>
+                <Row>
+                    <StarAndBomb>
+                        <img width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
+                        <img width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
+                    </StarAndBomb>
+                    <More>
+                        <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
+                        <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
+                    </More>
+                </Row>
             </Lower>
         </Block>
     )
 }
 
 
+
+
 export default BigFrame;
+export {BigFrame4Right}

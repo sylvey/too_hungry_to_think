@@ -83,47 +83,5 @@ export default[
          ]
 
     },
-    {
-        id: 5,
-        name: "餐廳",
-        image: require("../hardData/res 1.png"),
-        star: 2,
-        tags: [
-            {
-                type: "food",
-                name: "麵類"
-            },
-            {
-                 type: "place",
-                 name: "公館商圈"
-             },
-             {
-                 type: "in or take out",
-                 name: "外帶"
-             },
-         ]
-
-    },
-    {
-        id: 6,
-        name: "餐廳",
-        image: require("../hardData/res 1.png"),
-        star: 2,
-        tags: [
-            {
-                type: "food",
-                name: "麵類"
-            },
-            {
-                 type: "place",
-                 name: "公館商圈"
-             },
-             {
-                 type: "in or take out",
-                 name: "外帶"
-             },
-         ]
-
-    },
     
 ]

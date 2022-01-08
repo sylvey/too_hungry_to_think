@@ -1,38 +1,30 @@
 # Date type. See resolvers/Date.js
 # scalar Date
 
-# Status of a task. See resolvers/Status.js.
-# enum Status {
-#   TODO
-#   INPROGRESS
-#   DONE
-# }
-
-# A task will have an id, title, content, dueDate and status
-# type Task {
-#   id: ID!
-#   title: String!
-#   content: String!
-#   dueDate: Date! # use scalar Date above
-#   status: Status! # use enum Status above
-# }
-
 # See resolvers/Query.js
 type Query {
   restaurant: String!
 }
 
 
+
+# Status of a restaurant. See resolvers/Status.js.
+ enum Status {
+   PICKED
+   LIKE
+   BOMB
+ }
 # See resolvers/Mutation.js
 type Mutation {
-  createRestaurant(input: createRestaurantInput): Restaurant
-  createTag(input: createTagInput): Tag
+  createRestaurant(title: String!, tags: [Tag], link: String, photo: ?? ): Restaurant
+  createTag(type: String!, name: String!): Tag
 }
 
 type Restaurant{
   id: ID!
   title: String!
   stars: Float!
+  photo: ?? 
   link: String
   tags: [Tag]
 }
@@ -43,17 +35,8 @@ type Tag{
   name: String!
 }
 
-input createRestaurantInput {
-    id: ID!
-    title: String!
-    link: String!
-    tags: [String!]
+# See resolvers/Subscription.js
+type Subscription {
+  # Notify a restaurant created
+  restaurantCreated: Restaurant!
 }
-
-input createTagInput{
-  id: ID!
-  type: String!
-  name: String!
-}
-
-
