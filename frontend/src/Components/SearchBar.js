@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Container = styled.div`
     display: flex;
     height: 60px;
-    width: 80%;
+    width: 85%;
     background-color: #FFEDE9;
     border-radius: 30px;
     margin-top: 20px;
@@ -12,6 +12,15 @@ const Container = styled.div`
     padding-left: 20px;
     border: 1px solid #BA905F;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    @media(max-width:1200px){ 
+        width: 80%;
+    }
+    @media(max-width:900px){ 
+        width: 75%;
+    }
+    @media(max-width:700px){ 
+        width: 70%;
+    }
 `
 
 const Input = styled.input`

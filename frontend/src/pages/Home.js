@@ -20,7 +20,31 @@ const Row = styled.div`
     align-items: center;
     flex-direction: row;
 `
-
+const AddButton = styled.div`
+    padding: 0 5px 0 5px;
+    display: flex;
+    height: 60px;
+    width: 65px;
+    // max-width:95px
+    // min-width:20px;
+    background-color: #FFEDE9;
+    border-radius: 30px;
+    margin-top: 20px;
+    align-items: center;
+    justify-content:center;
+    padding-left: 10px;
+    border: 1px solid #BA905F;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size:25px;
+    color:red;
+    :hover{
+        opacity:0.7;
+        cursor:pointer;
+        transition-duration:0.2s;
+    }
+    @media(max-width:700px){ 
+        width: 60px;
+`
 function Home(){
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -31,10 +55,13 @@ function Home(){
                 <MainDiv style={{ flexDirection:'column'}}>
                     <Row>
                         <SearchBar></SearchBar> 
-                        <img src={require("../hardData/add.png")} 
+                        <AddButton onClick={handleOpen}>Add!</AddButton> 
+                            {/* <img src={require("../hardData/add.png")} 
                                 width={"30px"} height={"30px"} 
                                 style={{marginTop: "20px", marginLeft: "5px"}}
-                                onClick={handleOpen}></img>
+                                onClick={handleOpen}></img> */}
+                        
+                        
                     </Row>
                     
                     <Wrap>
