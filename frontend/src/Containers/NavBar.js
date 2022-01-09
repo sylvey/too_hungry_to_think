@@ -23,7 +23,7 @@ function NavBar() {
             <img src = "logo192.png" width="50px" height="50px"></img>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}} style = {{color:'#000000'}}>
-            {"HTTP \n Help Them To Pick"}
+            {"H.T.T.P. -- \n Help Them To Pick"}
           </Typography>
           <Button style = {loginRegisterButton} href = "/Register">Register</Button>
           <Button style = {loginRegisterButton} href = "/Login">Login</Button>
