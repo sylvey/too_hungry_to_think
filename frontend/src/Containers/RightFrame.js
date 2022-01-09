@@ -58,7 +58,6 @@ const Button = styled.div`
 const Title = styled.div`
     // color: #000000;
     margin: 15px;
-
     font-size:25px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-style:oblique;	    

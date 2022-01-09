@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import "../App.css";
 import { useState, useEffect } from 'react';
+import BigFrame, { BigFrame4Right } from "../Containers/BigFrame";
 
 const Example=styled.div`
     width:900px;
@@ -21,7 +22,7 @@ export default function RestaurantsDetail({display, handleClose}) {
                 // aria-labelledby="modal-modal-title"
                 // aria-describedby="modal-modal-description"
             >
-                
+                <BigFrame></BigFrame>
             </Modal>
         </div>
 

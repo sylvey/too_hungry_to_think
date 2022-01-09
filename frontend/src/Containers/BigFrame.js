@@ -151,8 +151,8 @@ const BigFrame = ({id, name, image, star, tags})=>{
                 
                 <Row>
                     <StarAndBomb>
-                        <img width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
-                        <img width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
                     </StarAndBomb>
                     <More>
                         <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>

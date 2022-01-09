@@ -51,7 +51,10 @@ function Home(){
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [display, setDisplay] = React.useState(false);
-    const handleDisplay = () => setDisplay(true);
+    const handleDisplay = () => {
+        setDisplay(true);
+        console.log(display);
+    }
 
     return(
         <Background>
@@ -82,7 +85,7 @@ function Home(){
             <AddRestaurants open = {open} handleClose={handleClose}></AddRestaurants>
             <RestaurantDetail display = {display} handleClose={handleClose}></RestaurantDetail>
 
-            RestaurantDetail
+
         </Background>
     )
 }
