@@ -1,10 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+//import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import "../App.css";
+import { useState, useEffect } from 'react';
+
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -45,7 +48,13 @@ const InputText = styled.input`
 const SubmitButton = styled.button`
     display: flex;
     margin-top: 20px;
+    margin-left: 40%;
     border-radius: 8px;
+    border-color: #BA905F;
+    outline: none;
+    width: 20%;
+    align-items: center;
+    justify-content: center;
     background-color: #F9636C;
     color: white;
     font-size: 16px;
@@ -56,53 +65,110 @@ const InputTitle = styled.p`
 `
 
 export default function AddRestaurants({open, handleClose}) {
-  
+    
+    const [title, setTitle] = useState("");
+    const [link, setLink] = useState("");
+    const [tag, setTag] = useState("");
+    const [image, setImage] = useState(null);
 
-  return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" color={"#BA905F"}>
-            新增餐廳
-          </Typography>
-          <form>
-              <InputBlock>
-                <InputTitle>餐廳名稱</InputTitle>
-                <InputText/>
-              </InputBlock>
+    // useEffect(()=>{
+    //     console.log(window.URL.createObjectURL(image));
+    // },[image])
+
+    useEffect(() => {
+        if(image){
+            console.log(window.URL.createObjectURL(image));
+        }
+        
+    }, [image])
+
+    return (
+        <div>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2" color={"#BA905F"}>
+                新增餐廳
+              </Typography>
+              <form>
+                  <InputBlock>
+                    <InputTitle>餐廳名稱</InputTitle>
+                    <InputText 
+                        value={title}
+                        onChange={(e)=>(setTitle(e.target.value))}
+                    />
+                  </InputBlock>
+
+                  <InputBlock>
+                    <InputTitle>餐廳連結</InputTitle>
+                    <InputText
+                        value={link}
+                        onChange={(e)=>setLink(e.target.value)}/>
+                  </InputBlock>
+
+                  <InputBlock>
+                    <InputTitle>相關資訊</InputTitle>
+                    <InputText 
+                        value={tag}
+                        onChange={(e)=>setTag(e.target.value)}/>
+                  </InputBlock>
+
+                  
+                {
+                    image?(
+                        <>
+                        <InputBlock>
+                          <InputTitle>餐廳圖片上傳</InputTitle>
+                          <label class="custom-file-upload">
+                            <input type="file"
+                              name="myImage"
+                              onChange={(event) => {
+                                console.log(event.target.files[0]);
+                                setImage(event.target.files[0]);
+                              }}
+                              />
+                            <i class="fa fa-cloud-upload"></i>點擊重新選擇
+                          </label>
+                        </InputBlock>
+
+                        <InputBlock>
+                            <img alt="not fount" 
+                                width={"40px"} 
+                                height= {"40px"}
+                                style={{display: "flex", marginTop: "20px"}}
+                                src={window.URL.createObjectURL(image)} />
+                        </InputBlock>
+                        </>
                         
-              <InputBlock>
-                <InputTitle>餐廳連結</InputTitle>
-                <InputText/>
-              </InputBlock>
+                    ):(
+                        <InputBlock>
+                          <InputTitle>餐廳圖片上傳</InputTitle>
+                          <label class="custom-file-upload">
+                            <input type="file"
+                              name="myImage"
+                              onChange={(event) => {
+                                console.log(event.target.files[0]);
+                                setImage(event.target.files[0]);
+                              }}
+                              />
+                            <i class="fa fa-cloud-upload"></i>點擊選擇檔案
+                          </label>
+                        </InputBlock>
+                    )
+                }
+                  <InputBlock >
+                    <SubmitButton
+                      type = "submit"
+                      >新增</SubmitButton>
+                  </InputBlock>
 
-              <InputBlock>
-                <InputTitle>相關資訊</InputTitle>
-                <InputText/>
-              </InputBlock>
-
-              <InputBlock>
-                <InputTitle>餐廳圖片上傳</InputTitle>
-                <label class="custom-file-upload">
-                  <input type="file"/>
-                  <i class="fa fa-cloud-upload"></i>點擊選擇檔案
-                </label>
-              </InputBlock>
-              
-              <InputBlock style={{diplay:"flex", alignItems: "center"}}>
-                <SubmitButton
-                  type = "submit"
-                  >新增</SubmitButton>
-              </InputBlock>
-              
-          </form>
-        </Box>
-      </Modal>
-    </div>
-  );
+              </form>
+            </Box>
+          </Modal>
+        </div>
+    );
 }
