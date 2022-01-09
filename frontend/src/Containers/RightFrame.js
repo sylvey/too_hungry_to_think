@@ -56,9 +56,17 @@ const Button = styled.div`
     margin-bottom: 18px;
 `
 const Title = styled.div`
+    // color: #000000;
+    margin: 15px;
+
+    font-size:25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style:oblique;	    
+    text-decoration:underline;
+    color:rgb(223, 162, 121);
     display: flex;
-    color: #000000;
-    margin: 8px;
+    justify-content: center;
+    algin-items: top;
 `
 const TitleSelected = styled.div`
     font-size:31px;
