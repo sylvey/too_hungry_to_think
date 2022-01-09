@@ -38,7 +38,7 @@ const AddButton = styled.div`
     font-size:25px;
     color:red;
     :hover{
-        opacity:0.7;
+        opacity:0.85;
         cursor:pointer;
         transition-duration:0.2s;
     }
@@ -60,8 +60,6 @@ function Home(){
                                 width={"30px"} height={"30px"} 
                                 style={{marginTop: "20px", marginLeft: "5px"}}
                                 onClick={handleOpen}></img> */}
-                        
-                        
                     </Row>
                     
                     <Wrap>

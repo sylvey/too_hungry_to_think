@@ -4,6 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import logo from "../img/loogo.PNG"
 
 
 const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", color: "white"};
@@ -20,7 +21,7 @@ function NavBar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <img src = "logo192.png" width="50px" height="50px"></img>
+            <img src = {logo} width="50px" height="50px"></img>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}} style = {{color:'#000000'}}>
             {"H.T.T.P. -- \n Help Them To Pick"}
