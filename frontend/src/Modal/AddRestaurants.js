@@ -16,6 +16,7 @@ const style = {
   width: 400,
   bgcolor: '#FFEDE9',
 //   border: '2px solid #000',
+  outline: 'none',
   boxShadow: 24,
   p: 4,
   border: "1px solid #BA905F",

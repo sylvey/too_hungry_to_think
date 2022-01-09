@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import Stars from "../Components/star";
+import IconTint from "react-icon-tint";
 
 const Block = styled.div`
     display: flex;
@@ -44,12 +45,11 @@ const Img = styled.img`
     width: 90px;
     height: 90px;
 `
-
-const AddButton = 
-    <img src={require("../hardData/check-circle.png")}
-         width={"20px"}
-         height={"20px"}
-style={{display: "flex", alignSelf: 'end', marginRight: "10px"}}></img>
+const AddButton = styled.img`
+    display: flex;
+    align-self: end;
+    margin-right: 10px;
+`
 
 const Title = styled.h4`
     font-size: 15px; 
@@ -101,8 +101,39 @@ const Row = styled.div`
 `
 
 
-const BigFrame = ({name, image, star, tags})=>{
-    console.log(name);
+const BigFrame = ({id, name, image, star, tags})=>{
+    //console.log(name);
+    const [chosen, setChosen] = useState(false);
+    const handleCheck = ()=>{
+        setChosen(!chosen);
+    }
+
+    useEffect(()=>{
+        if(chosen){
+            let pocketS = window.sessionStorage.getItem('pocketList');
+            if(pocketS){
+                let pocket = JSON.parse(pocketS);
+                let newPocket = [...pocket, {id, name, image, star, tags}];
+                let newPocketS = JSON.stringify(newPocket);
+                window.sessionStorage.setItem('pocketList', newPocketS);
+                console.log(window.sessionStorage.getItem('pocketList'));
+            }
+            else{
+                let newPocket = [{id, name, image, star, tags}];
+                let newPocketS = JSON.stringify(newPocket);
+                window.sessionStorage.setItem('pocketList', newPocketS);
+                console.log(window.sessionStorage.getItem('pocketList'));
+            }
+        } 
+        else{
+            let pocketS = window.sessionStorage.getItem('pocketList');
+            let pocket = JSON.parse(pocketS);
+            let newPocket = pocket.filter(item=>item.id !== id);
+            let newPocketS = JSON.stringify(newPocket);
+            window.sessionStorage.setItem('pocketList', newPocketS);
+        }
+    },[chosen])
+
     return(
         <Block>
             <Upper>
@@ -110,8 +141,12 @@ const BigFrame = ({name, image, star, tags})=>{
                     <Img src = {image}></Img>
                 </UpperLeft>
                 <UpperRight>
-                    {/* <div style={{height:"20px"}}></div> */}
-                    {AddButton}
+                    <AddButton 
+                        src={chosen?require("../hardData/check-circle.png"):require("../hardData/check-circle-empty.png")}
+                        width={"20px"}
+                        height ={"20px"}
+                        onClick={handleCheck}
+                    ></AddButton>
                     <Title>{name}</Title>
                     <Stars num={star} style= {{ width: "50px",height: "10px"}}></Stars>
                 </UpperRight>
@@ -152,8 +187,12 @@ const BigFrame4Right = ({name, image, star, tags})=>{
                     <Img src = {image}></Img>
                 </UpperLeft>
                 <UpperRight>
-                    {/* <div style={{height:"20px"}}></div> */}
-                    {AddButton}
+                    {/* <AddButton 
+                        src={chosen? require("../hardData/check-circle.png"):require("../hardData/check-circle-empty.png")}
+                        width={"20px"}
+                        height ={"20px"}
+                        onClick={handleCheck}
+                    ></AddButton> */}
                     <Title>{name}</Title>
                     <Stars num={star} style= {{ width: "50px",height: "10px"}}></Stars>
                 </UpperRight>

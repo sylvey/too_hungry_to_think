@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {BigFrame4Right} from "./BigFrame";
 import {Wrap} from "../pages/Home"
@@ -12,6 +12,7 @@ const Block = styled.div`
     background-color: #FFFFE9;
     //height: 200px;
     margin-top: 170px;
+    margin-bottom: 170px;
     border-radius: 20px;
     border-style: solid;
     border-width: 1px;
@@ -26,6 +27,7 @@ const BlockSelected = styled.div`
 
     background-color: #FFFFE9;
     height: auto;
+    margin-bottom: 170px;
     margin-top: 170px;
     border-radius: 20px;
     border-style: solid;
@@ -72,13 +74,29 @@ const TitleSelected = styled.div`
 
 
 function RightFrame(){
+    const [restaurants, setRestaurants] = useState([]);
+
+    window.addEventListener('storage', ()=>{
+        let pocketS = window.sessionStorage.getItem('pocketList');
+
+        if(pocketS){
+            let pocket = JSON.parse(pocketS);
+            setRestaurants(pocket);
+        }
+    });
+
+    useEffect(() => {
+
+    }, [])
+
     return(
-        {restaurantsSelected}
-        ?<BlockSelected>
+        <>
+        {restaurants
+            ?<BlockSelected>
             <TitleSelected>Pocket List</TitleSelected>
             <Wrap>
                     {
-                        restaurantsSelected.map((item)=>(
+                        restaurants.map((item)=>(
                             <BigFrame4Right {...item}></BigFrame4Right>
                         ))
                     }
@@ -89,6 +107,9 @@ function RightFrame(){
         <Title>RANDOM</Title>
         <Button>GO</Button> 
         </Block>
+        }
+        
+        </>
     )
 }
 
