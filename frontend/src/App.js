@@ -8,7 +8,7 @@ import food from './img/food.GIF'
 import foodPersonal from './img/food-2.GIF'
 //import { makeStyles } from '@mui/styles';
 // import Button from '@mui/material/Button';
-
+import { PocketHookProvider } from './hook/pocketProvider';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -21,6 +21,7 @@ function App() {
   // const classes = useStyles();
   return (
     <Router >
+      <PocketHookProvider>
       <Box sx={{ flexGrow: 1 }}>
         <NavBar />
         <Switch>
@@ -30,6 +31,7 @@ function App() {
           <Route path = "/Personal" component = {Personal}/>
         </Switch>
       </Box>
+      </PocketHookProvider>
     </Router>
   );
 }

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import Stars from "../Components/star";
 import IconTint from "react-icon-tint";
+import { usePocketHook } from "../hook/pocketProvider";
 
 const Block = styled.div`
     display: flex;
@@ -104,33 +105,18 @@ const Row = styled.div`
 const BigFrame = ({id, name, image, star, tags})=>{
     //console.log(name);
     const [chosen, setChosen] = useState(false);
+    const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
+
     const handleCheck = ()=>{
         setChosen(!chosen);
     }
 
     useEffect(()=>{
         if(chosen){
-            let pocketS = window.sessionStorage.getItem('pocketList');
-            if(pocketS){
-                let pocket = JSON.parse(pocketS);
-                let newPocket = [...pocket, {id, name, image, star, tags}];
-                let newPocketS = JSON.stringify(newPocket);
-                window.sessionStorage.setItem('pocketList', newPocketS);
-                console.log(window.sessionStorage.getItem('pocketList'));
-            }
-            else{
-                let newPocket = [{id, name, image, star, tags}];
-                let newPocketS = JSON.stringify(newPocket);
-                window.sessionStorage.setItem('pocketList', newPocketS);
-                console.log(window.sessionStorage.getItem('pocketList'));
-            }
-        } 
+            saveRestaurant({id, name, image, star, tags});
+        }
         else{
-            let pocketS = window.sessionStorage.getItem('pocketList');
-            let pocket = JSON.parse(pocketS);
-            let newPocket = pocket.filter(item=>item.id !== id);
-            let newPocketS = JSON.stringify(newPocket);
-            window.sessionStorage.setItem('pocketList', newPocketS);
+            deleteRestaurant(id);
         }
     },[chosen])
 

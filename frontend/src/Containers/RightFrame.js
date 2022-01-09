@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {BigFrame4Right} from "./BigFrame";
 import {Wrap} from "../pages/Home"
 import restaurantsSelected from "../hardData/restaurantsSelected";
+import { usePocketHook } from "../hook/pocketProvider";
 
 const Block = styled.div`
     display: flex;
@@ -75,28 +76,17 @@ const TitleSelected = styled.div`
 
 function RightFrame(){
     const [restaurants, setRestaurants] = useState([]);
+    const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
 
-    window.addEventListener('storage', ()=>{
-        let pocketS = window.sessionStorage.getItem('pocketList');
-
-        if(pocketS){
-            let pocket = JSON.parse(pocketS);
-            setRestaurants(pocket);
-        }
-    });
-
-    useEffect(() => {
-
-    }, [])
 
     return(
         <>
-        {restaurants
+        {pocket
             ?<BlockSelected>
             <TitleSelected>Pocket List</TitleSelected>
             <Wrap>
                     {
-                        restaurants.map((item)=>(
+                        pocket.map((item)=>(
                             <BigFrame4Right {...item}></BigFrame4Right>
                         ))
                     }
