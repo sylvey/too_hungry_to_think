@@ -13,6 +13,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Personal from './pages/Personal';
+import Information from './pages/Information';
+
 import { Opacity } from '@mui/icons-material';
 
 const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", color: "white"};
@@ -28,6 +30,7 @@ function App() {
           <Route path = "/" exact component={Home}/>
           <Route path = "/Login" component = {Login}/>
           <Route path = "/Register" component = {Register}/>
+          <Route path = "/Information" component = {Information}/>
           <Route path = "/Personal" component = {Personal}/>
         </Switch>
       </Box>

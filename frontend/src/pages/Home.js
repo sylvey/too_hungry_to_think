@@ -6,7 +6,7 @@ import BigFrame from "../Containers/BigFrame";
 import SearchBar from "../Components/SearchBar";
 import styled from "styled-components";
 import AddRestaurants from "../Modal/AddRestaurants";
-import RestaurantDetail from "../Modal/RestaurantDetail";
+
 
 const Wrap = styled.div`
     display: flex;
@@ -72,7 +72,9 @@ function Home(){
                     <Wrap>
                     {
                         restaurants.map((item)=>(
-                            <BigFrame {...item}></BigFrame>
+                            <BigFrame
+                            //  href = "/Information"
+                             {...item}></BigFrame>
                         ))
                     }
                     </Wrap>
@@ -83,9 +85,6 @@ function Home(){
                
             </CenterDiv>
             <AddRestaurants open = {open} handleClose={handleClose}></AddRestaurants>
-            <RestaurantDetail display = {display} handleClose={handleClose}></RestaurantDetail>
-
-
         </Background>
     )
 }
