@@ -27,7 +27,7 @@ function NavBar() {
             {"H.T.T.P. -- \n Help Them To Pick"}
           </Typography>
 
-          <Button style = {loginRegisterButton} href = "/Login">Login</Button>
+          <Button style = {loginRegisterButton} href = "/FBLogin">Login</Button>
         </Toolbar>
       </AppBar>
 
