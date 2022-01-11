@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import logo from "../img/loogo.PNG"
 
 
+
 const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", color: "white"};
 const NavBarBackground = {background: '#FAAC8A'};
 function NavBar() {
@@ -27,7 +28,7 @@ function NavBar() {
             {"H.T.T.P. -- \n Help Them To Pick"}
           </Typography>
 
-          <Button style = {loginRegisterButton} href = "/FBLogin">Login</Button>
+          <Button style = {loginRegisterButton} href = "/Login">Login</Button>
         </Toolbar>
       </AppBar>
 
