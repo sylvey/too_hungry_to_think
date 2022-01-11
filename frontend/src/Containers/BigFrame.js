@@ -151,8 +151,10 @@ const BigFrame = ({id, name, image, star, tags})=>{
                 
                 <Row>
                     <StarAndBomb>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
+                        {/* <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/> */}
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")}/>
                     </StarAndBomb>
                     <More>
                         <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
@@ -198,6 +200,7 @@ const BigFrame4Right = ({name, image, star, tags})=>{
                     <StarAndBomb>
                         <img width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
                         <img width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
+                        
                     </StarAndBomb>
                     <More>
                         <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
