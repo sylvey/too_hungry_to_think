@@ -26,7 +26,7 @@ function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}} style = {{color:'#000000'}}>
             {"H.T.T.P. -- \n Help Them To Pick"}
           </Typography>
-          <Button style = {loginRegisterButton} href = "/Register">Register</Button>
+
           <Button style = {loginRegisterButton} href = "/Login">Login</Button>
         </Toolbar>
       </AppBar>
