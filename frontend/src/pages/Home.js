@@ -74,7 +74,9 @@ function Home(){
                     <Wrap>
                     {
                         restaurants.map((item)=>(
-                            <BigFrame {...item}></BigFrame>
+                            <BigFrame
+                            //  href = "/Information"
+                             {...item}></BigFrame>
                         ))
                     }
                     </Wrap>
@@ -85,9 +87,6 @@ function Home(){
                
             </CenterDiv>
             <AddRestaurants open = {open} handleClose={handleClose}></AddRestaurants>
-            {/* <RestaurantDetail display = {display} handleClose={handleClose}></RestaurantDetail> */}
-
-
         </Background>
     )
 }

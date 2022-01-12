@@ -6,17 +6,21 @@ import { Javascript } from '@mui/icons-material';
 const PocketContext = React.createContext();
 
 const usePocketHookEffect = () => {
-  const [pocket, setPocket] = useState([]);
+  const [pocket, setPocket] = useState(window.sessionStorage.getItem('pocketList') ? 
+  JSON.parse(window.sessionStorage.getItem('pocketList'))
+  : []);
 
   const saveRestaurant = (item) => {
     let pocketS = window.sessionStorage.getItem('pocketList');
     if(pocketS){
         let pocketO = JSON.parse(pocketS);
-        let newPocket = [...pocketO, item];
-        let newPocketS = JSON.stringify(newPocket);
-        window.sessionStorage.setItem('pocketList', newPocketS);
-        console.log(window.sessionStorage.getItem('pocketList'));
-        setPocket(newPocket);
+        if(!pocketO.find(e => e.id === item.id)){
+            let newPocket = [...pocketO, item];
+            let newPocketS = JSON.stringify(newPocket);
+            window.sessionStorage.setItem('pocketList', newPocketS);
+            console.log(window.sessionStorage.getItem('pocketList'));
+            setPocket(newPocket);
+        }
     }
     else{
         let newPocket = [item];
@@ -39,8 +43,15 @@ const usePocketHookEffect = () => {
   }
 
   useEffect(() => {
-    const pocketList = window.sessionStorage.setItem('pocketList', JSON.stringify([]));
-    setPocket(pocketList);
+    if(!window.sessionStorage.getItem('pocketList')){
+        const pocketList = window.sessionStorage.setItem('pocketList', JSON.stringify([]));
+        setPocket(pocketList);
+    }
+    else{
+       const pocketList = JSON.parse(window.sessionStorage.getItem('pocketList'));
+       setPocket(pocketList);
+       console.log("pocket:", pocket)
+    }
   }, []);
 
   return { pocket, saveRestaurant, deleteRestaurant };

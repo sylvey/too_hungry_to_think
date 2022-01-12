@@ -82,9 +82,12 @@ const TitleSelected = styled.div`
 
 
 function RightFrame(){
-    const [restaurants, setRestaurants] = useState([]);
-    const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
+    //const [restaurants, setRestaurants] = useState([]);
+    const { pocket } = usePocketHook();
 
+    useEffect(()=>{
+        console.log(pocket);
+    },[pocket])
 
     return(
         <>

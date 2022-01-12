@@ -103,9 +103,9 @@ const Row = styled.div`
 
 
 const BigFrame = ({id, name, image, star, tags})=>{
-    //console.log(name);
-    const [chosen, setChosen] = useState(false);
-    const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
+    console.log(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
+    const [chosen, setChosen] = useState(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
+    const {saveRestaurant, deleteRestaurant } = usePocketHook();
 
     const handleCheck = ()=>{
         setChosen(!chosen);
@@ -119,6 +119,7 @@ const BigFrame = ({id, name, image, star, tags})=>{
             deleteRestaurant(id);
         }
     },[chosen])
+
 
     return(
         <Block>
@@ -151,8 +152,10 @@ const BigFrame = ({id, name, image, star, tags})=>{
                 
                 <Row>
                     <StarAndBomb>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
+                        {/* <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/> */}
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")}/>
                     </StarAndBomb>
                     <More>
                         <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
@@ -198,6 +201,7 @@ const BigFrame4Right = ({name, image, star, tags})=>{
                     <StarAndBomb>
                         <img width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
                         <img width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
+                        
                     </StarAndBomb>
                     <More>
                         <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>

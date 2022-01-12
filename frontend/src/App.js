@@ -13,6 +13,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Personal from './pages/Personal';
+import Information from './pages/Information';
+
 import { Opacity } from '@mui/icons-material';
 import RestaurantDetail from "./pages/RestaurantDetail";
 
@@ -29,6 +31,7 @@ function App() {
           <Route path = "/" exact component={Home}/>
           <Route path = "/Login" component = {Login}/>
           <Route path = "/Register" component = {Register}/>
+          <Route path = "/Information" component = {Information}/>
           <Route path = "/Personal" component = {Personal}/>
           <Route path = "/info" component = {RestaurantDetail}/>
         </Switch>

@@ -6,7 +6,7 @@ export const Background = styled.div`
     display: flex;
     flex-direction: row;
     // width: 100%;
-    height: 57em;
+    height: 65em;
 
     background-size: cover;
     background-position: fixed;
@@ -15,7 +15,14 @@ export const Background = styled.div`
     // background-color: white;
     background-image:url(${food});
     // background-size: cover;
-    @media(max-width:1500px){ 
+    @media(max-width:1900px){ 
+
+        height: 70em;
+        // background-position: center;
+        // background-position-y: 0;
+        // background-attachment: fixed;
+   }
+    @media(max-width:1300px){ 
 
         height: auto;
         background-position: center;
