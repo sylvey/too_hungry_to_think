@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Personal from './pages/Personal';
 import { Opacity } from '@mui/icons-material';
+import RestaurantDetail from "./pages/RestaurantDetail";
 
 const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", color: "white"};
 const NavBarBackground = {background: 'linear-gradient(90deg, white, #FAAC8A 100%)'}
@@ -29,6 +30,7 @@ function App() {
           <Route path = "/Login" component = {Login}/>
           <Route path = "/Register" component = {Register}/>
           <Route path = "/Personal" component = {Personal}/>
+          <Route path = "/info" component = {RestaurantDetail}/>
         </Switch>
       </Box>
       </PocketHookProvider>

@@ -6,7 +6,7 @@ import BigFrame from "../Containers/BigFrame";
 import SearchBar from "../Components/SearchBar";
 import styled from "styled-components";
 import AddRestaurants from "../Modal/AddRestaurants";
-import RestaurantDetail from "../Modal/RestaurantDetail";
+
 
 const Wrap = styled.div`
     display: flex;
@@ -50,16 +50,18 @@ function Home(){
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [display, setDisplay] = React.useState(false);
-    const handleDisplay = () => {
-        setDisplay(true);
-        console.log(display);
-    }
+    // const [display, setDisplay] = React.useState(false);
+    // const handleDisplay = () => {
+    //     setDisplay(true);
+    //     console.log(display);
+    // }
 
     return(
         <Background>
             <CenterDiv>
-                <MainDiv style={{ flexDirection:'column'}} onClick={handleDisplay}>
+                <MainDiv style={{ flexDirection:'column'}} 
+                // onClick={handleDisplay}
+                    >
                     <Row>
                         <SearchBar></SearchBar> 
                         <AddButton onClick={handleOpen}>Add!</AddButton> 
@@ -83,7 +85,7 @@ function Home(){
                
             </CenterDiv>
             <AddRestaurants open = {open} handleClose={handleClose}></AddRestaurants>
-            <RestaurantDetail display = {display} handleClose={handleClose}></RestaurantDetail>
+            {/* <RestaurantDetail display = {display} handleClose={handleClose}></RestaurantDetail> */}
 
 
         </Background>
