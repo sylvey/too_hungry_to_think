@@ -31,6 +31,9 @@ export default function AddBomb({open, handleClose, id, title}) {
     
     // console.log("title:", title);
     // console.log("id:", id);
+    const handleSubmit = ()=>{
+       handleClose();
+    }
 
     return (
         <div>
@@ -44,7 +47,7 @@ export default function AddBomb({open, handleClose, id, title}) {
               <Typography id="modal-modal-title" variant="h6" component="h2" color={"#BA905F"}>
                 確認新增{" "+title+ " "} 至你的地雷區餐廳?
               </Typography>
-              <SubmitButton>確認</SubmitButton>
+              <SubmitButton onClick={handleSubmit}>確認</SubmitButton>
               
             </Box>
           </Modal>

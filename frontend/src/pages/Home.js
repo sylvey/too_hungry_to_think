@@ -7,6 +7,7 @@ import SearchBar from "../Components/SearchBar";
 import styled from "styled-components";
 import AddRestaurants from "../Modal/AddRestaurants";
 import AddBomb from "../Modal/AddBomb";
+import AddFavorite from "../Modal/AddFavorite";
 
 
 const Wrap = styled.div`
@@ -54,19 +55,31 @@ function Home(){
     const handleAddRestaurantClose = () => setAddRestaurantOpen(false);
 
     //for add collection block
+    const [favoriteId, setFavoriteId] = useState("");
+    const [favoriteTitle, setFavoriteTitle] = useState("");
+    const [addFavoriteOpen, setAddFavoriteOpen] = useState("");
+    const handleAddFavoriteOpen = (id, title) => {
+        setFavoriteId(id);
+        setFavoriteTitle(title);
+        setAddFavoriteOpen(true);
+    }
+    const handleAddFavoriteClose = () =>{
+        setAddFavoriteOpen(false);
+    }
+
 
     //for add bomb block
     const [bombId, setBombId] = useState("");
     const [bombTitle, setBombTitle] = useState("");
     const [addBombOpen, setAddBombOpen] = useState(false);
     const handleAddBombOpen = (id, title) => {
-        console.log("id:", id);
-        console.log("tilte:", title);
         setBombId(id);
         setBombTitle(title);
         setAddBombOpen(true)
     };
-    const handleAddBombClose = () => setAddBombOpen(false); 
+    const handleAddBombClose = () => {
+        setAddBombOpen(false);
+    } 
 
 
 
@@ -87,6 +100,7 @@ function Home(){
                         restaurants.map((item)=>(
                             <BigFrame
                                openAddBomb={handleAddBombOpen}
+                               openAddFavorite={handleAddFavoriteOpen}
                                {...item}></BigFrame>
                         ))
                     }
@@ -98,7 +112,8 @@ function Home(){
                
             </CenterDiv>
             <AddRestaurants open = {addRestaurantOpen} handleClose={handleAddRestaurantClose}></AddRestaurants>
-            <AddBomb id = "bomb" open={addBombOpen} handleClose={handleAddBombClose} title={bombTitle} id={bombId}></AddBomb>
+            <AddBomb open={addBombOpen} handleClose={handleAddBombClose} title = {bombTitle} id = {bombId}></AddBomb>
+            <AddFavorite open = {addFavoriteOpen} handleClose={handleAddFavoriteClose} id = {favoriteId} title = {favoriteTitle}></AddFavorite>
         </Background>
     )
 }

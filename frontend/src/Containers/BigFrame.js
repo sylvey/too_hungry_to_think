@@ -102,7 +102,7 @@ const Row = styled.div`
 `
 
 
-const BigFrame = ({id, name, image, star, tags, openAddBomb})=>{
+const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>{
     // console.log(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
     const {pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
     const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
@@ -158,7 +158,7 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb})=>{
                 
                 <Row>
                     <StarAndBomb>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")} onClick={()=>openAddFavorite(id, name)}/>
                         <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")} onClick={()=>openAddBomb(id, name)}/>
                     </StarAndBomb>
                     <More>
