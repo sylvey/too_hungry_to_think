@@ -102,7 +102,7 @@ const Row = styled.div`
 `
 
 
-const BigFrame = ({id, name, image, star, tags})=>{
+const BigFrame = ({id, name, image, star, tags, openAddBomb})=>{
     // console.log(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
     const {pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
     const [chosen, setChosen] = useState(pocket.find(item=>item.id === id)? true: false);
@@ -156,10 +156,8 @@ const BigFrame = ({id, name, image, star, tags})=>{
                 
                 <Row>
                     <StarAndBomb>
-                        {/* <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/> */}
                         <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")}/>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")} onClick={()=>openAddBomb(id, name)}/>
                     </StarAndBomb>
                     <More>
                         <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>

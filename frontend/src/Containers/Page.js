@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import "../App.css";
-
 import { useState, useEffect } from 'react';
 import Stars from "../Components/star";
 import IconTint from "react-icon-tint";

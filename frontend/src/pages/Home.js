@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import RightFrame from "../Containers/RightFrame";
 import { Background, CenterDiv, MainDiv, RightDiv } from "../Containers/BackGround";
 import restaurants from "../hardData/restaurants";
@@ -6,6 +6,7 @@ import BigFrame from "../Containers/BigFrame";
 import SearchBar from "../Components/SearchBar";
 import styled from "styled-components";
 import AddRestaurants from "../Modal/AddRestaurants";
+import AddBomb from "../Modal/AddBomb";
 
 
 const Wrap = styled.div`
@@ -47,14 +48,28 @@ const AddButton = styled.div`
         width: 60px;
 `
 function Home(){
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    // const [display, setDisplay] = React.useState(false);
-    // const handleDisplay = () => {
-    //     setDisplay(true);
-    //     console.log(display);
-    // }
+    //for add restaurant block
+    const [addRestaurantOpen, setAddRestaurantOpen] = useState(false);
+    const handleAddRestaurantOpen = () => setAddRestaurantOpen(true);
+    const handleAddRestaurantClose = () => setAddRestaurantOpen(false);
+
+    //for add collection block
+
+    //for add bomb block
+    const [bombId, setBombId] = useState("");
+    const [bombTitle, setBombTitle] = useState("");
+    const [addBombOpen, setAddBombOpen] = useState(false);
+    const handleAddBombOpen = (id, title) => {
+        console.log("id:", id);
+        console.log("tilte:", title);
+        setBombId(id);
+        setBombTitle(title);
+        setAddBombOpen(true)
+    };
+    const handleAddBombClose = () => setAddBombOpen(false); 
+
+
+
 
     return(
         <Background>
@@ -64,19 +79,15 @@ function Home(){
                     >
                     <Row>
                         <SearchBar></SearchBar> 
-                        <AddButton onClick={handleOpen}>Add!</AddButton> 
-                            {/* <img src={require("../hardData/add.png")} 
-                                width={"30px"} height={"30px"} 
-                                style={{marginTop: "20px", marginLeft: "5px"}}
-                                onClick={handleOpen}></img> */}
+                        <AddButton onClick={handleAddRestaurantOpen}>Add!</AddButton> 
                     </Row>
                     
                     <Wrap>
                     {
                         restaurants.map((item)=>(
                             <BigFrame
-                            //  href = "/Information"
-                             {...item}></BigFrame>
+                               openAddBomb={handleAddBombOpen}
+                               {...item}></BigFrame>
                         ))
                     }
                     </Wrap>
@@ -86,7 +97,8 @@ function Home(){
                 </RightDiv>
                
             </CenterDiv>
-            <AddRestaurants open = {open} handleClose={handleClose}></AddRestaurants>
+            <AddRestaurants open = {addRestaurantOpen} handleClose={handleAddRestaurantClose}></AddRestaurants>
+            <AddBomb id = "bomb" open={addBombOpen} handleClose={handleAddBombClose} title={bombTitle} id={bombId}></AddBomb>
         </Background>
     )
 }

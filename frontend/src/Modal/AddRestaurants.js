@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import "../App.css";
 import { useState, useEffect } from 'react';
-
+import { SubmitButton } from '../Containers/Buttons';
 
 const style = {
   position: 'absolute',
@@ -45,20 +45,6 @@ const InputText = styled.input`
         outline: none;
         border-style: solid;
     }
-`
-const SubmitButton = styled.button`
-    display: flex;
-    margin-top: 20px;
-    margin-left: 40%;
-    border-radius: 8px;
-    border-color: #BA905F;
-    outline: none;
-    width: 20%;
-    align-items: center;
-    justify-content: center;
-    background-color: #F9636C;
-    color: white;
-    font-size: 16px;
 `
 
 const InputTitle = styled.p`
