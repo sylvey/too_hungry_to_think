@@ -33,7 +33,7 @@ function App() {
           <Route path = "/Register" component = {Register}/>
           <Route path = "/Information" component = {Information}/>
           <Route path = "/Personal" component = {Personal}/>
-          <Route path = "/info" component = {RestaurantDetail}/>
+          {/* <Route path = "/info" component = {RestaurantDetail}/> */}
         </Switch>
       </Box>
       </PocketHookProvider>
