@@ -86,7 +86,9 @@ function RightFrame(){
     const { pocket } = usePocketHook();
 
     useEffect(()=>{
-        console.log(pocket);
+        if(pocket){
+            console.log(pocket);
+        };
     },[pocket])
 
     return(

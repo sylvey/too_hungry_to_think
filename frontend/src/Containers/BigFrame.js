@@ -105,7 +105,7 @@ const Row = styled.div`
 const BigFrame = ({id, name, image, star, tags, openAddBomb})=>{
     // console.log(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
     const {pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
-    const [chosen, setChosen] = useState(pocket.find(item=>item.id === id)? true: false);
+    const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
 
     const handleCheck = ()=>{
         setChosen(!chosen);
@@ -121,7 +121,9 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb})=>{
     },[chosen])
 
     useEffect(()=>{
-        setChosen(pocket.find(item=>item.id === id)? true: false);
+        if(pocket){
+            setChosen(pocket.find(item=>item.id === id)? true: false);
+        }
     },[pocket])
 
 
