@@ -104,8 +104,8 @@ const Row = styled.div`
 
 const BigFrame = ({id, name, image, star, tags})=>{
     console.log(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
-    const [chosen, setChosen] = useState(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
-    const {saveRestaurant, deleteRestaurant } = usePocketHook();
+    const {pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
+    const [chosen, setChosen] = useState(pocket.find(item=>item.id === id)? true: false);
 
     const handleCheck = ()=>{
         setChosen(!chosen);
@@ -119,6 +119,10 @@ const BigFrame = ({id, name, image, star, tags})=>{
             deleteRestaurant(id);
         }
     },[chosen])
+
+    useEffect(()=>{
+        setChosen(pocket.find(item=>item.id === id)? true: false);
+    },[pocket])
 
 
     return(
@@ -167,8 +171,14 @@ const BigFrame = ({id, name, image, star, tags})=>{
     )
 }
 
-const BigFrame4Right = ({name, image, star, tags})=>{
-    console.log(name);
+const BigFrame4Right = ({id, name, image, star, tags})=>{
+    // console.log(name);
+    const {deleteRestaurant } = usePocketHook();
+
+    const handleDelete = ()=>{
+        deleteRestaurant(id);
+    }
+
     return(
         <Block>
             <Upper>
@@ -176,12 +186,12 @@ const BigFrame4Right = ({name, image, star, tags})=>{
                     <Img src = {image}></Img>
                 </UpperLeft>
                 <UpperRight>
-                    {/* <AddButton 
-                        src={chosen? require("../hardData/check-circle.png"):require("../hardData/check-circle-empty.png")}
+                    <AddButton 
+                        src={require("../hardData/deletion.png")}
                         width={"20px"}
                         height ={"20px"}
-                        onClick={handleCheck}
-                    ></AddButton> */}
+                        onClick={handleDelete}
+                    ></AddButton>
                     <Title>{name}</Title>
                     <Stars num={star} style= {{ width: "50px",height: "10px"}}></Stars>
                 </UpperRight>
