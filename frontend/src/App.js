@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Personal from './pages/Personal';
 import Information from './pages/Information';
+import Folder from './pages/Folder';
 
 import { Opacity } from '@mui/icons-material';
 // import RestaurantDetail from "./pages/RestaurantDetail";
@@ -33,7 +34,7 @@ function App() {
           <Route path = "/Register" component = {Register}/>
           <Route path = "/Information" component = {Information}/>
           <Route path = "/Personal" component = {Personal}/>
-          {/* <Route path = "/info" component = {RestaurantDetail}/> */}
+          <Route path = "/Folder/:id" component = {Folder}/>
         </Switch>
       </Box>
       </PocketHookProvider>

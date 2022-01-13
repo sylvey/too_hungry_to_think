@@ -10,9 +10,10 @@ const restaurantSchema = new mongoose.Schema(
     id: { type: String, unique: true },
     title: String,
     stars: Number,
-    // photo:??
+    photo: String,
     link: String,
     tags: [{type: mongoose.Types.ObjectId, ref: "Tag"}],
+    comments: [{type: mongoose.Types.ObjectId, ref: "Comment"}]
   },
   {
     collection: "restaurant",
@@ -26,12 +27,46 @@ const tagSchema = new mongoose.Schema(
         name: String,
     },
     {
-        collation: "tag",
+        collection: "tag",
     }
+)
+
+const userSchema = new mongoose.Schema(
+  {
+     id: {type: String, unique: true},
+     files: [{type: mongoose.Types.ObjectId, ref: "File"}],
+     bomb: [{type: mongoose.Types.ObjectId, ref: "Restaurant"}],
+  },
+  {
+      collection: "user"
+  }
+)
+
+const fileSchema = new mongoose.Schema(
+  {
+      id: {type: String, unique: true},
+      title: String,
+      restaurants: [{type: mongoose.Types.ObjectId, ref: "Restaurant"}],
+  },
+  {
+    collection: "file"
+  }
+)
+
+const commentSchema = new mongoose.Schema(
+  {
+      id: {type: String, unique: true},
+      userId: String,
+      restaurantId: String,
+      content: String,
+      star: Number
+  }
 )
 
 const TagsModel = mongoose.model("Tag", tagSchema);
 const RestaurantModel = mongoose.model("Restaurant", restaurantSchema);
+const UserModel = mongoose.model("User", userSchema);
+const FileModel = mongoose.model("File", fileSchema);
+const CommentModel = mongoose.model("Comment", commentSchema);
 
-
-export {TagsModel, RestaurantModel};
+export {TagsModel, RestaurantModel, UserModel, FileModel, CommentModel};

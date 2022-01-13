@@ -81,7 +81,7 @@ const TitleSelected = styled.div`
 `
 
 
-function RightFrame(){
+function RightFrame({spin}){
     //const [restaurants, setRestaurants] = useState([]);
     const { pocket } = usePocketHook();
 
@@ -103,11 +103,11 @@ function RightFrame(){
                         ))
                     }
                     </Wrap>
-            <Button>GO</Button> 
+            <Button style={{cursor: 'pointer'}} onClick={spin}>Spin</Button> 
         </BlockSelected>
         :<Block>
         <Title>RANDOM</Title>
-        <Button>GO</Button> 
+        <Button onClick={spin}>GO</Button> 
         </Block>
         }
         

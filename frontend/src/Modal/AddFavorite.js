@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import files from '../hardData/files';
+import { BigFrame4Modal } from '../Containers/BigFrame';
 import { width } from '@mui/system';
 
 
@@ -55,9 +56,6 @@ export default function AddFavorite({open, handleClose, id, title}) {
     const handleSubmit = ()=>{
       handleClose();
     }
-
-
-
     const [folder, setFolder] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
     const openAnchor = Boolean(anchorEl);
@@ -85,8 +83,14 @@ export default function AddFavorite({open, handleClose, id, title}) {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2" color={"#BA905F"}>
-                將 {" "+title+ " "} 加入至你的收藏餐廳
+              <Typography id="modal-modal-title" variant="h6" component="h2" color={"#BA905F"} style={{display: "flex", alignSelf:"start" }}>
+                將 {" "+title+ " "} 加入收藏
+              </Typography>
+
+              <BigFrame4Modal id={id}></BigFrame4Modal>
+
+              <Typography id="modal-modal-title" variant="h6" component="h2" color={"#BA905F"} style={{display: "flex", alignSelf:"start" }}>
+                收藏資料夾
               </Typography>
 
               <Button

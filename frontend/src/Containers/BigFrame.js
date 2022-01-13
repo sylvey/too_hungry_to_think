@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Stars from "../Components/star";
 import IconTint from "react-icon-tint";
 import { usePocketHook } from "../hook/pocketProvider";
+import restaurants from "../hardData/restaurants";
+import { red } from "@mui/material/colors";
 
 const Block = styled.div`
     display: flex;
@@ -14,6 +16,17 @@ const Block = styled.div`
     border-radius: 20px;
    // align-items: center;
     //justify-content: center;
+`
+const BlockWide = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: #FFEAA1;
+    width: 300px;
+    // height: 170px;
+    margin: 20px;
+    border-radius: 20px;
+   // align-items: center;
+    //justify-content: center;  
 `
 
 const Upper = styled.div`
@@ -32,12 +45,13 @@ const UpperLeft = styled.div`
     flex: 4;
     justify-content: center;
     align-items: center;
+    // background-color: red;
 `
 const UpperRight = styled.div`
     display: flex;
     flex: 3;
     flex-direction: column;
-    //background-color: yellow;
+    // background-color: yellow;
 
 `
 
@@ -223,8 +237,128 @@ const BigFrame4Right = ({id, name, image, star, tags})=>{
     )
 }
 
+const BigFrame4Modal = ({id})=>{
+
+    const [restaurant, setRestaurant] = useState(null);
+
+    useEffect(() => {
+        restaurants.map((item)=>{
+            if(item.id === id){
+                setRestaurant(item);
+            }
+        })
+    }, [])
+
+    return(
+        <>
+        {
+            restaurant? (
+                <BlockWide>
+                    <Upper>
+                        <UpperLeft style={{flex: 1}}>
+                            <Img src = {restaurant.image}></Img>
+                        </UpperLeft>
+                        <UpperRight style={{flex: 3}}>
+                            <Title style={{marginBottom:"5px"}}>{restaurant.name}</Title>
+                            <Stars num={restaurant.star} style= {{width: "50px",height: "10px"}}></Stars>
+                            <Row>
+                            {
+                                restaurant.tags.map((item)=>(
+                                    <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
+                                        {item.name}
+                                    </Tag>
+                                ))
+                            }
+                            </Row>
+                            <More style={{  width: "20%", justifySelf:"end", alignSelf:"end", height:"2px", marginRight: "20px"}}>
+                                <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
+                                <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
+                            </More>
+                        </UpperRight>
+
+                    </Upper>
+                </BlockWide>
+            ):null
+        }
+        
+        
+        </>
+    )
+}
+
+const BigFrame4Personal = ({id, name, image, star, tags})=>{
+    // console.log(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
+    const {pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
+    const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
+
+    const handleCheck = ()=>{
+        setChosen(!chosen);
+    }
+
+    useEffect(()=>{
+        if(chosen){
+            saveRestaurant({id, name, image, star, tags});
+        }
+        else{
+            deleteRestaurant(id);
+        }
+    },[chosen])
+
+    useEffect(()=>{
+        if(pocket){
+            setChosen(pocket.find(item=>item.id === id)? true: false);
+        }
+    },[pocket])
+
+
+    return(
+        <Block>
+            <Upper>
+                <UpperLeft>
+                    <Img src = {image}></Img>
+                </UpperLeft>
+                <UpperRight>
+                    <AddButton 
+                        src={chosen?require("../hardData/check-circle.png"):require("../hardData/check-circle-empty.png")}
+                        width={"20px"}
+                        height ={"20px"}
+                        onClick={handleCheck}
+                    ></AddButton>
+                    <Title>{name}</Title>
+                    <Stars num={star} style= {{ width: "50px",height: "10px"}}></Stars>
+                </UpperRight>
+                
+            </Upper>
+            <Lower>
+                <Row>
+                {
+                    tags.map((item)=>(
+                        <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
+                            {item.name}
+                        </Tag>
+                    ))
+                }
+                </Row>
+                
+                <Row>
+                    <StarAndBomb>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")}/>
+                    </StarAndBomb>
+                    <More>
+                        <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
+                        <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
+                    </More>
+                </Row>
+            </Lower>
+        </Block>
+    )
+}
+
 
 
 
 export default BigFrame;
-export {BigFrame4Right}
+export {BigFrame4Right};
+export {BigFrame4Modal};
+export {BigFrame4Personal};

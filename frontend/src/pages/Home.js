@@ -8,6 +8,7 @@ import styled from "styled-components";
 import AddRestaurants from "../Modal/AddRestaurants";
 import AddBomb from "../Modal/AddBomb";
 import AddFavorite from "../Modal/AddFavorite";
+import Spin from "../Modal/Spin";
 
 
 const Wrap = styled.div`
@@ -81,6 +82,17 @@ function Home(){
         setAddBombOpen(false);
     } 
 
+    //spin
+    const [spinOpen, setSpinOpen] = useState(false);
+    const handleSpinOpen = () => {
+        setSpinOpen(true)
+    };
+    const handleSpinClose = () => {
+        setSpinOpen(false);
+    } 
+    
+    
+
 
 
 
@@ -107,13 +119,14 @@ function Home(){
                     </Wrap>
                 </MainDiv>
                 <RightDiv>
-                    <RightFrame></RightFrame>
+                    <RightFrame spin={handleSpinOpen}></RightFrame>
                 </RightDiv>
                
             </CenterDiv>
             <AddRestaurants open = {addRestaurantOpen} handleClose={handleAddRestaurantClose}></AddRestaurants>
             <AddBomb open={addBombOpen} handleClose={handleAddBombClose} title = {bombTitle} id = {bombId}></AddBomb>
             <AddFavorite open = {addFavoriteOpen} handleClose={handleAddFavoriteClose} id = {favoriteId} title = {favoriteTitle}></AddFavorite>
+            <Spin open={spinOpen} handleClose={handleSpinClose}></Spin>
         </Background>
     )
 }

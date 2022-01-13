@@ -3,40 +3,66 @@
 
 # See resolvers/Query.js
 type Query {
-  restaurant: String!
+    restaurants: String! ## recommand restaurants
+    restaurantDetail(restaurantId: ID!): Restaurant ## given an restaurantId, return the restaurant's detail
+    searchRestaurants(keyword: String!): [Restaurant] ## searchRestaurants
+    files(userId: ID!): [File] ## search the user's files
+    collection(fileId: ID!): [Restaurant] ## search the folder's collections
+    bomb(userId: ID!): [Restaurant] ## return the bomb of it
+    searchTag(keyword: String!): [Tag] ## for adding tags
 }
-
 
 
 # Status of a restaurant. See resolvers/Status.js.
- enum Status {
-   PICKED
-   LIKE
-   BOMB
- }
+enum Status {
+  PICKED
+  LIKE
+  BOMB
+}
+
 # See resolvers/Mutation.js
 type Mutation {
-  createRestaurant(title: String!, tags: [Tag], link: String, photo: ?? ): Restaurant
-  createTag(type: String!, name: String!): Tag
+    createRestaurant(title: String!, tags: [Tag], photo: String!, link: String ): Restaurant! ## photo type may need to change
+    createTag(type: String!, name: String!): Tag!
+    createFile(userId: ID!, title: String!): File!
+    addBomb(userId: ID!, restaurantId: ID!): String! ##string specify whether it's successfully created
+    addCollection(userId: ID!, restaurantID: ID!, fileId: ID!): String! ##string specify whether it's successfully created
+    addComment(userId: ID!, restaurantId: ID!, content: String!, star: Int! ): Comment!
 }
 
 type Restaurant{
-  id: ID!
-  title: String!
-  stars: Float!
-  photo: ?? 
-  link: String
-  tags: [Tag]
+    id: ID!
+    title: String!
+    stars: Float!
+    photo: String! ## url 
+    link: String
+    tags: [Tag]
+    comments: [Comment]
 }
 
 type Tag{
-  id: ID!
-  type: String!
-  name: String!
+    id: ID!
+    type: String!
+    name: String!
+}
+type Comment{
+    id: ID!
+    userId: ID!
+    restaurantId: ID!
+    content: String!
+    star: Int!
 }
 
 # See resolvers/Subscription.js
 type Subscription {
   # Notify a restaurant created
-  restaurantCreated: Restaurant!
+  ## restaurantCreated: Restaurant!
+  
+  fileCreated: File!
+}
+
+type File{
+  id: ID!
+  title: String!
+  restaurants: [Restaurant]
 }

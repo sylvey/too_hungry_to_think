@@ -8,6 +8,7 @@ import SelectedBlock from "../Containers/SelectedBlock";
 import styled from "styled-components";
 import files from "../hardData/files";
 import { unstable_requirePropFactory } from "@mui/utils";
+import { Link } from "react-router-dom";
 
 const Wrap = styled.div`
     display: flex;
@@ -48,6 +49,7 @@ const File = styled.div`
     justify-content: center;
     color: #BA905F;
     font-size: 30px;
+    cursor: pointer;
 `
 
 const AddCatForm = styled.form`
@@ -107,7 +109,10 @@ function Personal(){
                          </File>
                         {
                             files.map((item)=>(
-                                <File>{item.title}</File>
+                                <File>
+                                    <Link to={{pathname: "/Folder/" + item.id}}
+                                          style = {{color:"#BA905F"}}>{item.title}</Link>
+                                </File>
                             ))
                         }
                     </Wrap>
