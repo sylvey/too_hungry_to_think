@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useState } from 'react';
-
+import Button from '@mui/material/Button';
 
 function Login(){
     const [loginData, setLoginData] = useState(
@@ -14,7 +14,7 @@ function Login(){
         };
 
   const handleLogin = async (googleData) => {
-    const res = await fetch('http://localhost:5000/api/google-login', {
+    const res = await fetch('/api/google-login', {
       method: 'POST',
       body: JSON.stringify({
         token: googleData.tokenId,
@@ -36,8 +36,7 @@ function Login(){
         <div>
           {loginData ? (
             <div>
-              <h3>You logged in as {loginData.email}</h3>
-              <button onClick={handleLogout}>Logout</button>
+              <h3>Hi {loginData.name} <button onClick={handleLogout} >Logout</button></h3>
             </div>
           ) : (
             <GoogleLogin
