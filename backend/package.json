@@ -20,6 +20,6 @@
     "@babel/preset-env": "^7.16.5"
   },
   "scripts": {
-    "start": "nodemon src/index.js --ext js,graphql --exec babel-node"
+    "start": "nodemon src/index.js --ext js,graphql --exec babel-node --ignore client"
   }
 }

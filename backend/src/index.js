@@ -25,6 +25,9 @@ server.post('/api/google-login', async (req, res) => {
   res.status(201);
   res.json({ name, email, picture });
 });
+server.get('/api/google-login',(req,res)=>{
+  res.send('hello')
+})
 
 
 
