@@ -10,6 +10,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import files from '../hardData/files';
+import { width } from '@mui/system';
 
 
 const style = {
@@ -37,10 +39,13 @@ const dropDownStyle = {
   display: "flex", 
   alignSelf: "center", 
   justifySelf: "center", 
-  color: "#BA905F", 
+  color: "#C4C4C4", 
+  height: "40px",
+  backgroundColor: "white",
   borderStyle: "solid", 
   borderWidth: "1px",
-  borderColor: "#BA905F", 
+  borderRadius: "20px",
+  borderColor: "000000", 
   marginTop: "20px" 
 }
 
@@ -51,14 +56,24 @@ export default function AddFavorite({open, handleClose, id, title}) {
       handleClose();
     }
 
+
+
+    const [folder, setFolder] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
     const openAnchor = Boolean(anchorEl);
     const handleClickDropDown = (event) => {
+      console.log("event", event.currentTarget);
       setAnchorEl(event.currentTarget);
     };
+
     const handleCloseAnchor = () => {
       setAnchorEl(null);
     };
+
+    const setDropDownValue = (item)=>{
+      setFolder({id: item.id, title: item.title});
+      setAnchorEl(null); 
+    }
    
 
     return (
@@ -82,8 +97,8 @@ export default function AddFavorite({open, handleClose, id, title}) {
                 aria-expanded={openAnchor ? 'true' : undefined}
                 onClick={handleClickDropDown}
               >
-                請選擇收藏資料夾
-                <img></img>
+                {folder? folder.title: "請選擇收藏資料夾"}
+                <img src={require('../hardData/dropDown.png')} height={"50%"}></img>
               </Button>
               <Menu
                 id="fade-menu"
@@ -95,9 +110,14 @@ export default function AddFavorite({open, handleClose, id, title}) {
                 onClose={handleCloseAnchor}
                 TransitionComponent={Fade}
               >
-                <MenuItem onClick={handleCloseAnchor}>Profile</MenuItem>
-                <MenuItem onClick={handleCloseAnchor}>My account</MenuItem>
-                <MenuItem onClick={handleCloseAnchor}>Logout</MenuItem>
+                {
+                  files.map((item)=>
+                    <MenuItem 
+                      onClick={()=>setDropDownValue(item)}
+                    >{item.title}</MenuItem>
+                  )
+                }
+                
               </Menu>
               <SubmitButton onClick={handleSubmit} style={{marginLeft:0}}>Collect</SubmitButton>
             </Box>
