@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import logo from "../img/loogo.PNG"
+import Login from '../Components/GoogleLogin';
 
 
 
@@ -27,8 +28,8 @@ function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}} style = {{color:'#000000'}}>
             {"H.T.T.P. -- \n Help Them To Pick"}
           </Typography>
-
-          <Button style = {loginRegisterButton} href = "/Login">Login</Button>
+          <Login></Login>
+          {/* <Button style = {loginRegisterButton} href = "/Login">Login</Button> */}
         </Toolbar>
       </AppBar>
 
