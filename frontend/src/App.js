@@ -16,7 +16,7 @@ import Personal from './pages/Personal';
 import Information from './pages/Information';
 
 import { Opacity } from '@mui/icons-material';
-import RestaurantDetail from "./pages/RestaurantDetail";
+// import RestaurantDetail from "./pages/RestaurantDetail";
 
 const loginRegisterButton = {backgroundColor: "#FA1414" , marginRight: "10px", color: "white"};
 const NavBarBackground = {background: 'linear-gradient(90deg, white, #FAAC8A 100%)'}
