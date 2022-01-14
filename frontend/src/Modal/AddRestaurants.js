@@ -12,9 +12,10 @@ import { SubmitButton } from '../Containers/Buttons';
 import { gql } from '@apollo/client';
 import { Tag } from '../Containers/BigFrame';
 import { autocompleteClasses } from '@mui/material';
+import { SettingsTwoTone } from '@mui/icons-material';
 const CREATE_RESTAURANT = gql`
-  mutation CreateRestaurant($id: ID!, $title: String!, $tags:[Tag], $link: String){
-    createRestaurant(id: $id, title: $title, tags: $tags, link: $link){
+  mutation createRestaurant($input: RestaurantInput! ){
+    createRestaurant(input: $input){
       id
     }
   }
@@ -113,6 +114,7 @@ const FormScroll = styled.form`
 export default function AddRestaurants({open, handleClose}) {
     
     const [title, setTitle] = useState("");
+    const [titleError, setTitleError] = useState("");
     const [link, setLink] = useState("");
     const [tag, setTag] = useState("");
     const [image, setImage] = useState(null);
@@ -137,8 +139,8 @@ export default function AddRestaurants({open, handleClose}) {
     const [createTag] = useMutation(CREATE_TAG);
     const handleAddNewTag = async()=>{
       let newId = uuid4();
-      let newChosenTagsId = [...chosenTagsId, {id: newId, type: "other", name: tag}];
-      let newChosenTags = [...chosenTags, newId];
+      let newChosenTagsId = [...chosenTagsId, newId];
+      let newChosenTags = [...chosenTags, {id: newId, type: "other", name: tag}];
       setChosenTagsId(newChosenTagsId);
       setChosenTags(newChosenTags);
       console.log(chosenTagsId);
@@ -163,9 +165,38 @@ export default function AddRestaurants({open, handleClose}) {
       console.log(chosenTags);
     }
 
+    //submit
+    const [createRestaurant] = useMutation(CREATE_RESTAURANT);
+    const handleSubmit = async()=>{
+      if(title !== ""){
+          console.log("have title");
+          const id = uuid4();
+          try{
+            await createRestaurant({
+            variables:{
+              input:{
+                id: id,
+                title: title,
+                link: link,
+                tagIds: chosenTagsId
+              }
+            },
+            onCompleted: ()=>{
+              console.log("success created restaurants");
+              handleClose();  
+            }   
+          })}catch(e){
+            console.log(e);
+          }
+      }
+    }
+
     // useEffect(() => {
-      
-    // }, [])
+    //   if(title !== ""){
+    //     setTitleError("")
+    //   }
+    // }, [title])
+
     return (
         <div>
           <Modal
@@ -184,7 +215,10 @@ export default function AddRestaurants({open, handleClose}) {
                     <InputText 
                         value={title}
                         onChange={(e)=>(setTitle(e.target.value))}
+                        required
                     />
+                    {titleError!== "" ?<InputTitle>{titleError}</InputTitle>: null}
+
                   </InputBlock>
 
                   <InputBlock>
@@ -201,7 +235,6 @@ export default function AddRestaurants({open, handleClose}) {
                         chosenTags.map((item)=>
                           <Tag style={{ 
                             cursor:"pointer",
-                            color: "black",
                             backgroundColor: item.type === "food"? "#147EFA": 
                                       item.type === "place"? "#FF0000": 
                                             item.type === "takeInOrOut"?"#14FA7E": "yellow"}}
@@ -217,7 +250,7 @@ export default function AddRestaurants({open, handleClose}) {
                     <RowScroll>
                         { tag !==""?
                           <Tag style = {{cursor:"pointer", backgroundColor:"yellow", color: "black"}}      
-                               onClick={()=>handleAddNewTag}
+                               onClick={()=>handleAddNewTag()}
                           >{tag}</Tag>
                           :null
                         }
@@ -284,7 +317,7 @@ export default function AddRestaurants({open, handleClose}) {
                 }
                   <InputBlock >
                     <SubmitButton
-                      type = "submit"
+                      onClick={()=>handleSubmit()}
                       >新增</SubmitButton>
                   </InputBlock>
 

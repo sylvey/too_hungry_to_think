@@ -34,14 +34,14 @@ input RestaurantInput{
     id: ID!
     title: String!
     link: String
-    tags: [String!]
+    tagIds: [String]
 }
 
 type Restaurant{
     id: ID!
     title: String!
     stars: Float!
-    photo: String! ## url 
+    # photo: String! ## url 
     link: String
     tags: [Tag!]
     comments: [Comment]
