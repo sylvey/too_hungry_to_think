@@ -7,6 +7,11 @@ import styled from 'styled-components';
 import "../App.css";
 import { useState, useEffect } from 'react';
 import { SubmitButton } from '../Containers/Buttons';
+import { gql } from '@apollo/client';
+
+// const CREATE_RESTAURANT = gql`
+//   mutation CreateRestaurant($)
+// `
 
 const style = {
   position: 'absolute',
