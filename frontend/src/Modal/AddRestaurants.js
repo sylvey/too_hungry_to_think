@@ -5,10 +5,13 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import "../App.css";
+import {v4 as uuid4} from "uuid";
 import { useState, useEffect } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 import { SubmitButton } from '../Containers/Buttons';
 import { gql } from '@apollo/client';
 import { Tag } from '../Containers/BigFrame';
+import { autocompleteClasses } from '@mui/material';
 const CREATE_RESTAURANT = gql`
   mutation CreateRestaurant($id: ID!, $title: String!, $tags:[Tag], $link: String){
     createRestaurant(id: $id, title: $title, tags: $tags, link: $link){
@@ -20,19 +23,20 @@ const CREATE_TAG = gql`
   mutation CreateTag($id: ID!, $type: String!, $name: String!){
     createTag(id: $id, type: $type, name: $name){
       id
+      name
+      type
     }
   }
 `
-const searchTag = gql`
+const SEARCH_TAG = gql`
   query SearchTag($keyword: String!){
     searchTag(keyword: $keyword){
+      id
       type
       name
     }
   }
 `
-
-
 
 const style = {
   position: 'absolute',
@@ -40,7 +44,9 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
+  height: 500,
   bgcolor: '#FFEDE9',
+  // overflow: "auto",
 //   border: '2px solid #000',
   outline: 'none',
   boxShadow: 24,
@@ -78,28 +84,30 @@ const InputTitle = styled.p`
 `
 
 const RowScroll = styled.div`
-    display: flex;
-    width: 80%;
-    // background-color: red;
-    flex-direction: row;
-    overflow: auto;
+  display: flex;
+  flex-direction: row;
+  width: inherit;
+  // height: 60px;
+  overflow-x: auto;
+  // background-color: red;
+  // position: relative;
+  &::-webkit-scrollbar {
+    width: inherit;
+    height: 7px;
+    border-radius: 6px;
+  }
+`
 
-    &::-webkit-scrollbar-track-piece{
-      background: transparent;
-      border-radius: 6px;
-    }
-    &::-webkit-scrollbar-corner{
-      border:1px solid red;
-    }
-
-    &::-webkit-scrollbar-track {
-      width: inherit;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: rgb(184, 184, 184);
-      border: 1px solid rgb(184, 184, 184);
-      border-radius: 8px;
-    }
+const FormScroll = styled.form`
+  display: flex;
+  flex-direction: column; 
+  height: 400px;  
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: inherit;
+    height: 7px;
+    border-radius: 6px;
+  }
 `
 
 export default function AddRestaurants({open, handleClose}) {
@@ -108,7 +116,9 @@ export default function AddRestaurants({open, handleClose}) {
     const [link, setLink] = useState("");
     const [tag, setTag] = useState("");
     const [image, setImage] = useState(null);
-
+    const [chosenTagsId, setChosenTagsId] = useState([]);
+    const [chosenTags, setChosenTags] = useState([]);
+    //image
     useEffect(() => {
         if(image){
             console.log(window.URL.createObjectURL(image));
@@ -116,6 +126,40 @@ export default function AddRestaurants({open, handleClose}) {
         
     }, [image])
 
+    //get tags
+    const {data, subscribeToMore, refetch} = useQuery(SEARCH_TAG,  { variables:{keyword: tag}})
+    useEffect(()=>{
+      refetch({keyword: tag});
+      console.log(data? data.searchTag: data);
+    }, [tag, chosenTags])
+
+    //create tag
+    const [createTag] = useMutation(CREATE_TAG);
+    const handleAddNewTag = ()=>{
+      let newId = uuid4();
+      let newChosenTagsId = chosenTagsId;
+      let newChosenTags = chosenTags;
+      newChosenTagsId.push(newId);
+      newChosenTags.push({id: newId, type: "other", name: tag});
+      setChosenTagsId(newChosenTagsId);
+      setChosenTags(newChosenTags);
+      console.log(chosenTagsId);
+      console.log(chosenTags);
+      createTag({
+        variables:{
+          id: newId,
+          type: "other",
+          name: tag
+        },
+        onCompleted: ()=>{
+          console.log("success");
+        }
+      })
+    }
+
+    // useEffect(() => {
+      
+    // }, [chosenTags])
     return (
         <div>
           <Modal
@@ -128,7 +172,7 @@ export default function AddRestaurants({open, handleClose}) {
               <Typography id="modal-modal-title" variant="h6" component="h2" color={"#BA905F"}>
                 新增餐廳
               </Typography>
-              <form>
+              <FormScroll>
                   <InputBlock>
                     <InputTitle>餐廳名稱</InputTitle>
                     <InputText 
@@ -147,27 +191,45 @@ export default function AddRestaurants({open, handleClose}) {
                   <InputBlock>
                     <InputTitle>相關資訊</InputTitle>
                     <RowScroll>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
-                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      {
+                        chosenTags.map((item)=>
+                          <Tag style={{ 
+                            cursor:"pointer",
+                            color: "black",
+                            backgroundColor: item.type === "food"? "#147EFA": 
+                                      item.type === "place"? "#FF0000": 
+                                            item.type === "takeInOrOut"?"#14FA7E": "yellow"}}
+                            >
+                          {item.name}
+                          </Tag>
+                        )
+                      }
                     </RowScroll>
-                    
                     <InputText 
                         value={tag}
                         onChange={(e)=>setTag(e.target.value)}/>
+                    <RowScroll>
+                        { tag !==""?
+                          <Tag style = {{cursor:"pointer", backgroundColor:"yellow", color: "black"}}
+                               onClick={handleAddNewTag}      
+                          >{tag}</Tag>
+                          :null
+                        }
+                        {
+                          data? data.searchTag.map((item)=>
+                            <Tag style={{ 
+                                  cursor:"pointer",
+                                  backgroundColor: item.type === "food"? "#147EFA": 
+                                            item.type === "place"? "#FF0000": 
+                                                  item.type === "takeInOrOut"?"#14FA7E": "yellow"}}
+                                  >
+                                {item.name}
+                            </Tag>
+                          ):null
+                        }
+                    </RowScroll>
+                    
+                    
                   </InputBlock>
 
                   
@@ -219,7 +281,7 @@ export default function AddRestaurants({open, handleClose}) {
                       >新增</SubmitButton>
                   </InputBlock>
 
-              </form>
+              </FormScroll>
             </Box>
           </Modal>
         </div>

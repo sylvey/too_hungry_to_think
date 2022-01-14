@@ -12,7 +12,7 @@ const restaurantSchema = new mongoose.Schema(
     stars: Number,
     photo: String,
     link: String,
-    tags: [{type: mongoose.Types.ObjectId, ref: "Tag"}],
+    tagIds: [String],
     comments: [{type: mongoose.Types.ObjectId, ref: "Comment"}]
   },
   {

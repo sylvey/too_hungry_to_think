@@ -82,6 +82,7 @@ const Tag = styled.div`
     display: flex;
     height: 15px;
     font-size:5px;
+    white-space: nowrap;
     border-style: solid;
     border-width: 1px;
     border-radius: 7px;
@@ -333,7 +334,7 @@ const BigFrame4Personal = ({id, name, image, star, tags})=>{
                 <Row>
                 {
                     tags.map((item)=>(
-                        <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
+                        <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": item.type === "takeInOrOut"?"#14FA7E": "yellow"}}>
                             {item.name}
                         </Tag>
                     ))
