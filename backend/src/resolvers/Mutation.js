@@ -1,12 +1,12 @@
 import { RestaurantModel, TagsModel } from "../db";
 
 const Mutation = {
-  createRestaurant: async (parent, {title, tags, photo, link}, { db, pubSub }) => {
+  createRestaurant: async (parent, {id, title, tags, link}, { db, pubSub }) => {
     // const newRestaurant = new RestaurantModel(input);
     // await newRestaurant.save();
     // return newRestaurant;
   },
-  createTag: async (parent, { type, name }, { db, pubSub }) => {
+  createTag: async (parent, { id, type, name }, { db, pubSub }) => {
     // const newTag = new TagsModel(input);
     // await newTag.save();
     // return newTag;

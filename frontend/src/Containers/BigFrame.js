@@ -362,3 +362,4 @@ export default BigFrame;
 export {BigFrame4Right};
 export {BigFrame4Modal};
 export {BigFrame4Personal};
+export {Tag};

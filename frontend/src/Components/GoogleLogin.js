@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useState } from 'react';
-
+import Button from '@mui/material/Button';
 
 function Login(){
     const [loginData, setLoginData] = useState(
@@ -36,8 +36,7 @@ function Login(){
         <div>
           {loginData ? (
             <div>
-              <h3>You logged in as {loginData.email}</h3>
-              <button onClick={handleLogout}>Logout</button>
+              <h3>Hi {loginData.name} <button onClick={handleLogout} >Logout</button></h3>
             </div>
           ) : (
             <GoogleLogin

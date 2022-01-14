@@ -8,10 +8,31 @@ import "../App.css";
 import { useState, useEffect } from 'react';
 import { SubmitButton } from '../Containers/Buttons';
 import { gql } from '@apollo/client';
+import { Tag } from '../Containers/BigFrame';
+const CREATE_RESTAURANT = gql`
+  mutation CreateRestaurant($id: ID!, $title: String!, $tags:[Tag], $link: String){
+    createRestaurant(id: $id, title: $title, tags: $tags, link: $link){
+      id
+    }
+  }
+`
+const CREATE_TAG = gql`
+  mutation CreateTag($id: ID!, $type: String!, $name: String!){
+    createTag(id: $id, type: $type, name: $name){
+      id
+    }
+  }
+`
+const searchTag = gql`
+  query SearchTag($keyword: String!){
+    searchTag(keyword: $keyword){
+      type
+      name
+    }
+  }
+`
 
-// const CREATE_RESTAURANT = gql`
-//   mutation CreateRestaurant($)
-// `
+
 
 const style = {
   position: 'absolute',
@@ -56,16 +77,37 @@ const InputTitle = styled.p`
     color: #BA905F
 `
 
+const RowScroll = styled.div`
+    display: flex;
+    width: 80%;
+    // background-color: red;
+    flex-direction: row;
+    overflow: auto;
+
+    &::-webkit-scrollbar-track-piece{
+      background: transparent;
+      border-radius: 6px;
+    }
+    &::-webkit-scrollbar-corner{
+      border:1px solid red;
+    }
+
+    &::-webkit-scrollbar-track {
+      width: inherit;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(184, 184, 184);
+      border: 1px solid rgb(184, 184, 184);
+      border-radius: 8px;
+    }
+`
+
 export default function AddRestaurants({open, handleClose}) {
     
     const [title, setTitle] = useState("");
     const [link, setLink] = useState("");
     const [tag, setTag] = useState("");
     const [image, setImage] = useState(null);
-
-    // useEffect(()=>{
-    //     console.log(window.URL.createObjectURL(image));
-    // },[image])
 
     useEffect(() => {
         if(image){
@@ -104,6 +146,25 @@ export default function AddRestaurants({open, handleClose}) {
 
                   <InputBlock>
                     <InputTitle>相關資訊</InputTitle>
+                    <RowScroll>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                      <Tag style ={{backgroundColor: "#147EFA"}}>Tag</Tag>
+                    </RowScroll>
+                    
                     <InputText 
                         value={tag}
                         onChange={(e)=>setTag(e.target.value)}/>

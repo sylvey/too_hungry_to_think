@@ -1,20 +1,23 @@
-import mongo from "./mongo.js";
-import server from "./server.js";
-
-import "dotenv-defaults/config.js";
+const express = require('express');
+const dotenv = require('dotenv');
+const path = require('path');
 const { OAuth2Client } = require('google-auth-library');
+
+dotenv.config();
 const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+
+const app = express();
+app.use(express.json());
+
 const users = [];
+
 function upsert(array, item) {
   const i = array.findIndex((_item) => _item.email === item.email);
   if (i > -1) array[i] = item;
   else array.push(item);
 }
 
-mongo.connect();
-const port = process.env.PORT | 5000;
-
-server.post('/api/google-login', async (req, res) => {
+app.post('/api/google-login', async (req, res) => {
   const { token } = req.body;
   const ticket = await client.verifyIdToken({
     idToken: token,
@@ -25,12 +28,14 @@ server.post('/api/google-login', async (req, res) => {
   res.status(201);
   res.json({ name, email, picture });
 });
-server.get('/api/google-login',(req,res)=>{
-  res.send('hello')
-})
 
+app.use(express.static(path.join(__dirname, '/build')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/build/index.html'))
+);
 
-
-server.start({ port }, () => {
-  console.log(`The server is up on port ${port}!`);
+app.listen(process.env.PORT || 5000, () => {
+  console.log(
+    `Server is ready at http://localhost:${process.env.PORT || 7000}`
+  );
 });
