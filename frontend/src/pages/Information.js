@@ -12,26 +12,19 @@ import { Background, CenterDiv, MainDiv, RightDiv } from "../Containers/BackGrou
 
 
 
-export default function Information({display, handleClose}) {
+export default function Information(props) {
+    console.log(props.location.state.id);
     return(
         <Background>
-            {/* <Modal
-                display={display}
-                handleClose={handleClose}
-                // aria-labelledby="modal-modal-title"
-                // aria-describedby="modal-modal-description"
-            > */}
-           
             <CenterDiv>
                 <MainDiv>
-                    <Page></Page>
+                    <Page
+                    props={props}/>
                 </MainDiv>
                 <RightDiv>
-                    <RightFrame></RightFrame>
+                    <RightFrame/>
                 </RightDiv> 
             </CenterDiv>         
-            {/* </Modal> */}
         </Background>
-
     )
 }

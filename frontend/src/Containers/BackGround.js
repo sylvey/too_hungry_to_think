@@ -18,9 +18,6 @@ export const Background = styled.div`
     @media(max-width:1900px){ 
 
         height: 70em;
-        // background-position: center;
-        // background-position-y: 0;
-        // background-attachment: fixed;
    }
     @media(max-width:1300px){ 
 

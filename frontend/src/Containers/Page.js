@@ -118,7 +118,14 @@ const CommentBlock = styled.div`
 
 
 
-export default function Page({id, name, image, star, tags}) {
+export default function Page(props) {
+    console.log(props.props.location.state.id);
+    const id = props.props.location.state.id;
+    const name = props.props.location.state.name;
+    const image = props.props.location.state.image;
+    const star = props.props.location.state.star;
+    const tags = props.props.location.state.tags;
+
     const [chosen, setChosen] = useState(false);
     const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
 
@@ -148,8 +155,7 @@ export default function Page({id, name, image, star, tags}) {
                             onClick={handleCheck}
                         ></AddButton>
                         <Title>
-                            123
-                            {/* {name} */}
+                            {name}
                         </Title>
                         <Stars num={star} style= {{ width: "50px",height: "10px"}}></Stars>
                     {/* <Row>
