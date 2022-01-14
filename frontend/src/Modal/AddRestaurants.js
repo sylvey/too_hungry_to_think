@@ -135,17 +135,15 @@ export default function AddRestaurants({open, handleClose}) {
 
     //create tag
     const [createTag] = useMutation(CREATE_TAG);
-    const handleAddNewTag = ()=>{
+    const handleAddNewTag = async()=>{
       let newId = uuid4();
-      let newChosenTagsId = chosenTagsId;
-      let newChosenTags = chosenTags;
-      newChosenTagsId.push(newId);
-      newChosenTags.push({id: newId, type: "other", name: tag});
+      let newChosenTagsId = [...chosenTagsId, {id: newId, type: "other", name: tag}];
+      let newChosenTags = [...chosenTags, newId];
       setChosenTagsId(newChosenTagsId);
       setChosenTags(newChosenTags);
       console.log(chosenTagsId);
       console.log(chosenTags);
-      createTag({
+      await createTag({
         variables:{
           id: newId,
           type: "other",
@@ -156,10 +154,18 @@ export default function AddRestaurants({open, handleClose}) {
         }
       })
     }
+    const handleAddOldTag = (item)=>{
+      let newChosenTagsId = [...chosenTagsId, item.id];
+      let newChosenTags = [...chosenTags, item];
+      setChosenTagsId(newChosenTagsId);
+      setChosenTags(newChosenTags);
+      console.log(chosenTagsId);
+      console.log(chosenTags);
+    }
 
     // useEffect(() => {
       
-    // }, [chosenTags])
+    // }, [])
     return (
         <div>
           <Modal
@@ -210,14 +216,15 @@ export default function AddRestaurants({open, handleClose}) {
                         onChange={(e)=>setTag(e.target.value)}/>
                     <RowScroll>
                         { tag !==""?
-                          <Tag style = {{cursor:"pointer", backgroundColor:"yellow", color: "black"}}
-                               onClick={handleAddNewTag}      
+                          <Tag style = {{cursor:"pointer", backgroundColor:"yellow", color: "black"}}      
+                               onClick={()=>handleAddNewTag}
                           >{tag}</Tag>
                           :null
                         }
                         {
                           data? data.searchTag.map((item)=>
-                            <Tag style={{ 
+                            <Tag  onClick={()=>handleAddOldTag(item)}
+                                  style={{ 
                                   cursor:"pointer",
                                   backgroundColor: item.type === "food"? "#147EFA": 
                                             item.type === "place"? "#FF0000": 
