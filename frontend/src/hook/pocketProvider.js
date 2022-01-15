@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, createContext } from 'react';
 
 import PropTypes from 'prop-types';
 import { Javascript } from '@mui/icons-material';
 
-const PocketContext = React.createContext();
+const PocketContext = createContext();
 
 const usePocketHookEffect = () => {
   const [pocket, setPocket] = useState(window.sessionStorage.getItem('pocketList') ? 

@@ -22,25 +22,37 @@ enum Status {
 
 # See resolvers/Mutation.js
 type Mutation {
-    createRestaurant(title: String!, tags: [Tag], photo: String!, link: String ): Restaurant! ## photo type may need to change
-    createTag(type: String!, name: String!): Tag!
+    createRestaurant( input: RestaurantInput! ): Restaurant! ## photo type may need to change
+    createTag(id: ID!, type: String!, name: String!): Tag!
     createFile(userId: ID!, title: String!): File!
     addBomb(userId: ID!, restaurantId: ID!): String! ##string specify whether it's successfully created
     addCollection(userId: ID!, restaurantID: ID!, fileId: ID!): String! ##string specify whether it's successfully created
     addComment(userId: ID!, restaurantId: ID!, content: String!, star: Int! ): Comment!
 }
 
+input RestaurantInput{
+    id: ID!
+    title: String!
+    link: String
+    tagIds: [String]
+}
+
 type Restaurant{
     id: ID!
     title: String!
     stars: Float!
-    photo: String! ## url 
+    # photo: String! ## url 
     link: String
-    tags: [Tag]
+    tags: [Tag!]
     comments: [Comment]
 }
 
 type Tag{
+    id: ID!
+    type: String!
+    name: String!
+}
+input TagInput{
     id: ID!
     type: String!
     name: String!

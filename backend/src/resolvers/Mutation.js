@@ -1,15 +1,30 @@
 import { RestaurantModel, TagsModel } from "../db";
 
 const Mutation = {
-  createRestaurant: async (parent, {title, tags, photo, link}, { db, pubSub }) => {
-    // const newRestaurant = new RestaurantModel(input);
-    // await newRestaurant.save();
-    // return newRestaurant;
+  createRestaurant: async (parent, {input}, { db, pubSub }) => {
+    
+    const newRestaurant = new RestaurantModel({...input, comments: [], stars: 0});
+    await newRestaurant.save();
+    console.log(newRestaurant);
+    let tags = await TagsModel.find({});
+    tags = tags.filter(tag => newRestaurant.tagIds.includes(tag.id));
+    console.log(tags);
+
+    let restaurantsToReturn = {
+      id: newRestaurant.id, 
+      title: newRestaurant.title, 
+      stars: newRestaurant.stars,
+      link: newRestaurant.link,
+      tags: tags,
+      comments: newRestaurant.comments
+    }
+
+    return restaurantsToReturn;
   },
-  createTag: async (parent, { type, name }, { db, pubSub }) => {
-    // const newTag = new TagsModel(input);
-    // await newTag.save();
-    // return newTag;
+  createTag: async (parent, { id, type, name }, { db, pubSub }) => {
+    const newTag = new TagsModel({id, type, name});
+    await newTag.save();
+    return newTag;
   },
   createFile: async (parent, { userId, title }, {db, pubSub})=>{
 

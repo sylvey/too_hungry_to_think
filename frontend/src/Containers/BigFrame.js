@@ -5,6 +5,7 @@ import IconTint from "react-icon-tint";
 import { usePocketHook } from "../hook/pocketProvider";
 import restaurants from "../hardData/restaurants";
 import { red } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 const Block = styled.div`
     display: flex;
@@ -82,6 +83,7 @@ const Tag = styled.div`
     display: flex;
     height: 15px;
     font-size:5px;
+    white-space: nowrap;
     border-style: solid;
     border-width: 1px;
     border-radius: 7px;
@@ -176,7 +178,18 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>
                         <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")} onClick={()=>openAddBomb(id, name)}/>
                     </StarAndBomb>
                     <More>
-                        <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
+                    <Link 
+                            style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
+                            to={{pathname: "/Information",
+                                 state: {
+                                    id: id,
+                                    name:name,
+                                    image:image,
+                                    star:star,
+                                    tags:tags,
+                                    BigFrame: true}
+                            }}
+                            >more</Link>
                         <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
                     </More>
                 </Row>
@@ -333,7 +346,7 @@ const BigFrame4Personal = ({id, name, image, star, tags})=>{
                 <Row>
                 {
                     tags.map((item)=>(
-                        <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
+                        <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": item.type === "takeInOrOut"?"#14FA7E": "yellow"}}>
                             {item.name}
                         </Tag>
                     ))
@@ -362,3 +375,4 @@ export default BigFrame;
 export {BigFrame4Right};
 export {BigFrame4Modal};
 export {BigFrame4Personal};
+export {Tag};

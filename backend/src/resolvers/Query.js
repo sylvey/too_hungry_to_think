@@ -1,3 +1,5 @@
+import { RestaurantModel, TagsModel } from "../db";
+
 const Query = {
   /**
    * Get all tasks
@@ -21,7 +23,20 @@ const Query = {
 
   },
   searchTag: async (parent, {keyword}, {db, pubSub})=>{
-
+    
+    let tags;
+    if(keyword === ""){
+      let takeInOrOut = await TagsModel.find({"type": "takeInOrOut" });
+      let place = await TagsModel.find({"type": "place" });
+      let food = await TagsModel.find({"type": "food" });
+      tags = [...takeInOrOut, ...place, ...food];
+      
+    }
+    else{
+      tags = await TagsModel.find({"name": {"$regex": keyword, "$options": "i"}}, function(err, docs){}).clone().catch(function(err){})
+    } 
+    
+    return tags;
   }
 };
 
