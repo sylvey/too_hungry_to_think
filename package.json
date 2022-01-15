@@ -6,7 +6,7 @@
   "devDependencies": {},
   "scripts": {
     "start":"cd ./backend&&yarn start",
-    "build":"cd ./frontend&&yarn run build",
+    "build":"cd ./frontend&&yarn install&&yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
