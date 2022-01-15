@@ -36,12 +36,15 @@ const Input = styled.input`
     }
 `
 
-function SearchBar(){
+function SearchBar({keyword, setKeyword, handleSearch}){
     return(
         <>
         <Container>
-            <img src={require("../hardData/search.png")} width={"30px"} height={"30px"}></img>
-            <Input></Input>
+            <img src={require("../hardData/search.png")} width={"30px"} height={"30px"}
+                 onClick={()=>handleSearch()}></img>
+            <Input
+                value={keyword}
+                onChange={(e)=>setKeyword(e.target.value)}></Input>
         </Container>
         </>
     )

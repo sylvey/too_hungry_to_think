@@ -6,6 +6,14 @@ import { usePocketHook } from "../hook/pocketProvider";
 import restaurants from "../hardData/restaurants";
 import { red } from "@mui/material/colors";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+
+// const IMAGE = gql`
+//     query image($imageId: ID){
+//         image(imageId: $imageId)
+//     }
+// `
 
 const Block = styled.div`
     display: flex;
@@ -117,6 +125,8 @@ const BigFrame = ({id, title, photo, star, tags, openAddBomb, openAddFavorite})=
     const {pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
     const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
 
+    // const imageQuery = useQuery(IMAGE, {variables:{imageId: photo}});
+    // const imageQuery = useQuery(IMAGE, { variables:{keyword: tag}}, (e)=>{console.log(e)})
     const handleCheck = ()=>{
         setChosen(!chosen);
     }
@@ -138,11 +148,13 @@ const BigFrame = ({id, title, photo, star, tags, openAddBomb, openAddFavorite})=
     },[pocket])
 
 
+    console.log(tags);
+
     return(
         <Block>
             <Upper>
                 <UpperLeft>
-                    {/* <Img src = {image}></Img> */}
+                    <Img src = {photo}></Img>
                 </UpperLeft>
                 <UpperRight>
                     <AddButton 

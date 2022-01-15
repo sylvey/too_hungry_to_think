@@ -4,7 +4,7 @@ scalar Upload
 # See resolvers/Query.js
 type Query {
     restaurants: [Restaurant] ## recommand restaurants
-    image(imageId: ID!): Upload
+    # image(imageId: ID): String!
     restaurantDetail(restaurantId: ID!): Restaurant ## given an restaurantId, return the restaurant's detail
     searchRestaurants(keyword: String!): [Restaurant] ## searchRestaurants
     files(userId: ID!): [File] ## search the user's files
@@ -34,7 +34,7 @@ type Mutation {
 input RestaurantInput{
     id: ID!
     title: String!
-    photo: Upload!
+    photo: String!
     link: String
     tagIds: [String]
 }
@@ -43,7 +43,7 @@ type Restaurant{
     id: ID!
     title: String!
     stars: Float!
-    photo: ID ## url 
+    photo: String! 
     link: String
     tags: [Tag]
     comments: [Comment]

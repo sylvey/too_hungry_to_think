@@ -1,5 +1,5 @@
 import { RestaurantModel, TagsModel } from "../db";
-import { downloadFile } from "./utility";
+// import { downloadFile } from "./utility";
 
 const Query = {
   restaurants: async (parent, query, { db, pubSub }) => {
@@ -10,7 +10,7 @@ const Query = {
     // console.log(restaurants);
     for(let i = 0; i < restaurants.length; i++){
       let newtags = tags.filter(tag => restaurants[i].tagIds.includes(tag.id));
-      console.log(newtags);
+      // console.log(newtags);
       result.push({
         id: restaurants[i].id,
         title: restaurants[i].title,
@@ -24,20 +24,43 @@ const Query = {
     console.log(tags, result);
 
     return result;
-  },
-  image: async (parent, {imageId}, { db, pubSub }) => {
-    try {
-      const img = await downloadFile(fileId);
-      return img;
-    } catch (error) {
-      throw new Error(error);
-    }
   }, 
   restaurantDetail: async (parent, {restaurantId}, {db, pubSub})=>{
 
   },
   searchRestaurants: async (parent, {keyword}, {db, pubSub})=>{
+    const restaurants = await RestaurantModel.find({});
+    console.log(keyword);
+    let restaurantsAllReturnType = [];
+    let tags = await TagsModel.find({});
+    // console.log(restaurants);
+    for(let i = 0; i < restaurants.length; i++){
+      let newtags = tags.filter(tag => restaurants[i].tagIds.includes(tag.id));
+      // console.log(newtags);
+      restaurantsAllReturnType.push({
+        id: restaurants[i].id,
+        title: restaurants[i].title,
+        stars: restaurants[i].stars,
+        photo: restaurants[i].photo,
+        tags: newtags,
+        link: restaurants[i].link,
+        comments: restaurants[i].comments
+      }); 
+    }
+    
+    let result = restaurantsAllReturnType.filter(restaurant=>{
+      if(restaurant.title.toLowerCase().indexOf(keyword.toLowerCase())>-1){
+        return true;
+      }
+      for(let i = 0; i < restaurant.tags.length; i++){
+        if(restaurant.tags[i].name.toLowerCase().indexOf(keyword.toLowerCase())>-1){
+          return true;
+        }
+      }
+      return false;
+    })
 
+    return result;
   },
   files: async (parent, {userId}, {db, pubSub})=>{
 

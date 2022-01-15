@@ -117,19 +117,11 @@ export default function AddRestaurants({open, handleClose}) {
     const [titleError, setTitleError] = useState("");
     const [link, setLink] = useState("");
     const [tag, setTag] = useState("");
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState("");
     const [chosenTagsId, setChosenTagsId] = useState([]);
     const [chosenTags, setChosenTags] = useState([]);
     
-    //image
-    useEffect(() => {
-        if(image){
-            console.log("image:", image);
-            console.log("windowUrl.createObj:", window.URL.createObjectURL(image));
-        }
-        
-    }, [image])
-
+    
     //get tags
     const {data, subscribeToMore, refetch} = useQuery(SEARCH_TAG,  { variables:{keyword: tag}}, (e)=>{console.log(e)})
     useEffect(()=>{
@@ -258,7 +250,7 @@ export default function AddRestaurants({open, handleClose}) {
                         }
                         {
                           data? data.searchTag.map((item)=>
-                            <Tag  onClick={()=>handleAddOldTag(item)}
+                            <Tag onClick={()=>handleAddOldTag(item)}
                                   style={{ 
                                   cursor:"pointer",
                                   backgroundColor: item.type === "food"? "#147EFA": 
@@ -273,51 +265,15 @@ export default function AddRestaurants({open, handleClose}) {
                     
                     
                   </InputBlock>
+                   
+                  <InputBlock>
+                    <InputTitle>餐廳照片網址</InputTitle>
+                    <InputText
+                        value={image}
+                        onChange={(e)=>setImage(e.target.value)}
+                        required/>
+                  </InputBlock>
 
-                  
-                {
-                    image?(
-                        <>
-                        <InputBlock>
-                          <InputTitle>餐廳圖片上傳</InputTitle>
-                          <label class="custom-file-upload">
-                            <input type="file"
-                              name="myImage"
-                              onChange={(event) => {
-                                console.log(event.target.files[0]);
-                                setImage(event.target.files[0]);
-                              }}
-                              required
-                              />
-                            <i class="fa fa-cloud-upload"></i>點擊重新選擇
-                          </label>
-                        </InputBlock>
-
-                        <InputBlock>
-                            <img alt="not fount" 
-                                width={"40px"} 
-                                height= {"40px"}
-                                style={{display: "flex", marginTop: "20px"}}
-                                src={window.URL.createObjectURL(image)} />
-                        </InputBlock>
-                        </>
-                        
-                    ):(
-                        <InputBlock>
-                          <InputTitle>餐廳圖片上傳</InputTitle>
-                          <label class="custom-file-upload">
-                            <input type="file"
-                              name="myImage"
-                              onChange={(event) => {
-                                console.log(event.target.files[0]);
-                                setImage(event.target.files[0]);
-                              }}
-                              />
-                            <i class="fa fa-cloud-upload"></i>點擊選擇檔案
-                          </label>
-                        </InputBlock>
-                    )
-                }
                   <InputBlock >
                     <SubmitButton
                       onClick={()=>handleSubmit()}

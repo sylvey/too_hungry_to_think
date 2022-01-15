@@ -1,24 +1,21 @@
 import { RestaurantModel, TagsModel, upload } from "../db";
-import { storeFile } from "./utility";
+// import { uploadFile } from "./utility";
 const Mutation = {
   createRestaurant: async (parent, {input}, { db, pubSub }) => {
-    
-    const fileId = await storeFile(input.photo).then(result=>result);
-    console.log(fileId);
-    
     const newRestaurant = new RestaurantModel({
       id: input.id, 
       title: input.title, 
       link: input.link, 
-      photo: fileId,
+      photo: input.photo,
+      tagIds: input.tagIds,
       comments: [], 
       stars: 0
     });
     await newRestaurant.save();
-    console.log(newRestaurant);
+    // console.log(newRestaurant);
     let tags = await TagsModel.find({});
     tags = tags.filter(tag => newRestaurant.tagIds.includes(tag.id));
-    console.log(tags);
+    // console.log(tags);
 
     let restaurantsToReturn = {
       id: newRestaurant.id, 

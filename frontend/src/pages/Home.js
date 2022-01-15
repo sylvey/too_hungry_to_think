@@ -28,6 +28,23 @@ const RESTAURANTS_DEFAULT = gql`
         }
     }
 `
+
+const SEARCH_RESTAURANTS = gql`
+    query searchRestaurants($keyword: String!){
+        searchRestaurants(keyword: $keyword){
+            id
+            title
+            stars
+            photo
+            link
+            tags{
+                id
+                type
+                name
+            }
+        }
+    }
+`
 const Wrap = styled.div`
     display: flex;
     width: 100%;
@@ -69,8 +86,23 @@ const AddButton = styled.div`
 function Home(){
 
     const [restaurants, setRestaurants] = useState([]);
+    //search
+    const [keyword, setKeyword] = useState("");
     const {data} = useQuery(RESTAURANTS_DEFAULT, (e)=>{console.log(e)});
-    console.log(data);
+    const searchRestaurants = useQuery(SEARCH_RESTAURANTS, {variables: {keyword:""}}, (e)=>{console.log(e)});
+    const handleSearch = async()=>{
+        console.log("handle search here");
+        try{
+            searchRestaurants.refetch({keyword:keyword});
+            console.log(searchRestaurants.data);
+        }catch(e){
+            console.log(e);
+        }
+        
+    }
+
+
+    // console.log(data);
     //for add restaurant block
     const [addRestaurantOpen, setAddRestaurantOpen] = useState(false);
     const handleAddRestaurantOpen = () => setAddRestaurantOpen(true);
@@ -111,6 +143,8 @@ function Home(){
     const handleSpinClose = () => {
         setSpinOpen(false);
     } 
+
+
     
     useEffect(() => {
         if(data){
@@ -119,7 +153,13 @@ function Home(){
                 setRestaurants(data.restaurants);  
             }
         }
-    }, [data])
+        if(searchRestaurants.data){
+            if(searchRestaurants.data.searchRestaurants){
+                // console.log("data.restaurants:", data.restaurants);
+                setRestaurants(searchRestaurants.data.searchRestaurants);  
+            }
+        }
+    }, [data, handleSearch])
 
     return(
         <Background>
@@ -128,7 +168,10 @@ function Home(){
                 // onClick={handleDisplay}
                     >
                     <Row>
-                        <SearchBar></SearchBar> 
+                        <SearchBar 
+                            keyword={keyword}
+                            setKeyword={setKeyword}
+                            handleSearch = {handleSearch}></SearchBar> 
                         <AddButton onClick={handleAddRestaurantOpen}>Add!</AddButton> 
                     </Row>
                     
