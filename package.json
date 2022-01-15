@@ -6,7 +6,7 @@
   "devDependencies": {},
   "scripts": {
     "frontend": "cd frontend && npm start",
-    "backend": "cd backend &&yarn install&& nodemon index.js",
+    "backend": "cd backend &&yarn install&& yarn start",
     "dev": "concurrently --kill-others-on-fail \"npm run backend\" \"npm run frontend\"",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
