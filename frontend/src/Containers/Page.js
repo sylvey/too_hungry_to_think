@@ -158,9 +158,11 @@ export default function Page(props) {
     // const tags = props.props.match.params.tags;
     // console.log(id);
     // console.log(name);
-    const [chosen, setChosen] = useState(false);
-    const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
+    // const [chosen, setChosen] = useState(false);
 
+    const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
+    const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
+    
     const handleCheck = ()=>{
         setChosen(!chosen);
     }
