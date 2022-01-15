@@ -8,6 +8,8 @@
     "frontend": "cd frontend && npm start",
     "backend": "cd backend &&yarn install&& yarn start",
     "dev": "concurrently --kill-others-on-fail \"npm run backend\" \"npm run frontend\"",
+    "build": "cd frontend && npm install && npm run build",
+    "start":"cd backend&&yarn start",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "repository": {
