@@ -19,5 +19,9 @@
     "url": "https://github.com/sylvey/too_hungry_to_think/issues"
   },
   "homepage": "https://github.com/sylvey/too_hungry_to_think#readme",
-  "engines" : { "node" : ">=0.12" } 
+  "engines" : { 
+    "node": "16.x",
+    "npm": "7.x" ,
+    "yarn": "1.x"
+  } 
 }
