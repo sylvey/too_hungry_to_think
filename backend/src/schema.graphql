@@ -3,7 +3,8 @@
 scalar Upload
 # See resolvers/Query.js
 type Query {
-    restaurants: String! ## recommand restaurants
+    restaurants: [Restaurant] ## recommand restaurants
+    image(imageId: ID!): Upload
     restaurantDetail(restaurantId: ID!): Restaurant ## given an restaurantId, return the restaurant's detail
     searchRestaurants(keyword: String!): [Restaurant] ## searchRestaurants
     files(userId: ID!): [File] ## search the user's files
@@ -42,9 +43,9 @@ type Restaurant{
     id: ID!
     title: String!
     stars: Float!
-    photo: ID! ## url 
+    photo: ID ## url 
     link: String
-    tags: [Tag!]
+    tags: [Tag]
     comments: [Comment]
 }
 

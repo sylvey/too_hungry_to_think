@@ -18,7 +18,7 @@ const Stars = ({num, style})=>{
         justify-content: center;
         ${style};
     `
-    console.log(style)
+    // console.log(style)
     
     return (
         <>

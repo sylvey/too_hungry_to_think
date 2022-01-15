@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import RightFrame from "../Containers/RightFrame";
 import { Background, CenterDiv, MainDiv, RightDiv } from "../Containers/BackGround";
-import restaurants from "../hardData/restaurants";
+// import restaurants from "../hardData/restaurants";
 import BigFrame from "../Containers/BigFrame";
 import SearchBar from "../Components/SearchBar";
 import styled from "styled-components";
@@ -9,8 +9,25 @@ import AddRestaurants from "../Modal/AddRestaurants";
 import AddBomb from "../Modal/AddBomb";
 import AddFavorite from "../Modal/AddFavorite";
 import Spin from "../Modal/Spin";
+import { gql, useQuery } from "@apollo/client";
 
-
+const RESTAURANTS_DEFAULT = gql`
+    query restaurants{
+        restaurants{
+            id
+            title
+            stars
+            photo
+            link
+            tags{
+                id
+                type
+                name
+            }
+            
+        }
+    }
+`
 const Wrap = styled.div`
     display: flex;
     width: 100%;
@@ -50,6 +67,10 @@ const AddButton = styled.div`
         width: 60px;
 `
 function Home(){
+
+    const [restaurants, setRestaurants] = useState([]);
+    const {data} = useQuery(RESTAURANTS_DEFAULT, (e)=>{console.log(e)});
+    console.log(data);
     //for add restaurant block
     const [addRestaurantOpen, setAddRestaurantOpen] = useState(false);
     const handleAddRestaurantOpen = () => setAddRestaurantOpen(true);
@@ -91,10 +112,14 @@ function Home(){
         setSpinOpen(false);
     } 
     
-    
-
-
-
+    useEffect(() => {
+        if(data){
+            if(data.restaurants){
+                // console.log("data.restaurants:", data.restaurants);
+                setRestaurants(data.restaurants);  
+            }
+        }
+    }, [data])
 
     return(
         <Background>
@@ -109,12 +134,14 @@ function Home(){
                     
                     <Wrap>
                     {
-                        restaurants.map((item)=>(
+                        restaurants? restaurants.map((item)=>(
                             <BigFrame
                                openAddBomb={handleAddBombOpen}
                                openAddFavorite={handleAddFavoriteOpen}
-                               {...item}></BigFrame>
-                        ))
+                               {...item}>
+
+                               </BigFrame>
+                        )):null
                     }
                     </Wrap>
                 </MainDiv>

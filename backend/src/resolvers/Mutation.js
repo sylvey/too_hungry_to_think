@@ -29,7 +29,6 @@ const Mutation = {
       tags: tags,
       comments: newRestaurant.comments
     }
-
     return restaurantsToReturn;
   },
   createTag: async (parent, { id, type, name }, { db, pubSub }) => {

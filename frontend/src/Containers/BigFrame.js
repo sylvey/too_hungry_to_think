@@ -29,7 +29,6 @@ const BlockWide = styled.div`
    // align-items: center;
     //justify-content: center;  
 `
-
 const Upper = styled.div`
     display: flex;
     flex-direction: row;
@@ -55,7 +54,6 @@ const UpperRight = styled.div`
     // background-color: yellow;
 
 `
-
 const Img = styled.img`
     margin: 10px;
     width: 90px;
@@ -66,12 +64,10 @@ const AddButton = styled.img`
     align-self: end;
     margin-right: 10px;
 `
-
 const Title = styled.h4`
     font-size: 15px; 
     //height: 20%;
 `
-
 const Lower = styled.div`
     display: flex;
     height: 40%;
@@ -94,14 +90,12 @@ const Tag = styled.div`
     padding-right: 7px;
     
 `
-
 const StarAndBomb = styled.div`
     display:flex;
     flex: 8; 
     //background-color: red;
     align-items: center;
 `
-
 const More = styled.div`
     display:flex;
     flex: 1;
@@ -118,7 +112,7 @@ const Row = styled.div`
 `
 
 
-const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>{
+const BigFrame = ({id, title, photo, star, tags, openAddBomb, openAddFavorite})=>{
     // console.log(JSON.parse(window.sessionStorage.getItem('pocketList')).find(item=>item.id === id)? true: false);
     const {pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
     const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
@@ -129,11 +123,12 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>
 
     useEffect(()=>{
         if(chosen){
-            saveRestaurant({id, name, image, star, tags});
+            saveRestaurant({id, name:title, image:photo, star, tags});
         }
         else{
             deleteRestaurant(id);
         }
+        // console.log(name);
     },[chosen])
 
     useEffect(()=>{
@@ -147,7 +142,7 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>
         <Block>
             <Upper>
                 <UpperLeft>
-                    <Img src = {image}></Img>
+                    {/* <Img src = {image}></Img> */}
                 </UpperLeft>
                 <UpperRight>
                     <AddButton 
@@ -156,7 +151,7 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>
                         height ={"20px"}
                         onClick={handleCheck}
                     ></AddButton>
-                    <Title>{name}</Title>
+                    <Title>{title}</Title>
                     <Stars num={star} style= {{ width: "50px",height: "10px"}}></Stars>
                 </UpperRight>
                 
@@ -165,7 +160,11 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>
                 <Row>
                 {
                     tags.map((item)=>(
-                        <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
+                        <Tag style={{
+                            backgroundColor: item.type === "food"? "#147EFA": 
+                                      item.type === "place"? "#FF0000": 
+                                            item.type === "takeInOrOut"?"#14FA7E": "yellow"}}
+                            >
                             {item.name}
                         </Tag>
                     ))
@@ -174,8 +173,8 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>
                 
                 <Row>
                     <StarAndBomb>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")} onClick={()=>openAddFavorite(id, name)}/>
-                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")} onClick={()=>openAddBomb(id, name)}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")} onClick={()=>openAddFavorite(id, title)}/>
+                        <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")} onClick={()=>openAddBomb(id, title)}/>
                     </StarAndBomb>
                     <More>
                     <Link 
@@ -183,8 +182,8 @@ const BigFrame = ({id, name, image, star, tags, openAddBomb, openAddFavorite})=>
                             to={{pathname: "/Information",
                                  state: {
                                     id: id,
-                                    name:name,
-                                    image:image,
+                                    name:title,
+                                    image:photo,
                                     star:star,
                                     tags:tags,
                                     BigFrame: true}
