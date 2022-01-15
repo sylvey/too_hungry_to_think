@@ -2,7 +2,7 @@ import mongo from "./mongo.js";
 import server from "./server.js";
 import "dotenv-defaults/config.js";
 import login from "./login.js";
-
+import publish from "./publish";
 
 mongo.connect();
 const port = process.env.PORT | 5000;
@@ -21,7 +21,7 @@ server.post('/api/google-login', async (req, res) => {
 
 const app = server.express;
 login(app);
-
+publish(app);
 
 server.start({ port }, () => {
   console.log(`The server is up on port ${port}!`);
