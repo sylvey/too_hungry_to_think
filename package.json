@@ -5,12 +5,12 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "frontend": "cd frontend && npm start",
-    "backend": "cd backend &&yarn install&& yarn start",
+    "frontend": "cd frontend && yarn install&&yarn run build",
+    "backend": "cd backend &&yarn start",
     "dev": "concurrently --kill-others-on-fail \"npm run backend\" \"npm run frontend\"",
-    "build": "cd frontend && npm install && npm run build",
-    "start":"cd backend&&yarn install&yarn start",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "build": "cd backend &&yarn install",
+    "start":"yarn backend",
+    "heroku-postbuild": "yarn frontend&&yarn build"
   },
   "repository": {
     "type": "git",
