@@ -5,9 +5,10 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "start":"cd ./backend&&yarn install&&yarn start",
-    "build":"cd ./frontend&&yarn install&&yarn run build&&cd ../backend&&yarn install&&yarn start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend &&yarn install&& nodemon index.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run backend\" \"npm run frontend\"",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "repository": {
     "type": "git",
