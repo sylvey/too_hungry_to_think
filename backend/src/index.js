@@ -29,8 +29,6 @@ server.get('/api/google-login',(req,res)=>{
   res.send('hello')
 })
 
-
-
 server.start({ port }, () => {
   console.log(`The server is up on port ${port}!`);
 });

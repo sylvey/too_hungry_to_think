@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
-// import { dataInit } from "./upload.js";
-
 import "dotenv-defaults/config.js";
 import dotenv from "dotenv-defaults";
+const Grid = require('gridfs-stream');
+
+// const methodOverride = require('method-override');
+
 async function connect() {
   // TODO 1.1 Connect your MongoDB
   dotenv.config();
@@ -22,11 +24,14 @@ async function connect() {
         throw new Error("DB connection error: "+ error);
     })
 
+    let gfs;
     db.once('open', ()=>{
+        gfs = Grid(db.db, mongoose.mongo);
+        gfs.collection('uploads');
         console.log("MongoDB connected");
     })
 
     //dataInit();
 }
 
-export default { connect };
+export default { connect, };

@@ -1,6 +1,6 @@
 # Date type. See resolvers/Date.js
 # scalar Date
-
+scalar Upload
 # See resolvers/Query.js
 type Query {
     restaurants: String! ## recommand restaurants
@@ -33,6 +33,7 @@ type Mutation {
 input RestaurantInput{
     id: ID!
     title: String!
+    photo: Upload!
     link: String
     tagIds: [String]
 }
@@ -41,7 +42,7 @@ type Restaurant{
     id: ID!
     title: String!
     stars: Float!
-    # photo: String! ## url 
+    photo: ID! ## url 
     link: String
     tags: [Tag!]
     comments: [Comment]

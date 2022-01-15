@@ -120,18 +120,24 @@ export default function AddRestaurants({open, handleClose}) {
     const [image, setImage] = useState(null);
     const [chosenTagsId, setChosenTagsId] = useState([]);
     const [chosenTags, setChosenTags] = useState([]);
+    
     //image
     useEffect(() => {
         if(image){
-            console.log(window.URL.createObjectURL(image));
+            console.log("image:", image);
+            console.log("windowUrl.createObj:", window.URL.createObjectURL(image));
         }
         
     }, [image])
 
     //get tags
-    const {data, subscribeToMore, refetch} = useQuery(SEARCH_TAG,  { variables:{keyword: tag}})
+    const {data, subscribeToMore, refetch} = useQuery(SEARCH_TAG,  { variables:{keyword: tag}}, (e)=>{console.log(e)})
     useEffect(()=>{
-      refetch({keyword: tag});
+      try{
+        refetch({keyword: tag});
+      }catch(e){
+        console.log(e);
+      }
       console.log(data? data.searchTag: data);
     }, [tag, chosenTags])
 
@@ -177,6 +183,7 @@ export default function AddRestaurants({open, handleClose}) {
               input:{
                 id: id,
                 title: title,
+                photo: image,
                 link: link,
                 tagIds: chosenTagsId
               }
@@ -191,11 +198,6 @@ export default function AddRestaurants({open, handleClose}) {
       }
     }
 
-    // useEffect(() => {
-    //   if(title !== ""){
-    //     setTitleError("")
-    //   }
-    // }, [title])
 
     return (
         <div>
@@ -285,6 +287,7 @@ export default function AddRestaurants({open, handleClose}) {
                                 console.log(event.target.files[0]);
                                 setImage(event.target.files[0]);
                               }}
+                              required
                               />
                             <i class="fa fa-cloud-upload"></i>點擊重新選擇
                           </label>

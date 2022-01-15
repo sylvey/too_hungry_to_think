@@ -1,6 +1,14 @@
 // for schemas
 
 import mongoose from "mongoose";
+import dotenv from "dotenv-defaults";
+import "dotenv-defaults/config.js";
+import path from "path";
+const {GridFsStorage} = require('multer-gridfs-storage');
+const multer = require('multer');
+const crypto = require('crypto');
+// const GridFsStorage = require('multer-gridfs-storage');
+
 
 /**
  * Task Schema for MongoDB
@@ -10,7 +18,7 @@ const restaurantSchema = new mongoose.Schema(
     id: { type: String, unique: true },
     title: String,
     stars: Number,
-    // photo: String,
+    photo: String,
     link: String,
     tagIds: [String],
     comments: [{type: mongoose.Types.ObjectId, ref: "Comment"}]
@@ -62,6 +70,9 @@ const commentSchema = new mongoose.Schema(
       star: Number
   }
 )
+
+
+
 
 const TagsModel = mongoose.model("Tag", tagSchema);
 const RestaurantModel = mongoose.model("Restaurant", restaurantSchema);

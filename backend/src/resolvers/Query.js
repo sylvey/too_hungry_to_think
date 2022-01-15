@@ -35,7 +35,7 @@ const Query = {
     else{
       tags = await TagsModel.find({"name": {"$regex": keyword, "$options": "i"}}, function(err, docs){}).clone().catch(function(err){})
     } 
-    
+    // console.log(tags);
     return tags;
   }
 };
