@@ -140,6 +140,14 @@ const CommentBlock = styled.div`
 //     justify-content: center;
 
 `
+const CommentBlockLeft = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+`
+const CommentBlockLeftTopOrBottom = styled.div`
+    height: 50%;
+`
 
 
 
@@ -212,12 +220,21 @@ export default function Page(props) {
                 </Row>
 
                 <Lower>
-                    <CommentBlock>
-                        <Stars num={1} style= {{ width: "50px",height: "10px"}}></Stars>
-
-                        <p>123</p>
-
-                    </CommentBlock>
+                    {
+                        tags.map((item)=>(
+                            <CommentBlock style={{backgroundColor:"white"}}>
+                                <CommentBlockLeft>
+                                    <CommentBlockLeftTopOrBottom>
+                                        <h1>{item.userName}</h1>
+                                    </CommentBlockLeftTopOrBottom>
+                                    <CommentBlockLeftTopOrBottom>
+                                        <Stars num={item.star} style= {{ width: "50px",height: "10px"}}></Stars>
+                                    </CommentBlockLeftTopOrBottom>
+                                </CommentBlockLeft>
+                                    <p>123</p>
+                            </CommentBlock>
+                        ))
+                    }
                 </Lower>
             </BigBlock>
         )

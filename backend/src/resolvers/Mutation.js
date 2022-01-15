@@ -1,4 +1,4 @@
-import { RestaurantModel, TagsModel, upload } from "../db";
+import { RestaurantModel, TagsModel, upload, CommentModel } from "../db";
 // import { uploadFile } from "./utility";
 const Mutation = {
   createRestaurant: async (parent, {input}, { db, pubSub }) => {
@@ -42,8 +42,24 @@ const Mutation = {
   addCollection: async(parent,{userId, restaurantId, fileId })=>{
 
   },
-  addComment: async(parent, {userID, restaurantId, content, star}, {db, pubSub})=>{
-    
+  async addComment(parent, {userID, restaurantId, content, star}, {db, pubSub}){
+    console.log(userID, restaurantId, content, star) 
+    if (!content || !star){
+      throw new Error("請留言並給星評價"); }
+    const newComment = new CommentModel({
+      id: userID+restaurantId, 
+      userID: userID, 
+      restaurantId: restaurantId, 
+      content: content, 
+      star: star
+    });
+    // pubsub.publish('POST_CREATED', {
+    //   postCreated: {
+    //     author: 'Ali Baba',
+    //     comment: 'Open sesame'
+    //   }
+    // });
+    return newComment;
   }
 };
 
