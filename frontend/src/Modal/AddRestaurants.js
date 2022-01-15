@@ -166,7 +166,7 @@ export default function AddRestaurants({open, handleClose}) {
     //submit
     const [createRestaurant] = useMutation(CREATE_RESTAURANT);
     const handleSubmit = async()=>{
-      if(title !== ""){
+      if(title !== "" && image !== "" && chosenTagsId !== [] && link !== ""){
           console.log("have title");
           const id = uuid4();
           try{
@@ -219,7 +219,8 @@ export default function AddRestaurants({open, handleClose}) {
                     <InputTitle>餐廳連結</InputTitle>
                     <InputText
                         value={link}
-                        onChange={(e)=>setLink(e.target.value)}/>
+                        onChange={(e)=>setLink(e.target.value)}
+                        required/>
                   </InputBlock>
 
                   <InputBlock>
@@ -271,7 +272,8 @@ export default function AddRestaurants({open, handleClose}) {
                     <InputText
                         value={image}
                         onChange={(e)=>setImage(e.target.value)}
-                        required/>
+                        required
+                    />
                   </InputBlock>
 
                   <InputBlock >
