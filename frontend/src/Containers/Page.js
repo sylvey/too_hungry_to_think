@@ -33,8 +33,6 @@ const BigBlock = styled.div`
     flex-direction: column;
     background-color: #FFEAA1;
     border-radius: 20px;
-//    align-items: center;
-//     justify-content: center;
     @media(max-width:1200px){ 
         height:60em;
     }
@@ -51,11 +49,9 @@ const Upper = styled.div`
         flex-direction: column;
         height: 51%;
     }
-
 `
 const UpperLeft = styled.div`
     margin-top:50px;
-  //  background-color: blue;
     display: flex;
     //flex: 4;
     height: 50%;
@@ -68,8 +64,6 @@ const UpperLeft = styled.div`
     }
 `
 const UpperRight = styled.div`
-    // margin-left:15px;
-    //background-color: green;
     display: flex;
     flex: 3;
     flex-direction: column;
@@ -84,7 +78,6 @@ const UpperRight = styled.div`
 
 const Img = styled.img`
     margin: 10px;
-    // width: 175px;
     height: 175px;
 `
 const AddButton = styled.img`
@@ -96,7 +89,6 @@ const AddButton = styled.img`
 const Title = styled.h4`
     font-size: 45px; 
     color:red;
-    //height: 20%;
     margin-top: 30px;
     @media(max-width:1200px){ 
         margin-top: 55px;
@@ -107,7 +99,6 @@ const Lower = styled.div`
     display: flex;
     height:400px;
     flex-direction: column;
-   // background-color: red;
     padding-left: 10px;
 `
 const Tag = styled.div`
@@ -131,16 +122,11 @@ const Tag = styled.div`
 const StarAndBomb = styled.div`
     display:flex;
     flex: 8; 
-    //background-color: red;
-    //align-items: center;
 `
 
 const Row = styled.div`
     display: flex;
     flex-direction: row;
-    //align-content: center;
-    //justify-content: center;
-    // background-color: red;
 `
 const CommentBlock = styled.div`
     width:90%;
@@ -150,9 +136,6 @@ const CommentBlock = styled.div`
     background-color: white;
     margin-bottom: 80px;
     border-radius: 20px;
-//    align-items: center;
-//     justify-content: center;
-
 `
 const CommentBlockLeft = styled.div`
     display: flex;
@@ -188,8 +171,6 @@ const Input = styled.input`
         border-style: none;
     }
 `
-
-
 
 export default function Page(props) {
     console.log(props.props.location.state.id);
@@ -284,9 +265,9 @@ export default function Page(props) {
 
                 <Lower>
                 <Container>
-                            <Text value={"comment"} 
-                                // value= {{userName}}
-                                >
+                    <Text value={"comment"} 
+                        // value= {{userName}}
+                        >
                             </Text>
                             <Input/>
                         </Container>
