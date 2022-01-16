@@ -1,4 +1,4 @@
-import { RestaurantModel, TagsModel,FileModel, UserModel } from "../db";
+import { RestaurantModel, TagsModel,FileModel, UserModel, bombModel } from "../db";
 // import { downloadFile } from "./utility";
 
 const Query = {
@@ -82,19 +82,8 @@ const Query = {
     return result;
   },
   files: async (parent, {userId}, {db, pubSub})=>{
-    const user = await UserModel.find({userId});
-    const file = user.files;
-    let result = [];
-    for(let i = 0; i < user.files.length; i++){
-      result.push({
-        id: file[i].id,
-        title: file[i].title,
-        }); 
-      return result;
-    }
-    console.log(tags, result);
-
-    return result;
+    const file = await FileModel.find({userId});
+    return file;
   },
   collection: async (parent, {fileId}, {db, pubSub})=>{
     const file = await FileModel.find({fileId});
@@ -104,23 +93,12 @@ const Query = {
       result.push({
         restaurants: collections[i],
         }); 
-      return result;
     }
-    console.log(tags, result);
-
     return result;
   },
   bomb: async (parent, {userId}, {db, pubSub})=>{
-    const user =  await UserModel.find({userId});
-    const bomb = user.bomb;
-    let result = [];
-    for (let i=0;i<bomb.length;i++)
-    {
-      result.push({
-        restaurants: bomb[i].restaurant,
-      })
-    }
-    return result;
+    const bomb = await bombModel.find({userId});
+    return bomb;
   },
   searchTag: async (parent, {keyword}, {db, pubSub})=>{
     

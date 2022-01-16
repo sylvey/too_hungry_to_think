@@ -9,7 +9,29 @@ import styled from "styled-components";
 import files from "../hardData/files";
 import { unstable_requirePropFactory } from "@mui/utils";
 import { Link } from "react-router-dom";
-
+import { gql } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
+const loginData =localStorage.getItem('loginData');
+const CREATE_FILE = gql`
+  mutation createFile($userId: ID!,$title:String!){
+    createFile(userId: $userId,title:$title)
+  }
+`
+const FILES = gql`
+  query files($userId: ID!){
+    files(userId: $ID)
+  }
+`
+const COLLECTION = gql`
+  query collection($fileID: ID!){
+    collection(fileID: $ID)
+  }
+`
+const BOMB = gql`
+    query files($userId: ID!){
+      files(userId: $ID)
+  }
+`
 const Wrap = styled.div`
     display: flex;
     width: 100%;
@@ -79,11 +101,26 @@ const AddCatInput = styled.input`
 function Personal(){
     const [showAddCat, setShowAddCat] = useState(false);
     const [newCat, setNewCat] = useState("");
-    
-    const handleAddCat = () =>{
-        setShowAddCat(false);
-    }
+    const [createFile] = useMutation(CREATE_FILE);
+    const handleAddCat = async () =>{
+            try{
+              await createFile({
+              variables:{
+              userId: loginData,
+              title:newCat,
+              },
+              onCompleted: ()=>{
+                console.log("success created collection");
+                setShowAddCat(false);
+              }   
+            })}catch(e){
+              console.log(e);
+              setShowAddCat(false);
+            } 
+            console.log(newCat) 
 
+    }
+    
     return(
         <Background>
             <CenterDiv>
@@ -96,7 +133,7 @@ function Personal(){
                              {
                                  showAddCat? (
                                  <AddCatForm
-                                        onSubmit = {handleAddCat}>
+                                         onSubmit= {()=> {handleAddCat()}}>
                                     <AddCatInput
                                            value = {newCat}
                                            placeholder="New File"

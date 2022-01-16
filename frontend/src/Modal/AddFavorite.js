@@ -10,11 +10,17 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import { gql } from '@apollo/client';
 import files from '../hardData/files';
 import { BigFrame4Modal } from '../Containers/BigFrame';
 import { width } from '@mui/system';
 import { useMutation, useQuery } from '@apollo/client';
-
+const ADD_COLLECTION = gql`
+  mutation addCollection($userId: ID!, $restaurantId: ID!,$title:String!){
+    addCollection(userId: $userId, restaurantId: $restaurantId,title:$title)
+  }
+`
+const loginData =localStorage.getItem('loginData');
 const style = {
   display:"flex",
   flexDirection: "column",
@@ -52,9 +58,22 @@ const dropDownStyle = {
 
 
 export default function AddFavorite({open, handleClose, id, title}) {
-    
-    const handleSubmit = ()=>{
-      handleClose();
+    const [addCollection] = useMutation(ADD_COLLECTION);
+    const handleSubmit = async ()=>{
+      try{
+        await addCollection({
+        variables:{
+        userId: loginData,
+        restaurantId: id,
+        title: folder.title,
+        },
+        onCompleted: ()=>{
+          console.log("success created collection");
+          handleClose();  
+        }   
+      })}catch(e){
+        console.log(e);
+      } 
     }
     const [folder, setFolder] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);

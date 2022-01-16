@@ -13,10 +13,7 @@ import restaurants from '../hardData/restaurants';
 const loginData =localStorage.getItem('loginData');
 const ADD_BOMB = gql`
   mutation addBomb($userId: ID!, $restaurantId: ID!){
-    addBomb(userId: $ID, restaurantId: $ID)
-    {
-      type
-    }
+    addBomb(userId: $userId, restaurantId: $restaurantId)
   }
 `
 const style = {
@@ -46,10 +43,8 @@ export default function AddBomb({open, handleClose, id, title}) {
       try{
         await addBomb({
         variables:{
-          input:{
-            userId: loginData.email,
-            restaurantId: id
-          }
+        userId: loginData,
+        restaurantId: id
         },
         onCompleted: ()=>{
           console.log("success created bomb");
@@ -57,7 +52,7 @@ export default function AddBomb({open, handleClose, id, title}) {
         }   
       })}catch(e){
         console.log(e);
-      }
+      } 
     }
 
     return (

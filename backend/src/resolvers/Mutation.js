@@ -1,4 +1,4 @@
-import { RestaurantModel, TagsModel, upload, CommentModel, UserModel,FileModel } from "../db";
+import { RestaurantModel, TagsModel, upload, CommentModel, bombModel,FileModel } from "../db";
 // import { uploadFile } from "./utility";
 const Mutation = {
   createRestaurant: async (parent, {input}, { db, pubSub }) => {
@@ -34,27 +34,25 @@ const Mutation = {
     return newTag;
   },
   createFile: async (parent, { userId, title }, {db, pubSub})=>{
-    const newFile = new FileModel({id,title,restaurants})
+    const newFile = new FileModel({userId,title})
     await newFile.save();
-    const user = await UserModel.findByIdAndUpdate(
-      user.files.push(newFile)
-    );
-    await user.save();
-  },
-  addBomb: async (parent, {userId, restaurantId}, {db, pubSub})=>{
-    const newBomb = restaurantId;
-    const user = await UserModel.find({userId});
-    user.bomb.push(newBomb);
-    await user.save();
     const success ="success";
     return success;
   },
-  addCollection: async(parent,{userId, restaurantId, fileId })=>{
-    const newCollection = restaurantId;
-    const file = await FileModel.findByIdAndUpdate(
-      file.restaurants.push(newCollection)
-    );
-    await file.save();
+  addBomb: async (parent, {userId, restaurantId}, {db, pubSub})=>{
+    const newBomb = new bombModel({userId,restaurantId});
+    await newBomb.save();
+    const success ="success";
+    return success;
+  },
+  addCollection: async(parent,{userId, restaurantId, title })=>{
+    let newCollection = restaurantId;
+    const File = await FileModel.find({userId,title});
+    let newRestaurant = File.restaurants+newCollection;
+    const newFile =FileModel({userId,title,newRestaurant});
+    await newFile.save();
+    const success ="success";
+    return success;
   },
   async addComment(parent, {userID, restaurantId, content, star}, {db, pubSub}){
     console.log(userID, restaurantId, content, star) 

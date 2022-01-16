@@ -39,22 +39,21 @@ const tagSchema = new mongoose.Schema(
     }
 )
 
-const userSchema = new mongoose.Schema(
+const bombSchema = new mongoose.Schema(
     {
-       id: {type: String, unique: true},
-       files: [{type: mongoose.Types.ObjectId, ref: "File"}],
-       bomb: [{type: mongoose.Types.ObjectId, ref: "Restaurant"}],
+       id: {type: String},
+       restaurants: [String],
     },
     {
-        collection: "user"
+        collection: "bomb"
     }
 )
 
 const fileSchema = new mongoose.Schema(
   {
-      id: {type: String, unique: true},
+      id: {type: String},
       title: String,
-      restaurants: [{type: mongoose.Types.ObjectId, ref: "Restaurant"}],
+      restaurants: [String],
   },
   {
     collection: "file"
@@ -76,8 +75,8 @@ const commentSchema = new mongoose.Schema(
 
 const TagsModel = mongoose.model("Tag", tagSchema);
 const RestaurantModel = mongoose.model("Restaurant", restaurantSchema);
-const UserModel = mongoose.model("User", userSchema);
+const bombModel = mongoose.model("User", bombSchema);
 const FileModel = mongoose.model("File", fileSchema);
 const CommentModel = mongoose.model("Comment", commentSchema);
 
-export {TagsModel, RestaurantModel, UserModel, FileModel, CommentModel};
+export {TagsModel, RestaurantModel, bombModel, FileModel, CommentModel};
