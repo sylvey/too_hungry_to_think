@@ -5,8 +5,26 @@ import { useState, useEffect } from 'react';
 import Stars from "../Components/star";
 import StarChoose from "../Components/starChoose";
 import { usePocketHook } from "../hook/pocketProvider";
+import { useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 
-
+const GET_RESTARURANT = gql`
+    query restaurant($restaurantId: ID!){
+        restaurantDetail(restaurantId: $restaurantId){
+            id
+            title
+            stars
+            photo
+            link
+            tags{
+                id
+                type
+                name
+            }
+        
+        }
+    }
+`
 
 const BigBlock = styled.div`
     width:600px;
@@ -176,10 +194,10 @@ const Input = styled.input`
 export default function Page(props) {
     console.log(props.props.location.state.id);
     const id = props.props.location.state.id;
-    const name = props.props.location.state.name;
-    const image = props.props.location.state.image;
-    const star = props.props.location.state.star;
-    const tags = props.props.location.state.tags;
+    // const name = props.props.location.state.name;
+    // const image = props.props.location.state.image;
+    // const star = props.props.location.state.star;
+    // const tags = props.props.location.state.tags;
 
     // const id = props.match.params.id;
     // const name = props.props.match.params.name;
@@ -190,6 +208,7 @@ export default function Page(props) {
     // console.log(name);
     // const [chosen, setChosen] = useState(false);
 
+    const [restaurant, setRestaurant] = useState(null);
     const [num, setNum] = useState(0);
     const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
     const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
@@ -198,16 +217,35 @@ export default function Page(props) {
         setChosen(!chosen);
     }
 
+    const {data, refetch} = useQuery(GET_RESTARURANT,  { variables:{restaurantId: id}}, (e)=>{console.log(e)})
+
+    useEffect(() => {
+        refetch({restaurantId: id});
+    }, [])
+
+    useEffect(()=>{
+        console.log("data", data);
+        if(data){
+            if(data.restaurantDetail){
+                console.log(data.restaurantDetail);
+                setRestaurant(data.restaurantDetail);
+            }
+        }
+    }, [data])
+
     useEffect(()=>{
         if(chosen){
-            saveRestaurant({id, name, image, star, tags});
+            saveRestaurant({id, name: restaurant.title, image: restaurant.photo, star: restaurant.stars, tags: restaurant.tags});
         }
         else{
             deleteRestaurant(id);
         }
     },[chosen])
-    return(
-            <BigBlock>
+
+    return(<>{
+        restaurant?
+    
+            (<BigBlock>
                 <AddButton 
                             src={chosen?require("../hardData/check-circle.png"):require("../hardData/check-circle-empty.png")}
                             width={"20px"}
@@ -216,16 +254,16 @@ export default function Page(props) {
                             onClick={handleCheck}/>
                 <Upper>
                     <UpperLeft>
-                        <Img src = {image}></Img>
+                        <Img src = {restaurant.photo}></Img>
                     </UpperLeft>
                     <UpperRight>
                         <Title>
-                            {name}
+                            {restaurant.title}
                         </Title>
-                        <Stars num={star} style= {{ width: "200px",height: "100px",marginTop:"-40px"}}></Stars>
+                        <Stars num={restaurant.star} style= {{ width: "200px",height: "100px",marginTop:"-40px"}}></Stars>
                         <Row>
                             {
-                            tags.map((item)=>(
+                            restaurant.tags.map((item)=>(
                                 <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
                                     {item.name}
                                 </Tag>
@@ -239,7 +277,9 @@ export default function Page(props) {
                     </UpperRight>
                 </Upper>
                 <Row style={{marginTop: "-50px"}}>
-                    <p>Address</p>
+                    <p >Address:
+                    <a href={restaurant.link}>Click me</a>
+                    </p>
                 </Row>
 
                 <Lower>
@@ -259,7 +299,7 @@ export default function Page(props) {
                                 style= {{ width: "50%",height: "35px", cursor: 'pointer'}} 
                                 />
                         </Container>
-                    {
+                    {/* {
                         tags.map((item)=>(
                             <CommentBlock style={{backgroundColor:"white"}}>
                                 <CommentBlockLeft>
@@ -273,8 +313,10 @@ export default function Page(props) {
                                     <p>123</p>
                             </CommentBlock>
                         ))
-                    }
+                    } */}
                 </Lower>
-            </BigBlock>
+            </BigBlock>)
+            : null
+        }</>
         )
 }
