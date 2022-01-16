@@ -13,14 +13,7 @@ import restaurants from '../hardData/restaurants';
 const loginData =localStorage.getItem('loginData');
 const ADD_BOMB = gql`
   mutation addBomb($userId: ID!, $restaurantId: ID!){
-<<<<<<< HEAD
     addBomb(userId: $userId, restaurantId: $restaurantId)
-=======
-    addBomb(userId: $ID, restaurantId: $ID)
-    # {
-    #   type
-    # }
->>>>>>> 9bf6e6bd69218eb4942142ebbf868018b5bc3d8b
   }
 `
 const style = {
