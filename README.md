@@ -8,10 +8,11 @@
 # Demo 影片連結:
 
 # 描述這個服務在做什麼
+有鑑於許多大學生常有午餐選擇障礙、晚餐選擇障礙......，團隊開發 H.T.T.P. Help Them To Pick 服務，讓使用者可加入、收藏、搜尋餐廳，並將符合今天胃口的餐廳放進待選清單中，讓系統為使用者選擇要吃什麼。
+
 
 # Deployed 連結 
-    (如有自己有安全性的疑慮，則可以不用在 FB 社團公告此項)
-    (如果有給 deployed 連結) 使用/操作方式 (含伺服器端以及使用者端)
+https://helpthemtopick.herokuapp.com/
 
 # Github link 
     (請不要給成你的 private wp1101 repo <= 別人看不到)
@@ -39,12 +40,49 @@
 * 後端 : Gridfs
 
 # 專題製作心得
+
 林又昕：
-與之前的專案相比，這次是我第一次有上架的專案，也是第一個有負責到後端的專案。透過這次專案，我把之前超級不熟的context provider自己寫了一次，也更加善用了 localstorage 跟 sessionStorage。以前總是很嚮往寫後端，但在經過這次之後，我真心感受到自己在面對後端的時候有多無力，好多好多的框架、模式、應用是我沒有學過的，前端只要不停調整就可以出來了，後端往往需要更多的套件管理與理解。希望未來我能繼續學習更多後端的應用，不會因為一兩次的失敗而放棄。
 
 
 # 如何在 localhost 安裝與測試之詳細步驟
 
 <!-- 請務必詳述，包含：基本的 yarn/npm 指令，後端如果使用其他語言所需要之安裝環境說明，資料庫串接與資料匯入方式，登入之帳密 (if needed)… 等。 -->
 
-# 給一組餐廳清單?
+* 前端環境架設：
+在 terminal 輸入指令
+```
+cd frontend
+yarn install
+```
+至 frontend/src/index.js 中，將19、24、30行註解掉，並將 20、25、31 解註解 (由於上傳為最終打包檔案，若要 run 在本地後端，需做此動作)
+
+
+* 後端環境架設：
+在 terminal 輸入指令
+```
+cd backend
+yarn install
+```
+接著至 backend 中按 .env.default 新增 .env
+
+* 開啟後端
+在 terminal 輸入指令
+```
+cd backend
+yarn start
+```
+
+* 開啟前端
+在 terminal 輸入指令
+```
+cd frontend
+yarn start
+```
+
+
+
+
+
+
+
+
