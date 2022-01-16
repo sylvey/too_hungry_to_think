@@ -37,14 +37,23 @@ const Mutation = {
     const newFile = new FileModel({id,title,restaurants})
     await newFile.save();
     const user = await UserModel.findByIdAndUpdate(
-
-    )
+      user.files.push(newFile)
+    );
+    await user.save();
   },
   addBomb: async (parent, {userId, restaurantId}, {db, pubSub})=>{
-
+    const newBomb = restaurantId;
+    const user = await UserModel.findByIdAndUpdate(
+      user.bomb.push(newBomb)
+    );
+    await user.save();
   },
   addCollection: async(parent,{userId, restaurantId, fileId })=>{
-
+    const newCollection = restaurantId;
+    const file = await FileModel.findByIdAndUpdate(
+      file.restaurants.push(newCollection)
+    );
+    await file.save();
   },
   async addComment(parent, {userID, restaurantId, content, star}, {db, pubSub}){
     console.log(userID, restaurantId, content, star) 
