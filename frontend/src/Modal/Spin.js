@@ -36,14 +36,16 @@ export default function Spin({open, handleClose}) {
     const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
     const [choose, setChoose] = useState("");
     useEffect(() => {
-      console.log(pocket);
-      console.log("choose:", choose);
-      setChoose(pocket[Math.floor(Math.random()*pocket.length)].id);
+      if(pocket.length !== 0){
+        console.log(pocket);
+        console.log("choose:", choose);
+        setChoose(pocket[Math.floor(Math.random()*pocket.length)].id);
+      }
     }, [])
 
-    useEffect(() => {
-      console.log("choose:", choose);
-    }, [choose])
+    // useEffect(() => {
+    //   console.log("choose:", choose);
+    // }, [choose])
     
     return (
         <div>
