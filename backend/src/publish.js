@@ -11,4 +11,19 @@ export default (app) => {
             origin: "http://localhost:3000", 
             credentials: true,
     }));
+    app.use(
+        cors({
+            origin: "http://localhost:5000", 
+            credentials: true,
+    }));
+    app.use(
+        cors({
+            origin: "ws://localhost:3000", 
+            credentials: true,
+    }));
+    app.use(
+        cors({
+            origin: "ws://localhost:5000", 
+            credentials: true,
+    }));
 }
