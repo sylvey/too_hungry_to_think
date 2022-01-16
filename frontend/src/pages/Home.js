@@ -28,7 +28,6 @@ const RESTAURANTS_DEFAULT = gql`
         }
     }
 `
-
 const SEARCH_RESTAURANTS = gql`
     query searchRestaurants($keyword: String!){
         searchRestaurants(keyword: $keyword){
