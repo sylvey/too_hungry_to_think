@@ -1,13 +1,9 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-//import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import "../App.css";
 import { useState, useEffect } from 'react';
 import Stars from "../Components/star";
-import IconTint from "react-icon-tint";
+import StarChoose from "../Components/starChoose";
 import { usePocketHook } from "../hook/pocketProvider";
 
 
@@ -149,6 +145,32 @@ const CommentBlockLeftTopOrBottom = styled.div`
     height: 50%;
 `
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-top:5px;
+    margin-bottom:5px;
+`
+
+const Text = styled.input`
+    width:20%;
+    align-items: center;
+    justify-content: center;
+`
+const Input = styled.input`
+    display: flex;
+    margin-left: 10px;
+    outline: none;
+    border-style: none;
+    background-color: white;
+    font-size: 30px;
+    width:70%;
+    &:focus {
+        outline: none;
+        border-style: none;
+    }
+`
+
 
 
 export default function Page(props) {
@@ -168,6 +190,7 @@ export default function Page(props) {
     // console.log(name);
     // const [chosen, setChosen] = useState(false);
 
+    const [num, setNum] = useState(0);
     const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
     const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
     
@@ -220,6 +243,22 @@ export default function Page(props) {
                 </Row>
 
                 <Lower>
+                <Container>
+                            <Text value={"comment"} 
+                                // value= {{userName}}
+                                >
+                            </Text>
+                            <Input/>
+                        </Container>
+                        <Container>
+                            <Text value={"rank"}>
+                            </Text>
+                            <StarChoose 
+                                num={num}
+                                setNum={setNum} 
+                                style= {{ width: "50%",height: "35px", cursor: 'pointer'}} 
+                                />
+                        </Container>
                     {
                         tags.map((item)=>(
                             <CommentBlock style={{backgroundColor:"white"}}>
