@@ -74,7 +74,11 @@ const Mutation = {
         $addToSet:{comments:[...comments, newComment]}
       },
     )
-    return newComment;
+    let restaurantStars = awaitRestaurantModel.findOne({id:restaurantId}).stars;
+    await RestaurantModel.findOneAndUpdate(
+      {restaurantStars:restaurantStars},
+      {restaurantStars:(restaurantStars*(comments-1)+star)/comments}
+    )
   }
 };
 
