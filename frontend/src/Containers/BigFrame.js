@@ -15,6 +15,24 @@ import { gql } from "@apollo/client";
 //     }
 // `
 
+const GET_RESTARURANT = gql`
+    query restaurant($restaurantId: ID!){
+        restaurantDetail(restaurantId: $restaurantId){
+            id
+            title
+            stars
+            photo
+            link
+            tags{
+                id
+                type
+                name
+            }
+        
+        }
+    }
+`
+
 const Block = styled.div`
     display: flex;
     flex-direction: column;
@@ -264,14 +282,20 @@ const BigFrame4Right = ({id, name, image, star, tags})=>{
 const BigFrame4Modal = ({id})=>{
 
     const [restaurant, setRestaurant] = useState(null);
-
+    const {data, refetch} = useQuery(GET_RESTARURANT,  { variables:{restaurantId: id}}, (e)=>{console.log(e)})
     useEffect(() => {
+        refetch({restaurantId: id});
         restaurants.map((item)=>{
             if(item.id === id){
                 setRestaurant(item);
             }
         })
     }, [])
+
+    useEffect(()=>{
+
+        console.log("data:", data);
+    }, [data])
 
     return(
         <>

@@ -40,14 +40,14 @@ const tagSchema = new mongoose.Schema(
 )
 
 const userSchema = new mongoose.Schema(
-  {
-     id: {type: String, unique: true},
-     files: [{type: mongoose.Types.ObjectId, ref: "File"}],
-     bomb: [{type: mongoose.Types.ObjectId, ref: "Restaurant"}],
-  },
-  {
-      collection: "user"
-  }
+    {
+       id: {type: String, unique: true},
+       files: [{type: mongoose.Types.ObjectId, ref: "File"}],
+       bomb: [{type: mongoose.Types.ObjectId, ref: "Restaurant"}],
+    },
+    {
+        collection: "user"
+    }
 )
 
 const fileSchema = new mongoose.Schema(
