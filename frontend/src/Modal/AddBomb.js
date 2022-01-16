@@ -14,9 +14,9 @@ const loginData =localStorage.getItem('loginData');
 const ADD_BOMB = gql`
   mutation addBomb($userId: ID!, $restaurantId: ID!){
     addBomb(userId: $ID, restaurantId: $ID)
-    {
-      type
-    }
+    # {
+    #   type
+    # }
   }
 `
 const style = {

@@ -3,12 +3,12 @@ import { RestaurantModel, TagsModel,FileModel, UserModel } from "../db";
 
 const Query = {
   restaurants: async (parent, query, { db, pubSub }) => {
-    const restaurants = await RestaurantModel.find({});
+    const restaurants = await RestaurantModel.find({}).limit(10);
 
     let result = [];
     let tags = await TagsModel.find({});
     // console.log(restaurants);
-    for(let i = 0; i < restaurants.length; i++){
+    for(let i = 0; i < 10; i++){
       let newtags = tags.filter(tag => restaurants[i].tagIds.includes(tag.id));
       // console.log(newtags);
       result.push({
