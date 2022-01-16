@@ -21,23 +21,17 @@ https://helpthemtopick.herokuapp.com/
 其他說明
 
 # 使用與參考之框架/模組/原始碼
-### 前端介面:  
+### 前端介面: 
+* React.js
 * session.storage render參考原始碼：https://javascript.plainenglish.io/connecting-react-with-localstorage-ad590d4e4fa1
+* material UI、react-bootstrap
+### 後端介面:
+* node.js
+### 前後端串接：
+* GraphQL
+### database：
+* mongodb
 
-
-
-
-
-# 使用之第三方套件、框架、程式碼
-#### 前端介面: 
-* 介面模組material ui、react-bootstrap 
-
-#### 後端介面:
-* 
-
-#### 開發過程有使用但最後沒用上：
-* 前端 : react-redux、react-icon-tint
-* 後端 : Gridfs
 
 # 專題製作心得
 
