@@ -58,14 +58,11 @@ const Row = styled.div`
     align-items: center;
     flex-direction: row;
 `
-const AddButton = styled.div`
+const Button = styled.div`
     padding: 0 5px 0 5px;
     display: flex;
     height: 60px;
     width: 65px;
-    // max-width:95px
-    // min-width:20px;
-    background-color: #FFEDE9;
     border-radius: 30px;
     margin-top: 20px;
     align-items: center;
@@ -171,8 +168,19 @@ function Home(){
                         <SearchBar 
                             keyword={keyword}
                             setKeyword={setKeyword}
-                            handleSearch = {handleSearch}></SearchBar> 
-                        <AddButton onClick={handleAddRestaurantOpen}>Add!</AddButton> 
+                            handleSearch = {handleSearch}>
+                        </SearchBar> 
+                        <img 
+                            src={require("../hardData/add.png")} 
+                            style={{ 
+                                height: "60px",
+                                width: "65px",
+                                marginTop: "20px",
+                                cursor: "pointer",
+                            }}
+                            onClick={handleAddRestaurantOpen}
+                            alt="Add"
+                        />
                     </Row>
                     
                     <Wrap>

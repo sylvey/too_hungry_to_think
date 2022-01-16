@@ -40,8 +40,10 @@ function SearchBar({keyword, setKeyword, handleSearch}){
     return(
         <>
         <Container>
-            <img src={require("../hardData/search.png")} width={"30px"} height={"30px"}
-                 onClick={()=>handleSearch()}></img>
+            <img src={require("../hardData/search.png")} 
+                width={"30px"} height={"30px"}
+                onClick={()=>handleSearch()}
+                style={{cursor: "pointer"}}></img>
             <Input
                 value={keyword}
                 onChange={(e)=>setKeyword(e.target.value)}></Input>
