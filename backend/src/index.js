@@ -5,7 +5,7 @@ import login from "./login.js";
 import publish from "./publish";
 
 mongo.connect();
-const port = process.env.PORT | 5000;
+const port = process.env.PORT || 5000;
 
 server.post('/api/google-login', async (req, res) => {
   const { token } = req.body;

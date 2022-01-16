@@ -22,13 +22,6 @@
     "multer-gridfs-storage": "^5.0.2",
     "nodemon": "^2.0.15",
     "react-google-login": "^5.2.2"
-    ,"@babel/cli": "^7.16.0",
-    "@babel/core": "^7.16.7",
-    "@babel/node": "^7.16.5",
-    "@babel/preset-env": "^7.16.5",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^27.4.6",
-    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
