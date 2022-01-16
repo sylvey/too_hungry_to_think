@@ -43,10 +43,11 @@ const Mutation = {
   },
   addBomb: async (parent, {userId, restaurantId}, {db, pubSub})=>{
     const newBomb = restaurantId;
-    const user = await UserModel.findByIdAndUpdate(
-      user.bomb.push(newBomb)
-    );
+    const user = await UserModel.find({userId});
+    user.bomb.push(newBomb);
     await user.save();
+    const success ="success";
+    return success;
   },
   addCollection: async(parent,{userId, restaurantId, fileId })=>{
     const newCollection = restaurantId;

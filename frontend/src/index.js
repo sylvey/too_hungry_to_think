@@ -16,16 +16,19 @@ import {getMainDefinition} from "@apollo/client/utilities";
 import {WebSocketLink} from "@apollo/client/link/ws";
 
 const httpLink = new HttpLink({
-  uri: 'https://helpthemtopick.herokuapp.com/',
+  // uri: 'https://helpthemtopick.herokuapp.com/',
+  uri: 'http://localhost:5000',
 })
 
 const uploadLink = createUploadLink({
-  uri: 'https://helpthemtopick.herokuapp.com/',
+  // uri: 'https://helpthemtopick.herokuapp.com/',
+  uri: 'http://localhost:5000',
   // credentials: "include",
 })
 
 const wsLink = new WebSocketLink({
-  uri: `wss://helpthemtopick.herokuapp.com/`,
+  // uri: `wss://helpthemtopick.herokuapp.com/`,
+  uri: 'ws://localhost:5000',
   options: {reconnect: true},
 })
 

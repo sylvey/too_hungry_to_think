@@ -26,7 +26,7 @@ type Mutation {
     createRestaurant( input: RestaurantInput! ): Restaurant! ## photo type may need to change
     createTag(id: ID!, type: String!, name: String!): Tag!
     createFile(userId: ID!, title: String!): File!
-    addBomb(userId: ID!, restaurantId: ID!): String! ##string specify whether it's successfully created
+    addBomb(userId: ID!, restaurantId: ID!): String ##string specify whether it's successfully created
     addCollection(userId: ID!, restaurantID: ID!, fileId: ID!): String! ##string specify whether it's successfully created
     addComment(userId: ID!, restaurantId: ID!, content: String!, star: Int! ): Comment!
 }

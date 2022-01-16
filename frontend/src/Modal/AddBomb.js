@@ -5,10 +5,20 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import "../App.css";
+import { gql } from '@apollo/client';
 import { useState, useEffect } from 'react';
 import { SubmitButton } from '../Containers/Buttons';
 import { useMutation, useQuery } from '@apollo/client';
-
+import restaurants from '../hardData/restaurants';
+const loginData =localStorage.getItem('loginData');
+const ADD_BOMB = gql`
+  mutation addBomb($userId: ID!, $restaurantId: ID!){
+    addBomb(userId: $ID, restaurantId: $ID)
+    {
+      type
+    }
+  }
+`
 const style = {
   position: 'absolute',
   top: '50%',
@@ -31,9 +41,23 @@ export default function AddBomb({open, handleClose, id, title}) {
     
     // console.log("title:", title);
     // console.log("id:", id);
-    const handleSubmit = ()=>{
-      console.log('closeBomb');
-      handleClose();
+    const [addBomb] = useMutation(ADD_BOMB);
+    const handleSubmit = async ()=>{
+      try{
+        await addBomb({
+        variables:{
+          input:{
+            userId: loginData.email,
+            restaurantId: id
+          }
+        },
+        onCompleted: ()=>{
+          console.log("success created bomb");
+          handleClose();  
+        }   
+      })}catch(e){
+        console.log(e);
+      }
     }
 
     return (
