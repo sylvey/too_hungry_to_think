@@ -117,6 +117,27 @@
     semver "^6.3.0"
     source-map "^0.5.0"
 
+"@babel/core@^7.16.7":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.16.7.tgz#db990f931f6d40cb9b87a0dc7d2adc749f1dcbcf"
+  integrity sha512-aeLaqcqThRNZYmbMqtulsetOQZ/5gbR/dWruUCJcpas4Qoyy+QeagfDsPdMrqwsPRDNxJvBlRiZxxX7THO7qtA==
+  dependencies:
+    "@babel/code-frame" "^7.16.7"
+    "@babel/generator" "^7.16.7"
+    "@babel/helper-compilation-targets" "^7.16.7"
+    "@babel/helper-module-transforms" "^7.16.7"
+    "@babel/helpers" "^7.16.7"
+    "@babel/parser" "^7.16.7"
+    "@babel/template" "^7.16.7"
+    "@babel/traverse" "^7.16.7"
+    "@babel/types" "^7.16.7"
+    convert-source-map "^1.7.0"
+    debug "^4.1.0"
+    gensync "^1.0.0-beta.2"
+    json5 "^2.1.2"
+    semver "^6.3.0"
+    source-map "^0.5.0"
+
 "@babel/eslint-parser@^7.16.3":
   version "7.16.5"
   resolved "https://registry.npmjs.org/@babel/eslint-parser/-/eslint-parser-7.16.5.tgz"
@@ -126,7 +147,7 @@
     eslint-visitor-keys "^2.1.0"
     semver "^6.3.0"
 
-"@babel/generator@^7.12.1", "@babel/generator@^7.16.8":
+"@babel/generator@^7.12.1", "@babel/generator@^7.16.7", "@babel/generator@^7.16.8":
   version "7.16.8"
   resolved "https://registry.npmjs.org/@babel/generator/-/generator-7.16.8.tgz"
   integrity sha512-1ojZwE9+lOXzcWdWmO6TbUzDfqLD39CmEhN8+2cX9XkDo5yW1OpgfejfliysR2AWLpMamTiOiAp/mtroaymhpw==
@@ -166,6 +187,16 @@
   dependencies:
     "@babel/compat-data" "^7.16.0"
     "@babel/helper-validator-option" "^7.14.5"
+    browserslist "^4.17.5"
+    semver "^6.3.0"
+
+"@babel/helper-compilation-targets@^7.16.7":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/helper-compilation-targets/-/helper-compilation-targets-7.16.7.tgz#06e66c5f299601e6c7da350049315e83209d551b"
+  integrity sha512-mGojBwIWcwGD6rfqgRXVlVYmPAv7eOpIemUG3dGnDdCY4Pae70ROij3XmfrH6Fa1h1aiDylpglbZyktfzyo/hA==
+  dependencies:
+    "@babel/compat-data" "^7.16.4"
+    "@babel/helper-validator-option" "^7.16.7"
     browserslist "^4.17.5"
     semver "^6.3.0"
 
@@ -292,7 +323,7 @@
   dependencies:
     "@babel/types" "^7.16.7"
 
-"@babel/helper-module-transforms@^7.12.1":
+"@babel/helper-module-transforms@^7.12.1", "@babel/helper-module-transforms@^7.16.7":
   version "7.16.7"
   resolved "https://registry.npmjs.org/@babel/helper-module-transforms/-/helper-module-transforms-7.16.7.tgz"
   integrity sha512-gaqtLDxJEFCeQbYp9aLAefjhkKdjKcdh6DB7jniIGU3Pz52WAmP268zK0VgPz9hUNkMSYeH976K2/Y6yPadpng==
@@ -402,6 +433,11 @@
   resolved "https://registry.npmjs.org/@babel/helper-validator-option/-/helper-validator-option-7.14.5.tgz"
   integrity sha512-OX8D5eeX4XwcroVW45NMvoYaIuFI+GQpA2a8Gi+X/U/cDUIRsV37qQfF905F0htTRCREQIB4KqPeaveRJUl3Ow==
 
+"@babel/helper-validator-option@^7.16.7":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/helper-validator-option/-/helper-validator-option-7.16.7.tgz#b203ce62ce5fe153899b617c08957de860de4d23"
+  integrity sha512-TRtenOuRUVo9oIQGPC5G9DgK4743cdxvtOw0weQNpZXaS16SCBi5MNjZF8vba3ETURjZpTbVn7Vvcf2eAwFozQ==
+
 "@babel/helper-wrap-function@^7.16.5":
   version "7.16.5"
   resolved "https://registry.npmjs.org/@babel/helper-wrap-function/-/helper-wrap-function-7.16.5.tgz"
@@ -412,7 +448,7 @@
     "@babel/traverse" "^7.16.5"
     "@babel/types" "^7.16.0"
 
-"@babel/helpers@^7.12.1":
+"@babel/helpers@^7.12.1", "@babel/helpers@^7.16.7":
   version "7.16.7"
   resolved "https://registry.npmjs.org/@babel/helpers/-/helpers-7.16.7.tgz"
   integrity sha512-9ZDoqtfY7AuEOt3cxchfii6C7GDyyMBffktR5B2jvWv8u2+efwvpnVKXMWzNehqy68tKgAfSwfdw/lWpthS2bw==
@@ -2007,6 +2043,27 @@
     jest-util "^27.4.2"
     micromatch "^4.0.4"
     pirates "^4.0.1"
+    slash "^3.0.0"
+    source-map "^0.6.1"
+    write-file-atomic "^3.0.0"
+
+"@jest/transform@^27.4.6":
+  version "27.4.6"
+  resolved "https://registry.yarnpkg.com/@jest/transform/-/transform-27.4.6.tgz#153621940b1ed500305eacdb31105d415dc30231"
+  integrity sha512-9MsufmJC8t5JTpWEQJ0OcOOAXaH5ioaIX6uHVBLBMoCZPfKKQF+EqP8kACAvCZ0Y1h2Zr3uOccg8re+Dr5jxyw==
+  dependencies:
+    "@babel/core" "^7.1.0"
+    "@jest/types" "^27.4.2"
+    babel-plugin-istanbul "^6.1.1"
+    chalk "^4.0.0"
+    convert-source-map "^1.4.0"
+    fast-json-stable-stringify "^2.0.0"
+    graceful-fs "^4.2.4"
+    jest-haste-map "^27.4.6"
+    jest-regex-util "^27.4.0"
+    jest-util "^27.4.2"
+    micromatch "^4.0.4"
+    pirates "^4.0.4"
     slash "^3.0.0"
     source-map "^0.6.1"
     write-file-atomic "^3.0.0"
@@ -4151,6 +4208,11 @@ babel-code-frame@^6.22.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
+babel-core@^7.0.0-bridge.0:
+  version "7.0.0-bridge.0"
+  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
+  integrity sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==
+
 babel-eslint@^10.1.0:
   version "10.1.0"
   resolved "https://registry.npmjs.org/babel-eslint/-/babel-eslint-10.1.0.tgz"
@@ -4212,6 +4274,20 @@ babel-jest@^27.4.2, babel-jest@^27.4.5:
     graceful-fs "^4.2.4"
     slash "^3.0.0"
 
+babel-jest@^27.4.6:
+  version "27.4.6"
+  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-27.4.6.tgz#4d024e69e241cdf4f396e453a07100f44f7ce314"
+  integrity sha512-qZL0JT0HS1L+lOuH+xC2DVASR3nunZi/ozGhpgauJHgmI7f8rudxf6hUjEHympdQ/J64CdKmPkgfJ+A3U6QCrg==
+  dependencies:
+    "@jest/transform" "^27.4.6"
+    "@jest/types" "^27.4.2"
+    "@types/babel__core" "^7.1.14"
+    babel-plugin-istanbul "^6.1.1"
+    babel-preset-jest "^27.4.0"
+    chalk "^4.0.0"
+    graceful-fs "^4.2.4"
+    slash "^3.0.0"
+
 babel-loader@8.1.0:
   version "8.1.0"
   resolved "https://registry.npmjs.org/babel-loader/-/babel-loader-8.1.0.tgz"
@@ -4240,7 +4316,7 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
-babel-plugin-istanbul@^6.0.0:
+babel-plugin-istanbul@^6.0.0, babel-plugin-istanbul@^6.1.1:
   version "6.1.1"
   resolved "https://registry.npmjs.org/babel-plugin-istanbul/-/babel-plugin-istanbul-6.1.1.tgz"
   integrity sha512-Y1IQok9821cC9onCx5otgFfRm7Lm+I+wwxOx738M/WLPZ9Q42m4IG5W0FNX8WLL2gYMZo3JkuXIH2DOpWM+qwA==
@@ -9947,6 +10023,26 @@ jest-haste-map@^27.4.5:
   optionalDependencies:
     fsevents "^2.3.2"
 
+jest-haste-map@^27.4.6:
+  version "27.4.6"
+  resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-27.4.6.tgz#c60b5233a34ca0520f325b7e2cc0a0140ad0862a"
+  integrity sha512-0tNpgxg7BKurZeFkIOvGCkbmOHbLFf4LUQOxrQSMjvrQaQe3l6E8x6jYC1NuWkGo5WDdbr8FEzUxV2+LWNawKQ==
+  dependencies:
+    "@jest/types" "^27.4.2"
+    "@types/graceful-fs" "^4.1.2"
+    "@types/node" "*"
+    anymatch "^3.0.3"
+    fb-watchman "^2.0.0"
+    graceful-fs "^4.2.4"
+    jest-regex-util "^27.4.0"
+    jest-serializer "^27.4.0"
+    jest-util "^27.4.2"
+    jest-worker "^27.4.6"
+    micromatch "^4.0.4"
+    walker "^1.0.7"
+  optionalDependencies:
+    fsevents "^2.3.2"
+
 jest-jasmine2@^25.5.4:
   version "25.5.4"
   resolved "https://registry.npmjs.org/jest-jasmine2/-/jest-jasmine2-25.5.4.tgz"
@@ -10681,6 +10777,15 @@ jest-worker@^27.0.2, jest-worker@^27.3.1, jest-worker@^27.4.1, jest-worker@^27.4
   version "27.4.5"
   resolved "https://registry.npmjs.org/jest-worker/-/jest-worker-27.4.5.tgz"
   integrity sha512-f2s8kEdy15cv9r7q4KkzGXvlY0JTcmCbMHZBfSQDwW77REr45IDWwd0lksDFeVHH2jJ5pqb90T77XscrjeGzzg==
+  dependencies:
+    "@types/node" "*"
+    merge-stream "^2.0.0"
+    supports-color "^8.0.0"
+
+jest-worker@^27.4.6:
+  version "27.4.6"
+  resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.4.6.tgz#5d2d93db419566cb680752ca0792780e71b3273e"
+  integrity sha512-gHWJF/6Xi5CTG5QCvROr6GcmpIqNYpDJyc8A1h/DyXqH1tD6SnRCM0d3U5msV31D2LB/U+E0M+W4oyvKV44oNw==
   dependencies:
     "@types/node" "*"
     merge-stream "^2.0.0"
@@ -12509,7 +12614,7 @@ pinkie@^2.0.0:
   resolved "https://registry.npmjs.org/pinkie/-/pinkie-2.0.4.tgz"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
-pirates@^4.0.1:
+pirates@^4.0.1, pirates@^4.0.4:
   version "4.0.4"
   resolved "https://registry.npmjs.org/pirates/-/pirates-4.0.4.tgz"
   integrity sha512-ZIrVPH+A52Dw84R0L3/VS9Op04PuQ2SEoJL6bkshmiTic/HldyW9Tf7oH5mhJZBK7NmDx27vSMrYEXPXclpDKw==
@@ -14566,9 +14671,14 @@ regenerator-runtime@^0.11.0:
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
 
-regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7, regenerator-runtime@^0.13.9:
+regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.9"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz"
+  integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
+
+regenerator-runtime@^0.13.9:
+  version "0.13.9"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
   integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
 
 regenerator-transform@^0.14.2:

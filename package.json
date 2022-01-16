@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^27.4.6",
+    "regenerator-runtime": "^0.13.9"
+  },
   "scripts": {
     "frontend": "cd frontend && yarn install&&yarn run build",
     "backend": "cd backend &&yarn start",
     "dev": "concurrently --kill-others-on-fail \"npm run backend\" \"npm run frontend\"",
     "build": "cd backend &&yarn install",
-    "start":"yarn backend",
+    "start": "yarn backend",
     "heroku-postbuild": "yarn frontend&&yarn build"
   },
   "repository": {
@@ -22,9 +27,9 @@
     "url": "https://github.com/sylvey/too_hungry_to_think/issues"
   },
   "homepage": "https://github.com/sylvey/too_hungry_to_think#readme",
-  "engines" : { 
+  "engines": {
     "node": "16.x",
-    "npm": "7.x" ,
+    "npm": "7.x",
     "yarn": "1.x"
-  } 
+  }
 }
