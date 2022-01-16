@@ -41,7 +41,7 @@ export default function Spin({open, handleClose}) {
         console.log("choose:", choose);
         setChoose(pocket[Math.floor(Math.random()*pocket.length)].id);
       }
-    }, [])
+    }, [open])
 
     // useEffect(() => {
     //   console.log("choose:", choose);
