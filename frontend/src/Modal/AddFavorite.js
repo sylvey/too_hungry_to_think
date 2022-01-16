@@ -13,7 +13,7 @@ import Fade from '@mui/material/Fade';
 import files from '../hardData/files';
 import { BigFrame4Modal } from '../Containers/BigFrame';
 import { width } from '@mui/system';
-
+import { useMutation, useQuery } from '@apollo/client';
 
 const style = {
   display:"flex",
@@ -72,8 +72,8 @@ export default function AddFavorite({open, handleClose, id, title}) {
       setFolder({id: item.id, title: item.title});
       setAnchorEl(null); 
     }
-   
 
+    
     return (
         <div>
           <Modal
