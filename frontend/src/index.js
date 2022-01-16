@@ -25,7 +25,7 @@ const uploadLink = createUploadLink({
 })
 
 const wsLink = new WebSocketLink({
-  uri: `ws://helpthemtopick.herokuapp.com/`,
+  uri: `wss://helpthemtopick.herokuapp.com/`,
   options: {reconnect: true},
 })
 
