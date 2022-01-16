@@ -1,4 +1,4 @@
-import { RestaurantModel, TagsModel } from "../db";
+import { RestaurantModel, TagsModel,FileModel } from "../db";
 // import { downloadFile } from "./utility";
 
 const Query = {
@@ -81,7 +81,8 @@ const Query = {
     return result;
   },
   files: async (parent, {userId}, {db, pubSub})=>{
-
+    const files = await FileModel.find({userId});
+    return files;
   },
   collection: async (parent, {fileId}, {db, pubSub})=>{
 
