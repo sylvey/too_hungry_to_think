@@ -9,12 +9,6 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
 
-// const IMAGE = gql`
-//     query image($imageId: ID){
-//         image(imageId: $imageId)
-//     }
-// `
-
 const GET_RESTARURANT = gql`
     query restaurant($restaurantId: ID!){
         restaurantDetail(restaurantId: $restaurantId){
@@ -285,16 +279,21 @@ const BigFrame4Modal = ({id})=>{
     const {data, refetch} = useQuery(GET_RESTARURANT,  { variables:{restaurantId: id}}, (e)=>{console.log(e)})
     useEffect(() => {
         refetch({restaurantId: id});
-        restaurants.map((item)=>{
-            if(item.id === id){
-                setRestaurant(item);
-            }
-        })
+        // restaurants.map((item)=>{
+        //     if(item.id === id){
+        //         setRestaurant(item);
+        //     }
+        // })
     }, [])
 
     useEffect(()=>{
-
-        console.log("data:", data);
+        console.log("data", data);
+        if(data){
+            if(data.restaurantDetail){
+                console.log(data.restaurantDetail);
+                setRestaurant(data.restaurantDetail);
+            }
+        }
     }, [data])
 
     return(
@@ -304,10 +303,10 @@ const BigFrame4Modal = ({id})=>{
                 <BlockWide>
                     <Upper>
                         <UpperLeft style={{flex: 1}}>
-                            <Img src = {restaurant.image}></Img>
+                            <Img src = {restaurant.photo}></Img>
                         </UpperLeft>
                         <UpperRight style={{flex: 3}}>
-                            <Title style={{marginBottom:"5px"}}>{restaurant.name}</Title>
+                            <Title style={{marginBottom:"5px"}}>{restaurant.title}</Title>
                             <Stars num={restaurant.star} style= {{width: "50px",height: "10px"}}></Stars>
                             <Row>
                             {
