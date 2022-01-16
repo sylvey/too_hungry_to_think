@@ -150,13 +150,18 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     margin-top:5px;
-    margin-bottom:5px;
+    margin-bottom:15px;
+    
 `
 
 const Text = styled.input`
     width:20%;
     align-items: center;
     justify-content: center;
+    border: 0;
+    border-radius:20px;
+    text-align:center;
+    height: 40px;
 `
 const Input = styled.input`
     display: flex;
@@ -283,9 +288,10 @@ export default function Page(props) {
                     <StarChoose 
                         num={num}
                         setNum={setNum} 
-                        style= {{ width: "50%",height: "35px", cursor: 'pointer'}} 
+                        style= {{ width: "50%",height: "35px", cursor: 'pointer', marginLeft: "10px"}} 
                         />
                 </Container>
+                <button style= {{ backgroundColor: "red", cursor: 'pointer',marginTop: "15px", marginRight: "10px", border:"0", color:"white", borderRadius: "10px", height: "30px"}} >Send</button>
                     {/* {
                         tags.map((item)=>(
                             <CommentBlock style={{backgroundColor:"white"}}>
