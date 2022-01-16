@@ -29,7 +29,7 @@ function NavBar() {
             {"H.T.T.P. -- \n Help Them To Pick"}
           </Typography>
           <Login></Login>
-          <Button style = {loginRegisterButton} href = "/Personal">Personal</Button>
+          {/* <Button style = {loginRegisterButton} href = "/Personal">Personal</Button> */}
         </Toolbar>
       </AppBar>
 

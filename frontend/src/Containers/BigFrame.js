@@ -195,10 +195,10 @@ const BigFrame = ({id, title, photo, star, tags, openAddBomb, openAddFavorite})=
                 </Row>
                 
                 <Row>
-                    <StarAndBomb>
+                    {/* <StarAndBomb>
                         <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")} onClick={()=>openAddFavorite(id, title)}/>
                         <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")} onClick={()=>openAddBomb(id, title)}/>
-                    </StarAndBomb>
+                    </StarAndBomb> */}
                     <More>
                     <Link 
                         style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
@@ -257,11 +257,11 @@ const BigFrame4Right = ({id, name, image, star, tags})=>{
                 }
                 </Row>
                 <Row>
-                    <StarAndBomb>
+                    {/* <StarAndBomb>
                         <img width={"30px"} height={"30px"} src={require("../hardData/emojione_star.png")}/>
                         <img width={"30px"} height={"30px"} src={require("../hardData/emojione-monotone_bomb.png")}/>
                         
-                    </StarAndBomb>
+                    </StarAndBomb> */}
                     <More>
                     <Link 
                         style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
@@ -400,10 +400,10 @@ const BigFrame4Personal = ({id, name, image, star, tags})=>{
                 </Row>
                 
                 <Row>
-                    <StarAndBomb>
+                    {/* <StarAndBomb>
                         <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/star.png")}/>
                         <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")}/>
-                    </StarAndBomb>
+                    </StarAndBomb> */}
                     <More>
                     <Link 
                         style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
