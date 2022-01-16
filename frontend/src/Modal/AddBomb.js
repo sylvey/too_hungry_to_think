@@ -32,7 +32,8 @@ export default function AddBomb({open, handleClose, id, title}) {
     // console.log("title:", title);
     // console.log("id:", id);
     const handleSubmit = ()=>{
-       handleClose();
+      console.log('closeBomb');
+      handleClose();
     }
 
     return (
