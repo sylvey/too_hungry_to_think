@@ -6,30 +6,34 @@ export const Background = styled.div`
     display: flex;
     flex-direction: row;
     // width: 100%;
-    height: 65em;
+    // height: 65em;
 
-    background-size: cover;
+    // background-size: cover;
     background-position: fixed;
-
+    overflow: auto;
     justify-content: center;
     // background-color: white;
     background-image:url(${food});
+    background-repeat: repeat-y;
+    background-size: 100vw;
     // background-size: cover;
     @media(max-width:1900px){ 
-
         height: 70em;
         // background-position: center;
         // background-position-y: 0;
         // background-attachment: fixed;
    }
     @media(max-width:1300px){ 
-
         height:  70em;
-        background-position: center;
-        background-position-y: 0;
-        background-attachment: fixed;
+        // background-position: center;
+        // background-position-y: 0;
+        // background-attachment: fixed;
    }
-    
+   &::-webkit-scrollbar {
+    height: inherit;
+    width: 7px;
+    border-radius: 6px;
+  }
 `
 export const CenterDiv = styled.div`
     display: flex;

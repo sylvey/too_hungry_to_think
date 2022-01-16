@@ -149,7 +149,7 @@ function Home(){
                 setRestaurants(data.restaurants);  
             }
         }
-        if(searchRestaurants.data){
+        if(searchRestaurants.data && keyword !== ""){
             if(searchRestaurants.data.searchRestaurants){
                 // console.log("data.restaurants:", data.restaurants);
                 setRestaurants(searchRestaurants.data.searchRestaurants);  

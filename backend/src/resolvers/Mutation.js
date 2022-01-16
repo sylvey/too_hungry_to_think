@@ -58,6 +58,7 @@ const Mutation = {
     console.log(userID, restaurantId, content, star) 
     if (!content || !star){
       throw new Error("請留言並給星評價"); }
+    
     const newComment = new CommentModel({
       id: userID+restaurantId, 
       userID: userID, 
@@ -65,13 +66,17 @@ const Mutation = {
       content: content, 
       star: star
     });
-    // pubsub.publish('POST_CREATED', {
-    //   postCreated: {
-    //     author: 'Ali Baba',
-    //     comment: 'Open sesame'
-    //   }
-    // });
-    return newComment;
+    let comments = await RestaurantModel.findOne({id:restaurantId}).comments;
+    await RestaurantModel.findOneAndUpdate(
+      {id:restaurantId},{
+        $addToSet:{comments:[...comments, newComment]}
+      },
+    )
+    let restaurantStars = awaitRestaurantModel.findOne({id:restaurantId}).stars;
+    await RestaurantModel.findOneAndUpdate(
+      {restaurantStars:restaurantStars},
+      {restaurantStars:(restaurantStars*(comments-1)+star)/comments}
+    )
   }
 };
 
