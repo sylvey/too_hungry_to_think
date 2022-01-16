@@ -83,11 +83,12 @@ const Query = {
   },
   files: async (parent, {userId}, {db, pubSub})=>{
     const user = await UserModel.find({userId});
+    const file = user.files;
     let result = [];
     for(let i = 0; i < user.files.length; i++){
       result.push({
-        id: files[i].id,
-        title: files[i].title,
+        id: file[i].id,
+        title: file[i].title,
         }); 
       return result;
     }
@@ -96,11 +97,12 @@ const Query = {
     return result;
   },
   collection: async (parent, {fileId}, {db, pubSub})=>{
-    const collections = await FileModel.find({fileId}).restaurants;
+    const file = await FileModel.find({fileId});
+    const collections = file.restaurants;
     let result = [];
     for(let i = 0; i < collections.length; i++){
       result.push({
-        restaurants: collections[i].restaurant,
+        restaurants: collections[i],
         }); 
       return result;
     }
@@ -109,7 +111,8 @@ const Query = {
     return result;
   },
   bomb: async (parent, {userId}, {db, pubSub})=>{
-    const bomb = await UserModel.find({userId}).bomb
+    const user =  await UserModel.find({userId});
+    const bomb = user.bomb;
     let result = [];
     for (let i=0;i<bomb.length;i++)
     {
