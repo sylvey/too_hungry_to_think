@@ -27,14 +27,14 @@ const Query = {
   }, 
   restaurantDetail: async (parent, {restaurantId}, {db, pubSub})=>{
     console.log(restaurantId);
-    const restaurant = await RestaurantModel.find({restaurantId});
+    const restaurant = await RestaurantModel.findOne({id: restaurantId});
 
-    let restaurantDetailReturn = [];
+    // let restaurantDetailReturn = {};
     let tags = await TagsModel.find({});
-
-    if({restaurant}){
+    let result = {};
+    if(restaurant){
         let newtags = tags.filter(tag => restaurant.tagIds.includes(tag.id));
-        restaurantDetailReturn.push({
+        result = {
             id: restaurant.id,
             title: restaurant.title,
             stars:restaurant.stars,
@@ -42,9 +42,10 @@ const Query = {
             tags: newtags,
             link: restaurant.link,
             comments: restaurant.comments
-      })
+        }
     }
-    return restaurantDetailReturn;
+    console.log(result);
+    return result;
   },
   searchRestaurants: async (parent, {keyword}, {db, pubSub})=>{
     const restaurants = await RestaurantModel.find({});
