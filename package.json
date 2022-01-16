@@ -31,5 +31,8 @@
     "node": "16.x",
     "npm": "7.x",
     "yarn": "1.x"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
