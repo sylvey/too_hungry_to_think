@@ -1,4 +1,4 @@
-import { RestaurantModel, TagsModel, upload, CommentModel } from "../db";
+import { RestaurantModel, TagsModel, upload, CommentModel, UserModel,FileModel } from "../db";
 // import { uploadFile } from "./utility";
 const Mutation = {
   createRestaurant: async (parent, {input}, { db, pubSub }) => {
@@ -34,7 +34,11 @@ const Mutation = {
     return newTag;
   },
   createFile: async (parent, { userId, title }, {db, pubSub})=>{
+    const newFile = new FileModel({id,title,restaurants})
+    await newFile.save();
+    const user = await UserModel.findByIdAndUpdate(
 
+    )
   },
   addBomb: async (parent, {userId, restaurantId}, {db, pubSub})=>{
 
