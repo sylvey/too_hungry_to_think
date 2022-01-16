@@ -22,7 +22,6 @@ const GET_RESTARURANT = gql`
                 type
                 name
             }
-        
         }
     }
 `
@@ -202,17 +201,13 @@ const BigFrame = ({id, title, photo, star, tags, openAddBomb, openAddFavorite})=
                     </StarAndBomb>
                     <More>
                     <Link 
-                            style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
-                            to={{pathname: "/Information",
-                                 state: {
-                                    id: id,
-                                    name:title,
-                                    image:photo,
-                                    star:star,
-                                    tags:tags,
-                                    BigFrame: true}
-                            }}
-                            >more</Link>
+                        style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
+                        to={{pathname: "/Information",
+                                state: {
+                                id: id
+                            }
+                        }}
+                    >more</Link>
                         <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
                     </More>
                 </Row>
@@ -268,7 +263,14 @@ const BigFrame4Right = ({id, name, image, star, tags})=>{
                         
                     </StarAndBomb>
                     <More>
-                        <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
+                    <Link 
+                        style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
+                        to={{pathname: "/Information",
+                                state: {
+                                id: id
+                            }
+                        }}
+                    >more</Link>
                         <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
                     </More>
                 </Row>
@@ -321,7 +323,14 @@ const BigFrame4Modal = ({id})=>{
                             }
                             </Row>
                             <More style={{  width: "20%", justifySelf:"end", alignSelf:"end", height:"2px", marginRight: "20px"}}>
-                                <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
+                            <Link 
+                        style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
+                        to={{pathname: "/Information",
+                                state: {
+                                id: id
+                            }
+                        }}
+                    >more</Link>
                                 <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
                             </More>
                         </UpperRight>
@@ -396,7 +405,14 @@ const BigFrame4Personal = ({id, name, image, star, tags})=>{
                         <img style={{ cursor: 'pointer' }} width={"30px"} height={"30px"} src={require("../img/bomb.png")}/>
                     </StarAndBomb>
                     <More>
-                        <p style={{display: "flex", marginRight: "2px", marginTop: "12px"}}>more</p>
+                    <Link 
+                        style={{display: "flex", marginRight: "6px", marginBottom: "8px"}}
+                        to={{pathname: "/Information",
+                                state: {
+                                id: id
+                            }
+                        }}
+                    >more</Link>
                         <img width={"10px"} height={"10px"} src={require("../hardData/more.png")}></img>
                     </More>
                 </Row>

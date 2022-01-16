@@ -150,13 +150,18 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     margin-top:5px;
-    margin-bottom:5px;
+    margin-bottom:15px;
+    
 `
 
 const Text = styled.input`
     width:20%;
     align-items: center;
     justify-content: center;
+    border: 0;
+    border-radius:20px;
+    text-align:center;
+    height: 40px;
 `
 const Input = styled.input`
     display: flex;
@@ -174,7 +179,7 @@ const Input = styled.input`
 
 export default function Page(props) {
     console.log(props.props.location.state.id);
-    const id = props.props.location.state.id;
+    // const [id, setId] = useState(props.props.location.state.id);
     // const name = props.props.location.state.name;
     // const image = props.props.location.state.image;
     // const star = props.props.location.state.star;
@@ -192,19 +197,20 @@ export default function Page(props) {
     const [restaurant, setRestaurant] = useState(null);
     const [num, setNum] = useState(0);
     const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
-    const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === id)? true : false): false);
+    const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === props.props.location.state.id)? true : false): false);
     
     const handleCheck = ()=>{
         setChosen(!chosen);
     }
 
-    const {data, refetch} = useQuery(GET_RESTARURANT,  { variables:{restaurantId: id}}, (e)=>{console.log(e)})
+    const {data, refetch} = useQuery(GET_RESTARURANT,  { variables:{restaurantId: props.props.location.state.id}}, (e)=>{console.log(e)})
 
     useEffect(() => {
-        refetch({restaurantId: id});
+        refetch({restaurantId: props.props.location.state.id});
     }, [])
 
     useEffect(()=>{
+        // console.log(id);
         console.log("data", data);
         if(data){
             if(data.restaurantDetail){
@@ -212,27 +218,32 @@ export default function Page(props) {
                 setRestaurant(data.restaurantDetail);
             }
         }
+        else{
+            refetch({restaurantId: props.props.location.state.id});
+        }
     }, [data])
 
     useEffect(()=>{
-        if(chosen){
-            saveRestaurant({id, name: restaurant.title, image: restaurant.photo, star: restaurant.stars, tags: restaurant.tags});
-        }
-        else{
-            deleteRestaurant(id);
+        if(restaurant){
+            if(chosen){
+                console.log("restaurant:", restaurant);
+                saveRestaurant({id: props.props.location.state.id, name: restaurant.title, image: restaurant.photo, star: restaurant.stars, tags: restaurant.tags});
+            }
+            else{
+                deleteRestaurant(props.props.location.state.id);
+            }
         }
     },[chosen])
 
     return(<>{
         restaurant?
-    
             (<BigBlock>
                 <AddButton 
-                            src={chosen?require("../hardData/check-circle.png"):require("../hardData/check-circle-empty.png")}
-                            width={"20px"}
-                            height ={"20px"}
-                            style={{marginTop:"10px"}}
-                            onClick={handleCheck}/>
+                    src={chosen?require("../hardData/check-circle.png"):require("../hardData/check-circle-empty.png")}
+                    width={"20px"}
+                    height ={"20px"}
+                    style={{marginTop:"10px"}}
+                    onClick={handleCheck}/>
                 <Upper>
                     <UpperLeft>
                         <Img src = {restaurant.photo}></Img>
@@ -266,20 +277,21 @@ export default function Page(props) {
                 <Lower>
                 <Container>
                     <Text value={"comment"} 
-                        // value= {{userName}}
-                        >
-                            </Text>
-                            <Input/>
-                        </Container>
-                        <Container>
-                            <Text value={"rank"}>
-                            </Text>
-                            <StarChoose 
-                                num={num}
-                                setNum={setNum} 
-                                style= {{ width: "50%",height: "35px", cursor: 'pointer'}} 
-                                />
-                        </Container>
+                                // value= {{userName}}
+                                >
+                    </Text>
+                    <Input/>
+                </Container>
+                <Container>
+                    <Text value={"rank"}>
+                    </Text>
+                    <StarChoose 
+                        num={num}
+                        setNum={setNum} 
+                        style= {{ width: "50%",height: "35px", cursor: 'pointer', marginLeft: "10px"}} 
+                        />
+                </Container>
+                <button style= {{ backgroundColor: "red", cursor: 'pointer',marginTop: "15px", marginRight: "10px", border:"0", color:"white", borderRadius: "10px", height: "30px"}} >Send</button>
                     {/* {
                         tags.map((item)=>(
                             <CommentBlock style={{backgroundColor:"white"}}>
