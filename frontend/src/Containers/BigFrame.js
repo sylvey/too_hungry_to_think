@@ -251,7 +251,11 @@ const BigFrame4Right = ({id, name, image, star, tags})=>{
                 <Row>
                 {
                     tags.map((item)=>(
-                        <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
+                        <Tag style={{
+                            backgroundColor: item.type === "food"? "#147EFA": 
+                                      item.type === "place"? "#FF0000": 
+                                            item.type === "takeInOrOut"?"#14FA7E": "yellow"}}
+                            >
                             {item.name}
                         </Tag>
                     ))
@@ -279,11 +283,6 @@ const BigFrame4Modal = ({id})=>{
     const {data, refetch} = useQuery(GET_RESTARURANT,  { variables:{restaurantId: id}}, (e)=>{console.log(e)})
     useEffect(() => {
         refetch({restaurantId: id});
-        // restaurants.map((item)=>{
-        //     if(item.id === id){
-        //         setRestaurant(item);
-        //     }
-        // })
     }, [])
 
     useEffect(()=>{
@@ -311,7 +310,11 @@ const BigFrame4Modal = ({id})=>{
                             <Row>
                             {
                                 restaurant.tags.map((item)=>(
-                                    <Tag style={{backgroundColor: item.type === "food"? "#147EFA": item.type === "place"? "#FF0000": "#14FA7E"}}>
+                                    <Tag style={{
+                                        backgroundColor: item.type === "food"? "#147EFA": 
+                                                  item.type === "place"? "#FF0000": 
+                                                        item.type === "takeInOrOut"?"#14FA7E": "yellow"}}
+                                        >
                                         {item.name}
                                     </Tag>
                                 ))
