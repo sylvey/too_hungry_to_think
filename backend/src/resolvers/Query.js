@@ -1,4 +1,4 @@
-import { RestaurantModel, TagsModel,FileModel } from "../db";
+import { RestaurantModel, TagsModel,FileModel, UserModel } from "../db";
 // import { downloadFile } from "./utility";
 
 const Query = {
@@ -81,14 +81,42 @@ const Query = {
     return result;
   },
   files: async (parent, {userId}, {db, pubSub})=>{
-    const files = await FileModel.find({userId});
-    return files;
+    const user = await UserModel.find({userId});
+    let result = [];
+    for(let i = 0; i < user.files.length; i++){
+      result.push({
+        id: files[i].id,
+        title: files[i].title,
+        }); 
+      return result;
+    }
+    console.log(tags, result);
+
+    return result;
   },
   collection: async (parent, {fileId}, {db, pubSub})=>{
+    const collections = await FileModel.find({fileId}).restaurants;
+    let result = [];
+    for(let i = 0; i < collections.length; i++){
+      result.push({
+        restaurants: collections[i].restaurant,
+        }); 
+      return result;
+    }
+    console.log(tags, result);
 
+    return result;
   },
   bomb: async (parent, {userId}, {db, pubSub})=>{
-
+    const bomb = await UserModel.find({userId}).bomb
+    let result = [];
+    for (let i=0;i<bomb.length;i++)
+    {
+      result.push({
+        restaurants: bomb[i].restaurant,
+      })
+    }
+    return result;
   },
   searchTag: async (parent, {keyword}, {db, pubSub})=>{
     

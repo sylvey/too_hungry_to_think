@@ -76,7 +76,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^27.4.6",
     "eslint": "8.0.0",
-    "eslint-config-react-app": "^7.0.0"
+    "eslint-config-react-app": "^7.0.0",
+    "regenerator-runtime": "^0.13.9"
   }
 }
