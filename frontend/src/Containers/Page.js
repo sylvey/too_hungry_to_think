@@ -21,11 +21,29 @@ const GET_RESTARURANT = gql`
                 type
                 name
             }
-        
+            comments{
+                id
+                userId
+                restaurantId
+                content
+                star
+            }
         }
     }
 `
 
+// const MUTATE_COMMENT = gql`
+//     mutation AddComment($userId: ID!, $restaurantId: ID!, $content: String!, $star: Int!){
+//         addComment(userId:$userId, restaurantId:$restaurantId, content:$content, star:$star){
+//             id
+//             userId
+//             restaurantId
+//             content
+//             star
+//         }
+//     }
+
+// `
 const BigBlock = styled.div`
     width:600px;
     height:600px;
@@ -128,74 +146,61 @@ const Row = styled.div`
     display: flex;
     flex-direction: row;
 `
-const CommentBlock = styled.div`
-    width:90%;
-    height:50px;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    margin-bottom: 80px;
-    border-radius: 20px;
-`
-const CommentBlockLeft = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-`
-const CommentBlockLeftTopOrBottom = styled.div`
-    height: 50%;
-`
+// const CommentBlock = styled.div`
+//     width:90%;
+//     height:50px;
+//     display: flex;
+//     flex-direction: column;
+//     background-color: white;
+//     margin-bottom: 80px;
+//     border-radius: 20px;
+// `
+// const CommentBlockLeft = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     width: 30%;
+// `
+// const CommentBlockLeftTopOrBottom = styled.div`
+//     height: 50%;
+// `
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin-top:5px;
-    margin-bottom:15px;
+// const Container = styled.div`
+//     display: flex;
+//     flex-direction: row;
+//     margin-top:5px;
+//     margin-bottom:15px;
     
-`
+// `
 
-const Text = styled.input`
-    width:20%;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    border-radius:20px;
-    text-align:center;
-    height: 40px;
-`
-const Input = styled.input`
-    display: flex;
-    margin-left: 10px;
-    outline: none;
-    border-style: none;
-    background-color: white;
-    font-size: 30px;
-    width:70%;
-    &:focus {
-        outline: none;
-        border-style: none;
-    }
-`
+// const Text = styled.input`
+//     width:20%;
+//     align-items: center;
+//     justify-content: center;
+//     border: 0;
+//     border-radius:20px;
+//     text-align:center;
+//     height: 40px;
+// `
+// const Input = styled.input`
+//     display: flex;
+//     margin-left: 10px;
+//     outline: none;
+//     border-style: none;
+//     background-color: white;
+//     font-size: 30px;
+//     width:70%;
+//     &:focus {
+//         outline: none;
+//         border-style: none;
+//     }
+// `
 
 export default function Page(props) {
-    console.log(props.props.location.state.id);
-    // const [id, setId] = useState(props.props.location.state.id);
-    // const name = props.props.location.state.name;
-    // const image = props.props.location.state.image;
-    // const star = props.props.location.state.star;
-    // const tags = props.props.location.state.tags;
-
-    // const id = props.match.params.id;
-    // const name = props.props.match.params.name;
-    // const image = props.props.match.params.image;
-    // const star = props.props.match.params.star;
-    // const tags = props.props.match.params.tags;
-    // console.log(id);
-    // console.log(name);
-    // const [chosen, setChosen] = useState(false);
+    // console.log(props.props.location.state.id);
 
     const [restaurant, setRestaurant] = useState(null);
     const [num, setNum] = useState(0);
+    const [commentContent, setCommentContent] = useState("")
     const { pocket, saveRestaurant, deleteRestaurant } = usePocketHook();
     const [chosen, setChosen] = useState(pocket? (pocket.find(item=>item.id === props.props.location.state.id)? true : false): false);
     
@@ -234,6 +239,44 @@ export default function Page(props) {
             }
         }
     },[chosen])
+
+    // const [addComment] = useMutation(MUTATE_COMMENT)
+    // console.log(window.localStorage.getItem('loginData'))
+            
+
+    // const inputComment = async () =>{
+    //     if(num===0 || commentContent === "" ){
+    //         throw new Error('Missing comment or ranking!');
+    //     }
+    //     else{
+    //         console.log(restaurant.id);
+    //         let loginData = JSON.parse(window.localStorage.getItem('loginData')).name;
+    //         console.log(window.localStorage.getItem('loginData').name);
+    //         await addComment({
+    //             variables:{
+    //                 userId:loginData,
+    //                 restaurantId:restaurant.id,
+    //                 content:commentContent,
+    //                 star:num,
+    //             }
+    //           })
+    //         setCommentContent("");
+    //         setNum(0);
+    //     }
+    // }
+
+    useEffect(()=>{
+        if(restaurant){
+            if(chosen){
+                console.log("restaurant:", restaurant);
+                saveRestaurant({id: props.props.location.state.id, name: restaurant.title, image: restaurant.photo, star: restaurant.stars, tags: restaurant.tags});
+            }
+            else{
+                deleteRestaurant(props.props.location.state.id);
+            }
+        }
+    },[chosen])
+console.log(restaurant)
 
     return(<>{
         restaurant?
@@ -274,13 +317,11 @@ export default function Page(props) {
                     </p>
                 </Row>
 
-                <Lower>
+                {/* <Lower>
                 <Container>
-                    <Text value={"comment"} 
-                                // value= {{userName}}
-                                >
-                    </Text>
-                    <Input/>
+                    <Text value={"comment"}/>
+                    <Input value = {commentContent}
+                            onChange={(e)=>setCommentContent(e.target.value)}/>
                 </Container>
                 <Container>
                     <Text value={"rank"}>
@@ -291,23 +332,25 @@ export default function Page(props) {
                         style= {{ width: "50%",height: "35px", cursor: 'pointer', marginLeft: "10px"}} 
                         />
                 </Container>
-                <button style= {{ backgroundColor: "red", cursor: 'pointer',marginTop: "15px", marginRight: "10px", border:"0", color:"white", borderRadius: "10px", height: "30px"}} >Send</button>
-                    {/* {
-                        tags.map((item)=>(
+                <button style= {{ backgroundColor: "red", cursor: 'pointer',marginTop: "15px", marginRight: "10px", border:"0", color:"white", borderRadius: "10px", height: "30px"}} 
+                        onClick={()=>inputComment()}>
+                    Send
+                </button>
+                    {
+                        restaurant.comments.map((item)=>(
                             <CommentBlock style={{backgroundColor:"white"}}>
                                 <CommentBlockLeft>
                                     <CommentBlockLeftTopOrBottom>
-                                        <h1>{item.userName}</h1>
                                     </CommentBlockLeftTopOrBottom>
                                     <CommentBlockLeftTopOrBottom>
                                         <Stars num={item.star} style= {{ width: "50px",height: "10px"}}></Stars>
                                     </CommentBlockLeftTopOrBottom>
                                 </CommentBlockLeft>
-                                    <p>123</p>
+                                    <p>{item.content}</p>
                             </CommentBlock>
                         ))
-                    } */}
-                </Lower>
+                    }
+                </Lower> */}
             </BigBlock>)
             : null
         }</>
